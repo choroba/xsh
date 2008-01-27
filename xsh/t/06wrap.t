@@ -61,39 +61,42 @@ create scratch '<foo/>';
 
 call x_assert 'count(//node())=1';
 
-insert pi foo before /foo;
+insert pi 'foo FOO' before /foo;
 
 insert comment foo after /foo;
 
 call x_assert 'count(//node())=3';
 
-perl { $list = xml_list('//node()') };
+perl { $list = xml_list('//node()'); };
 
-call x_assert '"${list}"="<?foo?><foo/><!--foo-->"';
+echo $list;
+
+call x_assert '"${list}"="<?foo FOO?><foo/><!--foo-->"';
 
 call x_assert '"${list}"=xsh:serialize(//node())';
 
 wrap 'bar' /foo;
 
-call x_assert 'xsh:serialize(/node())="<?foo?><bar><foo/></bar><!--foo-->"';
+
+call x_assert 'xsh:serialize(/node())="<?foo FOO?><bar><foo/></bar><!--foo-->"';
 
 delete /bar;
 
-call x_assert 'xsh:serialize(/node())="<?foo?><!--foo-->"';
+call x_assert 'xsh:serialize(/node())="<?foo FOO?><!--foo-->"';
 
 wrap 'foo' /processing-instruction();
 
 count (xsh:serialize(/node())) | cat 2>&1;
 
-call x_assert 'xsh:serialize(/node())="<foo><?foo?></foo><!--foo-->"';
+call x_assert 'xsh:serialize(/node())="<foo><?foo FOO?></foo><!--foo-->"';
 
 move /foo/processing-instruction() replace /foo;
 
-call x_assert 'xsh:serialize(/node())="<?foo?><!--foo-->"';
+call x_assert 'xsh:serialize(/node())="<?foo FOO?><!--foo-->"';
 
 wrap 'foo' /comment();
 
-call x_assert 'xsh:serialize(/node())="<?foo?><foo><!--foo--></foo>"';
+call x_assert 'xsh:serialize(/node())="<?foo FOO?><foo><!--foo--></foo>"';
 
 create scratch '<a><b/>foo<c/><b/><d/><c/><b/><c/></a>';
 

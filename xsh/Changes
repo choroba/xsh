@@ -1,6 +1,6 @@
 Release 1.8.2:
 
-Changes since 1.8 (CVS)
+Changes since 1.8
 ------------------
 Incompatible changes:
    - xsh now uses UTF8 as the default encoding and query-encoding.
