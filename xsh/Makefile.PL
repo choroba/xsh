@@ -9,6 +9,9 @@ $| = 1;
 WriteMakefile(
     'NAME'      => 'XML::XSH2',
     'VERSION_FROM' => 'lib/XML/XSH2.pm',
+    META_MERGE => {
+        resources => { repository => 'https://github.com/choroba/xsh' }
+    },
     'EXE_FILES' => ['xsh'],
     'PREREQ_PM' => {
                     'URI' => 0,
