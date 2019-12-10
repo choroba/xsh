@@ -304,13 +304,31 @@ foreach //node() {
   assert2 'xsh:path(.)' '"${pwd}"';
 }
 
+register-namespace n n ;
 $c = 0 ;
-stream :N :s '<r><a/><b/><a/><c/></r>' select a { $c = $c + 1 } ;
+stream :N :s '<r xmlns:n="n"><n:a/><b/><n:a/><c/></r>' select n:a { $c = $c + 1 } ;
 assert2 $c 2 ;
 
 $c = 0 ;
 stream :N :p 'perl -e"print q(<r><n/><n/></r>)"' select n { $c = $c + 1 } ;
 assert2 $c 2 ;
+
+register-namespace n n ;
+$c = 0 ;
+pull :s '<r xmlns:n="n"><n:a/><b/><n:a/><c/></r>' read n:a { $c = $c + 1 } ;
+assert2 $c 2 ;
+
+$c = 0 ;
+pull :p 'perl -e"print q(<r><n/><n/></r>)"' read n { $c = $c + 1 } ;
+assert2 $c 2 ;
+
+$c = 0 ;
+stream :N :s '<a><a><a/></a></a>' select a { $c = $c + 1 } ;
+assert2 $c 1 ;
+
+$c = 0 ;
+pull :s '<a><a><a/></a></a>' read a { $c = $c + 1 } ;
+assert2 $c 3 ;
 EOF
 
   plan tests => 4+@xsh_test;
