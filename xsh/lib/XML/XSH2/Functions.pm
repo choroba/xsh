@@ -5674,61 +5674,67 @@ sub stream_process_node {
   die $err if $err; # propagate
 }
 
+sub pull_stream_opts {
+    my ($opts) = @_;
+    die "Only one --input-xxxx parameter can be specified\n"
+        if grep {/^input-/} keys %$opts > 1;
+    die "Only one --output-xxxx parameter can be specified\n"
+        if grep {/^output-/} grep { !/^output-encoding/ } keys %$opts > 1;
+    die "Can't combine --no-output with --output-xxxx\n"
+        if $opts->{'no-output'} && grep /^output-/, keys %$opts;
+
+    my ($out, $termout);
+    $opts->{'input-file'} = _tilde_expand($opts->{'input-file'})
+        if exists($opts->{'input-file'});
+    $opts->{'output-file'} = _tilde_expand($opts->{'output-file'})
+        if exists($opts->{'output-file'});
+    my $output = $opts->{'output-string'} || $opts->{'output-pipe'} ||
+        $opts->{'output-file'} || undef;
+    my $input = $opts->{'input-string'} || $opts->{'input-pipe'} ||
+        $opts->{'input-file'} || '-';
+
+    if (exists $opts->{'output-file'}) {
+        open $out,'>'.$output || die "Cannot open output file $output\n";
+        if ($] >= 5.008) {
+            binmode ($out,
+                     ($opts->{'output-encoding'}
+                      ? ":encoding($opts->{'output-encoding'})"
+                      : ":utf8"));
+        }
+    } elsif (exists $opts->{'output-pipe'}) {
+        open $out,'| '.$output || die "Cannot open pipe to $output\n";
+        if ($] >= 5.008) {
+            binmode ($out,
+                     ($opts->{'output-encoding'}
+                      ? ":encoding($opts->{'output-encoding'})"
+                      : ":utf8"));
+        }
+    } elsif (exists $opts->{'output-string'}) {
+        my $output = $opts->{'output-string'};
+        if ($output =~ /^\$(\$?[a-zA-Z_][a-zA-Z0-9_]*)$/) {
+            $out = _get_var_ref($output);
+        } elsif (ref($OUT) =~ /Term::ReadLine/) {
+            $out = *$OUT;
+            $termout = 1;
+        } else {
+            $out = $OUT;
+            $termout = 1;
+        }
+    } else {
+        $out = $output;
+    }
+    return $out, $termout, $input
+}
+
 sub stream_process {
   my ($opts, $process)=@_;
   $opts = _ev_opts($opts);
+  my ($out, $termout, $input) = pull_stream_opts($opts);
 
   require XML::Filter::DOMFilter::LibXML;
   require XML::LibXML::SAX;
   require XML::SAX::Writer;
 
-  if (grep {/^input-/} keys %$opts>1) {
-    die "Only one --input-xxxx parameter can be specified\n";
-  }
-  if (grep {/^output-/} grep { !/^output-encoding/ } keys %$opts>1) {
-    die "Only one --output-xxxx parameter can be specified\n";
-  }
-  if ($opts->{'no-output'} && grep /^output-/, keys %$opts) {
-      die "Can't combine --no-output with --output-xxxx\n";
-  }
-
-  my $out;
-  my $termout;
-  $opts->{'input-file'} = _tilde_expand($opts->{'input-file'}) if exists($opts->{'input-file'});
-  $opts->{'output-file'} = _tilde_expand($opts->{'output-file'}) if exists($opts->{'output-file'});
-  my $output = $opts->{'output-string'} || $opts->{'output-pipe'} ||
-               $opts->{'output-file'} || undef;
-  my $input = $opts->{'input-string'} || $opts->{'input-pipe'} ||
-              $opts->{'input-file'} || '-';
-
-  if (exists $opts->{'output-file'}) {
-    open $out,'>'.$output || die "Cannot open output file ".$output."\n";
-    if ($] >= 5.008) {
-      binmode ($out,
-	($opts->{'output-encoding'} ? 
-	   ":encoding(".$opts->{'output-encoding'}.")" : ":utf8"));
-    }
-  } elsif (exists $opts->{'output-pipe'}) {
-    open $out,'| '.$output || die "Cannot open pipe to ".$output."\n";
-    if ($] >= 5.008) {
-      binmode ($out,
-	($opts->{'output-encoding'} ? 
-	   ":encoding(".$opts->{'output-encoding'}.")" : ":utf8"));
-    }
-  } elsif (exists $opts->{'output-string'}) {
-    my $output = $opts->{'output-string'};
-    if ($output =~ /^\$(\$?[a-zA-Z_][a-zA-Z0-9_]*)$/) {
-      $out = _get_var_ref($output);
-    } elsif (ref($OUT)=~/Term::ReadLine/) {
-      $out = *$OUT;
-      $termout=1;
-    } else {
-      $out = $OUT;
-      $termout=1;
-    }
-  } else {
-    $out = $output;
-  }
   my $parser=XML::LibXML::SAX
     ->new( Handler =>
 	   XML::Filter::DOMFilter::LibXML
@@ -5774,23 +5780,36 @@ sub stream_process {
 sub pull_process {
     my ($opts, $process) = @_;
     $opts = _ev_opts($opts);
+    my ($out, $termout, $input) = pull_stream_opts($opts);
+
+    my %src;
+    if (exists $opts->{'input-pipe'}) {
+        open my $F, "$input|" or die "Cannot open pipe to $input: $!\n";
+        %src = (IO => $F);
+    } elsif (exists $opts->{'input-string'}) {
+        %src = (string => $input);
+    } else {
+        %src = (location => $input);
+    }
 
     require XML::LibXML::Reader;
-    my $reader = 'XML::LibXML::Reader'->new(
-                     location => $opts->{'input-file'}) or die;
-    $_->[0] = 'XML::LibXML::Pattern'->new($_->[0]) for @$process;
+    my $reader = 'XML::LibXML::Reader'->new(%src) or die;
+    $_->[0] = 'XML::LibXML::Pattern'->new($_->[0], \%_ns) for @$process;
 
     while ($reader->read) {
         for my $step (@$process) {
             if ($reader->nodeType != 15
              && $reader->nodeType != 16
              && $reader->matchesPattern($step->[0])
-               ) {
+            ) {
                 stream_process_node($reader->copyCurrentNode(1), $step->[1]);
                 last
             }
         }
     }
+    close $out if exists $opts->{'output-pipe'};
+    out("\n") if $termout;
+    return 1
 }
 
 sub iterate {
