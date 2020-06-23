@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="doc_info_command">
+  <title>doc-info command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>doc-info [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> doc_info</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    In the present implementation, this command displays
+	    information provided in the <literal>&lt;?xml
+	    ...?&gt;</literal> declaration of a document:
+	    <literal>version, encoding, standalone</literal>, 
+	    plus information about
+	    level of <literal>gzip</literal> compression of the
+	    original XML file and
+	    the original XML file URI.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_set_enc_command.html">set-enc</ulink>, <ulink url="s_set_standalone_command.html">set-standalone</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

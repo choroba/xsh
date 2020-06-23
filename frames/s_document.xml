@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="document">
+  <title>document argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>
+	    A document is specified by arbitrary
+	    <ulink url="s_exp.html">expression</ulink> which evaluates
+	    to a non-empty node-list.
+	    From this node-list, the first node
+	    is taken and its owner document is used.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-001">
+    <title>See Also</title>
+    <para><ulink url="s_Variables.html">Variables</ulink>, <ulink url="s_assign_command.html">assign</ulink>, <ulink url="s_my_command.html">my</ulink>, <ulink url="s_local_command.html">local</ulink></para>
+  </simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink>, <ulink url="s_Variables.html">Variables</ulink></para>
+  </simplesect>
+</section>

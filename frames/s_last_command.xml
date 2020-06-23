@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="last_command">
+  <title>last command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>last [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    The <literal>last</literal> command is like the break
+	    statement in C (as used in loops); it immediately exits an
+	    enclosing loop. The optional <ulink url="s_exp.html">expression</ulink>
+	    argument may evaluate to a positive integer number that
+	    indicates which level of the nested loops to quit. If this
+	    argument is omitted, it defaults to 1, i.e. the innermost
+	    loop.
+	  </para>
+	  <para>
+	    Using this command outside a loop causes an
+	    immediate run-time error.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_foreach.html">foreach</ulink>, <ulink url="s_while.html">while</ulink>, <ulink url="s_iterate.html">iterate</ulink>, <ulink url="s_next_command.html">next</ulink>, <ulink url="s_last_command.html">last</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

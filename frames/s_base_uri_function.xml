@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="base_uri_function">
+  <title>xsh:base-uri function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:base-uri(node-set?)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Returns base URI of the first node in the node-set (or
+	  the current node).  The function should work on both XML and
+	  HTML documents even if base mechanisms for these are
+	  completely different. It returns the base as defined in RFC
+	  2396 sections "5.1.1. Base URI within Document Content" and
+	  "5.1.2. Base URI from the Encapsulating Entity". However it
+	  does not return the document base (5.1.3), use
+	  document-uri() for this.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="eval_command">
+  <title>eval command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>eval <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>NOTE: This command has very different behavior from XSH1,
+	    where it used to be an alias for <ulink url="s_perl_command.html">perl</ulink>.
+	  </para>
+	  <para>This command first evaluates a given <ulink url="s_exp.html">expression</ulink> to obtain a string,
+	    then evaluates this string as XSH2 code in the current context, returning
+	    the return value of the last evaluated command.
+	    This command raises
+	    an exception if either <ulink url="s_exp.html">expression</ulink> evaluates to
+	    invalid XSH2 code or if evaluating the code raises an exception.
+	  </para>
+	  <example id="gen-002">
+	    <title>Evaluate "in-line" XSH snippets within a XML document</title>
+	    <programlisting>foreach //inline-xsh eval .;</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

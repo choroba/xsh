@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>edit-string command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="edit_string_command" target="_self"></a>edit-string command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">edit-string [--editor|:E <a class="ulink" href="s_filename.html" target="_self">filename</a>] 
+	  [--encoding|:e <a class="ulink" href="s_enc_string.html" target="_self">encoding</a>]
+	  [--allow-empty|:0] <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Evaluating given <a class="ulink" href="s_exp.html" target="_self">expression</a> to a string,
+	    save it in a temporary file,
+	    open the file an external editor as a plain text,
+	    and when the editor exits,
+	    read and return the result. The <code class="literal">--editor</code>
+	    (<code class="literal">:E</code>) parameter can be used
+	    to provide an editor command, whereas
+	    <code class="literal">--encoding</code> (<code class="literal">:e</code>)
+	    can be used to specify character encoding used for
+	    communication with the editor. If the result
+	    is empty, the interactive XSH2 shell asks user for
+	    confirmation before returning the result in order
+	    to prevent data loss due to some unexpected error.
+	    To suppress this feature, use <code class="literal">--allow-empty</code>
+	    or <code class="literal">:0</code> flag.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

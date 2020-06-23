@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="exp">
+  <title>expression argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>An XSH2 expression can be one of the following constructs:</para>
+	  <orderedlist>
+	    <listitem>
+	      <para>
+		XPath 1.0 expression with the following restriction: 
+		whitespace is only allowed within parts the expression
+		enclosed in quotes (literal strings) or brackets (XPath
+		has two types of brackets - plain and square). Thus, while
+		<literal>/ foo / bar</literal> is a valid XPath expression
+		matching element named bar under root element foo, in XSH2 this
+		expression must be written as <literal>/foo/bar</literal> or
+		<literal>(/ foo / bar)</literal> or
+		<literal>(/foo/bar)</literal> etc.
+		The reason for this restriction is simple: 
+                XSH2, like most shell
+		languages, uses whitespace as argument delimiter so it must
+		be able to determine expression boundaries
+		(otherwise, <literal>/ bar / foo</literal> could be
+		anything between one and four expressions).
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		In certain contexts, usually when a filename or a node
+		name is
+		expected as an argument, bareword (otherwise XPath) 
+		expressions are
+		evaluated in a non-standard way: as long as the
+		expression contains no whitespace, no brackets of any
+		kind, quotes, double-quotes, <literal>$</literal>
+		character, nor <literal>@</literal> character, 
+		it is treated as a literal
+		token which evaluates to itself. 
+		This usually happens if a file name or element
+		name is expected, but some other commands, like
+		<ulink url="s_print_command.html">print</ulink>,
+		evaluate its arguments in this way. In order to force an
+		XPath evaluation in such situations, the entire expression
+		should be enclosed with brackets <literal>(...)</literal>.
+		For example, with
+		<ulink url="s_open_command.html">open</ulink> command, <literal>open
+		file</literal> or <literal>open "file"</literal> both
+		open a file whose name is <literal>file</literal>
+		(literally) whereas <literal>open (file)</literal> or
+		<literal>open @file</literal> compute the file name
+		by evaluating <literal>(file)</literal> or
+		<literal>@file</literal> respectively, as XPath
+		expressions.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+  		Perl blocks. These are enclosed in braces like: 
+		<literal>{ perl-code }</literal>.
+		Perl expressions can be used to evaluate more complicated
+		things, like complex string expressions, regexp matches,
+		perl commands, etc. In short, arbitrary perl.
+		Of course, things like <literal>{`ls`}</literal> work
+		too, and that's why we don't need to define shell-like backticks
+		in XSH2 itself.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		Result of one XSH2 command can be directly passed as an argument
+		to another. This is done using &amp;{ xsh-code } expressions.
+		Most XSH2 commands always return <literal>undef</literal> or 1,
+		but some do return a value, usually a node-list. Examples of
+		such commands are
+		<ulink url="s_open_command.html">open</ulink>, <ulink url="s_copy_command.html">copy</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_wrap_command.html">wrap</ulink>, <ulink url="s_edit_command.html">edit</ulink>, or <ulink url="s_xslt_command.html">xslt</ulink>.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		Large blocks of literal data can be passed to commands
+		via "here document" expressions
+		<literal>&lt;&lt;EOF</literal>,
+		<literal>&lt;&lt;'EOF'</literal>,
+		&lt;&lt;"EOF"<literal/>, where
+		<literal>EOF</literal> is an arbitrary
+		<literal>ID</literal> string.
+		<literal>&lt;&lt;EOF</literal> and
+		<literal>&lt;&lt;"EOF"</literal> are equivalent, and
+		are subject to interpolation of
+		<literal>${...}</literal> constructs, where as
+		<literal>&lt;&lt;'EOF'</literal> does not. The result
+		of evaluation of these three is the literal content
+		(with <literal>${...}</literal> possibly interpolated)
+		of the script starting at the following line and
+		ending at a line containing just
+		<literal>EOF</literal>. <literal>&lt;&lt;{EOF}</literal>
+		and <literal>&lt;&lt;(EOF)</literal> are implemented
+		too, but I'm not sure they are of any use since
+		putting the expression in ( ) or { } has the same
+		effect.
+	      </para>
+	    </listitem>
+	  </orderedlist>
+	  <para>
+	    XPath expressions (and their filename variant) are subject
+	    to interpolation of substrings of the form
+	    <literal>${...}</literal> (called interpolators), where
+	    <literal>...</literal> can be of several different forms,
+	    described below. The interpolation can be suppressed
+	    by preceding the <literal>$</literal> sign with a backslash.
+	  </para>
+	  <para>
+	    Substrings of the form <literal>${id}</literal> or
+	    <literal>${$id}</literal> are interpolated with the
+	    value of the variable named <literal>$id</literal>.
+	  </para>
+	  <para>
+	    Interpolators of the form
+	    <literal>${{</literal> and <literal>}}</literal>
+	    evaluate their contents
+	    as a Perl expression (in very much the same way as the
+	    <ulink url="s_perl_command.html">perl</ulink> command) and interpolate
+	    to the resulting value.
+	  </para>
+	  <para>
+	    Interpolators of the form
+	    <literal>${(</literal> and <literal>)}</literal>
+	    evaluate their contents as an XPath expression and interpolates to
+	    a string value of the result.
+	  </para>
+	  <para>
+	    Substrings of the form <literal>\${</literal>
+	    interpolate to <literal>${</literal>
+	    (as a means for escaping <literal>${...}</literal>
+	    in an expression).
+	  </para>
+	  <para>
+	    Expressions are evaluated by XSH2 commands themselves, so
+	    the exact value an expression evaluates to, is also
+	    command-dependent. There are commands that can handle
+	    all data types, but some commands expect their arguments to
+	    evaluate only to specific kinds of values.
+	    As already mentioned above, commands
+	    expecting a filename or a node name usually evaluate
+	    simple expressions not containing any special characters
+	    as literal strings, whereas commands expecting strings
+	    evaluate all expressions so that they get a string value
+	    (e.g. by converting a node-set to its text content).
+	    Similarly, commands expecting a node-set usually convert
+	    strings to a small XML fragments, while commands
+	    expecting a single document node usually convert
+	    node-sets to a document node by taking the owner
+	    document of the first element in the node-set.
+	  </para>
+	  <example id="gen-001">
+	    <programlisting>$a = "bar";              # $a contains: bar</programlisting>
+    	    <programlisting>$b = $a;                 # $b contains: bar</programlisting>
+	    <programlisting>$b = "$a";               # $b contains: $a</programlisting>
+	    <programlisting>$b = "${a}";             # $b contains: bar</programlisting>
+            <programlisting>$b = {$a};               # $b contains: bar</programlisting>
+            <programlisting>$b = //creature;         # $b contains a node-set</programlisting>
+            <programlisting>ls $b;                   # prints the node-set as XML in document order</programlisting>
+            <programlisting>count $b;                # prints number of nodes in the node-set</programlisting>
+            <programlisting>echo count($b);          # the same</programlisting>
+            <programlisting>$c = string($b[1]/@name) # $c contains string value of //creature[1]/@name (e.g. Bilbo)</programlisting>
+            <programlisting>echo //creature          # prints: //creature</programlisting>
+            <programlisting>echo (//creature)        # evaluates (//creature) as XPath and prints the
+# text content of the resulting node-set</programlisting>
+	    <programlisting/>
+	    <programlisting>echo { join(",",split(//,$a)) }              # prints: b,a,r</programlisting>
+	    <programlisting>echo ${{ join(",",split(//,$a)) }}           # the same</programlisting>
+	    <programlisting>echo "${{ join(",",split(//,$a)) }}"         # the same</programlisting>
+	    <programlisting>echo "${(//creature[1]/@name)}"              # prints e.g.: Bilbo</programlisting>
+	    <programlisting>echo ${(//creature[1]/@name)}                # the same</programlisting>
+	    <programlisting>echo //creature[1]/@name                     # the same</programlisting>
+	    <programlisting>echo string(//creature[1]/@name)             # the same</programlisting>
+	    <programlisting>echo (//creature[1]/@name)                   # the same</programlisting>
+	  </example>
+	  <example id="gen-002">
+	    <title>In-line documents</title>
+	    <programlisting>$a="bar"</programlisting>
+	    <programlisting>echo foo &lt;&lt;END baz;
+xx ${a} yy
+END
+# prints foo xx bar yy baz</programlisting>
+	    <programlisting>echo foo &lt;&lt;"END" baz;
+xx ${a} yy
+END
+# same as above</programlisting>
+	    <programlisting>echo foo &lt;&lt;'END' baz;
+xx ${a} yy
+END
+# prints foo xx $a yy baz</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Expressions returning result of a XSH2 command</title>
+	    <programlisting>copy &amp;{ sort --key @best_score --numeric //player } into .;</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Variables.html">Variables</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink>, <ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink></para>
+  </simplesect>
+</section>

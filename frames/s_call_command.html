@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>call command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="call_command" target="_self"></a>call command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">call <a class="ulink" href="s_exp.html" target="_self">expression</a> [<a class="ulink" href="s_exp.html" target="_self">expression</a> ...]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Call a subroutine whose name is computed by evaluating
+	    the first argument <a class="ulink" href="s_exp.html" target="_self">expression</a>. All other
+	    expressions are evaluated too and the results are passed
+	    to the subroutine as arguments.
+	  </p>
+<p>
+	    This command should only be used if the name of the subroutine
+	    isn't known at the compile time. Otherwise it is recommended
+	    to use a direct subroutine call of the form:
+	  </p>
+<pre class="programlisting">subroutine-name [argument1 argument2 ...]</pre>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">def a $arg { echo "A says" $arg }
+def b $arg { echo "B says" $arg }
+a "hallo!";  # call subroutine a
+b "hallo!";  # call subroutine b
+call { chr(ord("a")+rand(2)) } "surprise!"; # call a or b randomly 
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_def.html" target="_self">def</a>, <a class="ulink" href="s_return_command.html" target="_self">return</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

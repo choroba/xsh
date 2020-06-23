@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>xsh:resolve-uri function</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="resolve_uri_function" target="_self"></a>xsh:resolve-uri function</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">string xsh:resolve-uri(string, string?)</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This function takes one or two arguments: a relative URI and an optional base URI.
+	    If the first argument is a relative URI reference, 
+	    this function resolves it against either the 
+	    given base URI, if given (which is assumed to be an absolute URI)
+	    or, if base URI not given, against the URI of the current working directory.
+	    If the first argument is an absolute URI reference, it is returned unchanged. 
+	  </p>
+<p>
+	    If the first argument is the zero-length string, returns 
+	    the base URI if given and the URI of the current working directory otherwise.
+	  </p>
+<p>
+	    Note: Resolving a URI does not dereference it (download
+	    the referenced content); it is merely a syntactic
+	    operation on two character strings.
+	  </p>
+</div>
+</div></body>
+</html>

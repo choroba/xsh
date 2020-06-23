@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xpath_completion_command">
+  <title>xpath-completion command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xpath-completion <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> xpath_completion</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    If the
+	    <ulink url="s_exp.html">expression</ulink> is non-zero,
+	    enable the TAB completion for <ulink url="s_xpath.html">xpath</ulink>
+	    expansions in the interactive shell mode, disable it
+	    otherwise. Defaults to on.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$XPATH_COMPLETION</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

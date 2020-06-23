@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Namespaces in XML and XPath</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="Namespaces" target="_self"></a>Namespaces in XML and XPath</h2></div></div>
+<hr>
+</div>
+<p>Namespaces provide a
+	simple method for qualifying element and attribute names in
+	XML documents.  Namespaces are represented by a namespace URI
+	but, since the URI can be very long, element and attribute
+	names are associated with a namespace using a namespace prefix
+	(see the <a class="ulink" href="http://www.w3.org/TR/REC-xml-names/" target="_self">W3C
+	recommendation</a> for details). In an XML document, a
+	prefix can be associated with a namespace URI using a
+	declaration which takes form of special attribute of the form
+	<code class="literal">xmlns:prefix="namespace uri"</code> on an element.
+	The scope of the namespace declaration is then the subtree of the
+	element carrying the special <code class="literal">xmlns:prefix</code> attribute (and includes
+	attributes of the element). Moreover, a default namespace can
+	be declared using just <code class="literal">xmlns="namespace
+	uri"</code>.  In that case all unprefixed element names
+	in the scope of such a
+	declaration belong to the namespace. 
+	An unprefixed element which is not in scope of 
+	a default namespace declaration does not belong to any namespace.
+	It is recommended not to combine namespaced elements and
+	non-namespaced elements in a single document.
+	Note that regardless of default
+	namespace declarations, unprefixed attributes do not belong to any namespace
+	(because they are uniquely determined by their name
+	and the namespace and name of the the element which carries them).
+      </p>
+<p>XSH2 tries to deal namespace declarations transparently
+	(creating them if necessary when nodes are copied between
+	different documents or scopes of namespace declarations). 
+	Most commands which create new elements or attributes provide
+	means to indicate a namespace. In addition, XSH2 provides commands <a class="ulink" href="s_declare_namespace_command.html" target="_self">declare-ns</a>, <a class="ulink" href="s_set_namespace_command.html" target="_self">set-ns</a>, <a class="ulink" href="s_change_namespace_uri_command.html" target="_self">change-ns-uri</a>, and <a class="ulink" href="s_change_namespace_prefix_command.html" target="_self">change-ns-prefix</a> to
+	directly manipulate XML namespace declarations on the current
+	node.
+      </p>
+<p>
+	Since XSH2 is heavily XPath-based, it is important to
+	remember that XPath 1.0 maps prefixes to namespaces
+	independently of the declarations in the current document. The
+	mapping is instead provided via so called XPath context.
+	Namespaces can be tested in XPath either using the built-in
+	<code class="literal">namespace-uri()</code> function, but it is more
+	convenient to use namespace prefixes associated with namespace
+	URIs in the XPath context.  This association is independent of
+	the documents to which the XPath expression is applied and can
+	be established using the command <a class="ulink" href="s_registerns_command.html" target="_self">register-namespace</a>.  Additional, XSH2
+	automatically propagates the namespace association in the
+	scope of the current node to the XPath context, so that
+	per-document prefixes in the current scope can also be used.
+      </p>
+<p>
+	IMPORTANT: <a class="ulink" href="http://www.w3.org/TR/xpath" target="_self">XPath 1.0</a> has no concept of a default namespace.
+	Unprefixed names in XPath only match names which have no
+	namespace. So, if the document uses a default namespace,
+	it is required to associate a
+	non-empty prefix with the default namespace
+        via  <a class="ulink" href="s_registerns_command.html" target="_self">register-namespace</a>
+	and add that prefix to names in XPath expressions intended to match 
+	nodes in the default namespace.
+      </p>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Manipulating nodes in XHTML documents</b></p>
+<div class="example-contents"><pre class="programlisting">open "index.xhtml";
+$xhtmlns = "http://www.w3.org/1999/xhtml";
+register-namespace x $xhtmlns;
+wrap --namespace $xhtmlns '&lt;font color="blue"&gt;' //x:a[@href];
+# or 
+wrap '&lt;x:font color="blue"&gt;' //x:a[@href];</pre></div>
+</div>
+<br class="example-break"><p>In the preceding example we associate the (typically
+	default) namespace of XHTML documents with the prefix
+	<code class="literal">x</code>.  We than use this prefix to match all
+	links (<code class="literal">a</code> elements) in the document.  Note
+	that we do not write <code class="literal">@x:href</code> to match the
+	<code class="literal">@href</code> attribute because unprefixed
+	attributes do not belong to the default namespace.  The <a class="ulink" href="s_wrap_command.html" target="_self">wrap</a> command is used to create new containing
+	elements for the nodes matched by the XPath expression. We may
+	either specify the namespace of the containing element
+	explicitly, using <code class="literal">--namespace</code> option, or
+	implicitly, by using a prefix associated with the namespace in
+	the XPath context.  In the latter case, XSH2 chooses a
+	suitable prefix declared for the namespace in the document
+	scope (in this case the default, i.e. no, prefix), adding a
+	new namespace declaration if necessary.
+      </p>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Related Topics</h3></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><a class="ulink" href="s_change_namespace_prefix_command.html" target="_self">change-ns-prefix</a></span></dt>
+<dd>change namespace prefix (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_change_namespace_uri_command.html" target="_self">change-ns-uri</a></span></dt>
+<dd>change namespace URI (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_declare_namespace_command.html" target="_self">declare-ns</a></span></dt>
+<dd>create a special attribute declaring an XML namespace (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_namespaces_command.html" target="_self">namespaces</a></span></dt>
+<dd>List namespaces available in a context of
+	  a given nodes</dd>
+<dt><span class="term"><a class="ulink" href="s_registerns_command.html" target="_self">register-namespace</a></span></dt>
+<dd>register namespace prefix to use XPath expressions</dd>
+<dt><span class="term"><a class="ulink" href="s_registerns_xhtml_command.html" target="_self">register-xhtml-namespace</a></span></dt>
+<dd>register a prefix for the XHTML namespace</dd>
+<dt><span class="term"><a class="ulink" href="s_registerns_xsh_command.html" target="_self">register-xsh-namespace</a></span></dt>
+<dd>register a prefix for the XSH2 namespace</dd>
+<dt><span class="term"><a class="ulink" href="s_set_namespace_command.html" target="_self">set-ns</a></span></dt>
+<dd>set namespace of the current node (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_unregisterns_command.html" target="_self">unregister-namespace</a></span></dt>
+<dd>unregister namespace prefix</dd>
+</dl></div>
+</div>
+</div></body>
+</html>

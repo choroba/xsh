@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="do_command">
+  <title>do command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>do <ulink url="s_block.html">block</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Execute <ulink url="s_block.html">block</ulink>.
+	    This command is probably only useful when one wants to
+	    redirect output of more than one command.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_block.html">block</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

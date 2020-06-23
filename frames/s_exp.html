@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>expression argument type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="exp" target="_self"></a>expression argument type</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Description</h3></div></div></div>
+<p>An XSH2 expression can be one of the following constructs:</p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>
+		XPath 1.0 expression with the following restriction: 
+		whitespace is only allowed within parts the expression
+		enclosed in quotes (literal strings) or brackets (XPath
+		has two types of brackets - plain and square). Thus, while
+		<code class="literal">/ foo / bar</code> is a valid XPath expression
+		matching element named bar under root element foo, in XSH2 this
+		expression must be written as <code class="literal">/foo/bar</code> or
+		<code class="literal">(/ foo / bar)</code> or
+		<code class="literal">(/foo/bar)</code> etc.
+		The reason for this restriction is simple: 
+                XSH2, like most shell
+		languages, uses whitespace as argument delimiter so it must
+		be able to determine expression boundaries
+		(otherwise, <code class="literal">/ bar / foo</code> could be
+		anything between one and four expressions).
+	      </p></li>
+<li class="listitem"><p>
+		In certain contexts, usually when a filename or a node
+		name is
+		expected as an argument, bareword (otherwise XPath) 
+		expressions are
+		evaluated in a non-standard way: as long as the
+		expression contains no whitespace, no brackets of any
+		kind, quotes, double-quotes, <code class="literal">$</code>
+		character, nor <code class="literal">@</code> character, 
+		it is treated as a literal
+		token which evaluates to itself. 
+		This usually happens if a file name or element
+		name is expected, but some other commands, like
+		<a class="ulink" href="s_print_command.html" target="_self">print</a>,
+		evaluate its arguments in this way. In order to force an
+		XPath evaluation in such situations, the entire expression
+		should be enclosed with brackets <code class="literal">(...)</code>.
+		For example, with
+		<a class="ulink" href="s_open_command.html" target="_self">open</a> command, <code class="literal">open
+		file</code> or <code class="literal">open "file"</code> both
+		open a file whose name is <code class="literal">file</code>
+		(literally) whereas <code class="literal">open (file)</code> or
+		<code class="literal">open @file</code> compute the file name
+		by evaluating <code class="literal">(file)</code> or
+		<code class="literal">@file</code> respectively, as XPath
+		expressions.
+	      </p></li>
+<li class="listitem"><p>
+  		Perl blocks. These are enclosed in braces like: 
+		<code class="literal">{ perl-code }</code>.
+		Perl expressions can be used to evaluate more complicated
+		things, like complex string expressions, regexp matches,
+		perl commands, etc. In short, arbitrary perl.
+		Of course, things like <code class="literal">{`ls`}</code> work
+		too, and that's why we don't need to define shell-like backticks
+		in XSH2 itself.
+	      </p></li>
+<li class="listitem"><p>
+		Result of one XSH2 command can be directly passed as an argument
+		to another. This is done using &amp;{ xsh-code } expressions.
+		Most XSH2 commands always return <code class="literal">undef</code> or 1,
+		but some do return a value, usually a node-list. Examples of
+		such commands are
+		<a class="ulink" href="s_open_command.html" target="_self">open</a>, <a class="ulink" href="s_copy_command.html" target="_self">copy</a>, <a class="ulink" href="s_move_command.html" target="_self">move</a>, <a class="ulink" href="s_wrap_command.html" target="_self">wrap</a>, <a class="ulink" href="s_edit_command.html" target="_self">edit</a>, or <a class="ulink" href="s_xslt_command.html" target="_self">xslt</a>.
+	      </p></li>
+<li class="listitem"><p>
+		Large blocks of literal data can be passed to commands
+		via "here document" expressions
+		<code class="literal">&lt;&lt;EOF</code>,
+		<code class="literal">&lt;&lt;'EOF'</code>,
+		&lt;&lt;"EOF"<code class="literal"></code>, where
+		<code class="literal">EOF</code> is an arbitrary
+		<code class="literal">ID</code> string.
+		<code class="literal">&lt;&lt;EOF</code> and
+		<code class="literal">&lt;&lt;"EOF"</code> are equivalent, and
+		are subject to interpolation of
+		<code class="literal">${...}</code> constructs, where as
+		<code class="literal">&lt;&lt;'EOF'</code> does not. The result
+		of evaluation of these three is the literal content
+		(with <code class="literal">${...}</code> possibly interpolated)
+		of the script starting at the following line and
+		ending at a line containing just
+		<code class="literal">EOF</code>. <code class="literal">&lt;&lt;{EOF}</code>
+		and <code class="literal">&lt;&lt;(EOF)</code> are implemented
+		too, but I'm not sure they are of any use since
+		putting the expression in ( ) or { } has the same
+		effect.
+	      </p></li>
+</ol></div>
+<p>
+	    XPath expressions (and their filename variant) are subject
+	    to interpolation of substrings of the form
+	    <code class="literal">${...}</code> (called interpolators), where
+	    <code class="literal">...</code> can be of several different forms,
+	    described below. The interpolation can be suppressed
+	    by preceding the <code class="literal">$</code> sign with a backslash.
+	  </p>
+<p>
+	    Substrings of the form <code class="literal">${id}</code> or
+	    <code class="literal">${$id}</code> are interpolated with the
+	    value of the variable named <code class="literal">$id</code>.
+	  </p>
+<p>
+	    Interpolators of the form
+	    <code class="literal">${{</code> and <code class="literal">}}</code>
+	    evaluate their contents
+	    as a Perl expression (in very much the same way as the
+	    <a class="ulink" href="s_perl_command.html" target="_self">perl</a> command) and interpolate
+	    to the resulting value.
+	  </p>
+<p>
+	    Interpolators of the form
+	    <code class="literal">${(</code> and <code class="literal">)}</code>
+	    evaluate their contents as an XPath expression and interpolates to
+	    a string value of the result.
+	  </p>
+<p>
+	    Substrings of the form <code class="literal">\${</code>
+	    interpolate to <code class="literal">${</code>
+	    (as a means for escaping <code class="literal">${...}</code>
+	    in an expression).
+	  </p>
+<p>
+	    Expressions are evaluated by XSH2 commands themselves, so
+	    the exact value an expression evaluates to, is also
+	    command-dependent. There are commands that can handle
+	    all data types, but some commands expect their arguments to
+	    evaluate only to specific kinds of values.
+	    As already mentioned above, commands
+	    expecting a filename or a node name usually evaluate
+	    simple expressions not containing any special characters
+	    as literal strings, whereas commands expecting strings
+	    evaluate all expressions so that they get a string value
+	    (e.g. by converting a node-set to its text content).
+	    Similarly, commands expecting a node-set usually convert
+	    strings to a small XML fragments, while commands
+	    expecting a single document node usually convert
+	    node-sets to a document node by taking the owner
+	    document of the first element in the node-set.
+	  </p>
+<div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents">
+<pre class="programlisting">$a = "bar";              # $a contains: bar</pre>
+<pre class="programlisting">$b = $a;                 # $b contains: bar</pre>
+<pre class="programlisting">$b = "$a";               # $b contains: $a</pre>
+<pre class="programlisting">$b = "${a}";             # $b contains: bar</pre>
+<pre class="programlisting">$b = {$a};               # $b contains: bar</pre>
+<pre class="programlisting">$b = //creature;         # $b contains a node-set</pre>
+<pre class="programlisting">ls $b;                   # prints the node-set as XML in document order</pre>
+<pre class="programlisting">count $b;                # prints number of nodes in the node-set</pre>
+<pre class="programlisting">echo count($b);          # the same</pre>
+<pre class="programlisting">$c = string($b[1]/@name) # $c contains string value of //creature[1]/@name (e.g. Bilbo)</pre>
+<pre class="programlisting">echo //creature          # prints: //creature</pre>
+<pre class="programlisting">echo (//creature)        # evaluates (//creature) as XPath and prints the
+# text content of the resulting node-set</pre>
+<pre class="programlisting"></pre>
+<pre class="programlisting">echo { join(",",split(//,$a)) }              # prints: b,a,r</pre>
+<pre class="programlisting">echo ${{ join(",",split(//,$a)) }}           # the same</pre>
+<pre class="programlisting">echo "${{ join(",",split(//,$a)) }}"         # the same</pre>
+<pre class="programlisting">echo "${(//creature[1]/@name)}"              # prints e.g.: Bilbo</pre>
+<pre class="programlisting">echo ${(//creature[1]/@name)}                # the same</pre>
+<pre class="programlisting">echo //creature[1]/@name                     # the same</pre>
+<pre class="programlisting">echo string(//creature[1]/@name)             # the same</pre>
+<pre class="programlisting">echo (//creature[1]/@name)                   # the same</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;In-line documents</b></p>
+<div class="example-contents">
+<pre class="programlisting">$a="bar"</pre>
+<pre class="programlisting">echo foo &lt;&lt;END baz;
+xx ${a} yy
+END
+# prints foo xx bar yy baz</pre>
+<pre class="programlisting">echo foo &lt;&lt;"END" baz;
+xx ${a} yy
+END
+# same as above</pre>
+<pre class="programlisting">echo foo &lt;&lt;'END' baz;
+xx ${a} yy
+END
+# prints foo xx $a yy baz</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;Expressions returning result of a XSH2 command</b></p>
+<div class="example-contents"><pre class="programlisting">copy &amp;{ sort --key @best_score --numeric //player } into .;</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Argtypes.html" target="_self">Argument Types</a>, <a class="ulink" href="s_Variables.html" target="_self">Variables</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a>, <a class="ulink" href="s_Perl_shell.html" target="_self">Interacting with Perl and Shell</a></p>
+</div>
+</div></body>
+</html>

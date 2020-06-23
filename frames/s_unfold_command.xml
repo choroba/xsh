@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="unfold_command">
+  <title>unfold command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>unfold <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This feature is still EXPERIMENTAL! 
+	  </para>
+	  <para>Unfold command removes
+	    <literal>xsh:fold</literal> attributes from all given elements.
+	    Such attributes are usually created by previous
+	    usage of <ulink url="s_fold_command.html">fold</ulink>.  Be aware, that
+	    <literal>xmlns:xsh</literal> namespace declaration may
+	    still be present in the document even when all elements
+	    are unfolded.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_fold_command.html">fold</ulink>, <ulink url="s_list_command.html">ls</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Navigation.html">Tree navigation</ulink>
+    </para>
+  </simplesect>
+</section>

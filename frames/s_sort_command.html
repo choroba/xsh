@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>sort command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="sort_command" target="_self"></a>sort command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">$result := sort [ --key|:k <a class="ulink" href="s_exp.html" target="_self">expression</a> ]
+	  --compare|:c <a class="ulink" href="s_perl_code.html" target="_self">perl-code</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+<p><code class="literal">$result := sort [ --key|:k <a class="ulink" href="s_exp.html" target="_self">expression</a> ]
+	  [ --numeric|:n ] [ --descending|:d ] [ --locale|:l]  <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	  </code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>This command sorts a given node-list,
+	    returning a node-list ordered according to a given
+	    key and ordering function.
+	  </p>
+<p>
+	    <code class="literal">--key|:k</code> followed by an expression
+	    specifies the key to be computed for each member of the
+	    node-list and the result used as the sorting key. If omitted,
+	    keys are created by converting the nodes
+	    to string as if XPath expression <code class="literal">string(.)</code>
+	    was used.
+	  </p>
+<p>
+	    <code class="literal">--numeric|:n</code> specifies, that
+	    keys should be compared by their numerical values
+	    (the default is string comparison).
+	  </p>
+<p>
+	    <code class="literal">--descending|:d</code> specifies,
+	    that the result should be ordered in descending order
+	    (default is ascending).
+	  </p>
+<p>
+	    <code class="literal">--locale|:l</code> forces using
+	    current locale settings for string comparison
+	    (default is no locale).
+	  </p>
+<p>
+	    <code class="literal">--compare</code> argument followed
+	    by a <a class="ulink" href="s_perl_code.html" target="_self">perl-code</a> allows to define a custom
+	    comparison method in a similar way to Perl <code class="literal">sort</code>
+	    command. The keys to be compared are passed
+	    to the code in variables <code class="literal">$a</code> and 
+	    <code class="literal">$b</code>. The code is supposed to return 1 if
+	    the key in <code class="literal">$a</code> is  greater than
+	    <code class="literal">$b</code>, 0 if the keys are equal
+	    and <code class="literal">-1</code> if <code class="literal">$a</code>
+	    is less than <code class="literal">$b</code>, depending
+            on how the corresponding elements are to be ordered.
+	    It is a run-time error to use
+	    <code class="literal">--compare</code> together with either
+	    <code class="literal">--numeric</code> or
+	    <code class="literal">--descending</code>. 
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Case-insensitive sort of a given node-list</b></p>
+<div class="example-contents"><pre class="programlisting">$ordered := sort --key xsh:lc(.) $unordered;</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Reorder creature elements by name attribute
+	      in ascending order using Czech locale settings
+	    </b></p>
+<div class="example-contents"><pre class="programlisting">perl {
+# setup locale collating function
+# Note, that the collating function must be UTF8 aware.
+use POSIX qw(locale_h);
+setlocale(LC_COLLATE,'cs_CZ.UTF-8');
+};
+
+xmove &amp;{ sort :k@name :l * } into /middle-earth[1]/creatures;
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;Sort a node-list by a pre-computed score (Perl-based sort)</b></p>
+<div class="example-contents"><pre class="programlisting">$results := sort --numeric --descending --key { $scores{literal('@name')} } $players;
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

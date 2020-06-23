@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="throw_command">
+  <title>throw command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>throw <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command throws and exception containing error message
+	    given by the obligatory <ulink url="s_exp.html">expression</ulink>
+	    argument. If the exception is not handled 
+	    by some surrounding <ulink url="s_try_catch.html">try</ulink> block,
+	    the execution is stopped immediately and the error
+	    message is printed.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_try_catch.html">try</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="set_filename_command">
+  <title>set_filename command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>set_filename <ulink url="s_exp.html">expression</ulink> [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Changes filename or URL associated with a 
+	    given document (or the current document, if only
+	    one argument is specified). Document filename is initialized
+	    by the <ulink url="s_open_command.html">open</ulink> command
+	    and used e.g. by <ulink url="s_save_command.html">save</ulink>.
+	    It can be queried in XPath expressions using the
+	    <ulink url="s_filename_function.html">xsh:filename</ulink> function.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_open_command.html">open</ulink>, <ulink url="s_save_command.html">save</ulink>, <ulink url="s_filename_function.html">xsh:filename</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

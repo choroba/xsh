@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Perl_shell">
+      <title>Interacting with Perl and Shell</title>
+      <para>
+	Along with XPath, Perl is one of two XSH2 expression languages,
+	and borrows XSH2 its great expressive power.
+	Perl is a language optimized for scanning arbitrary text
+	files, extracting information from those text files, and
+	printing reports based on that information. It has built-in
+	regular expressions and powerful yet easy to learn 
+	data structures (scalars, arrays, hash tables). It's also a
+	good language for many system management tasks.
+	XSH2 itself is written in Perl (except for the XML engine,
+	which uses libxml2 library written in C by Daniel Veillard).
+      </para>
+      <section id="binding_perl">
+	<title>Calling Perl</title>
+	<para>
+	  Perl <ulink url="s_perl_code.html">expressions or blocks of
+	  code</ulink> can either be used as arguments to any XSH2 command.
+	  One of them is 
+	  <ulink url="s_perl_command.html">perl</ulink> command
+	  which simply evaluates the given Perl block.
+	  Other commands, such as <ulink url="s_map_command.html">map</ulink>,
+	  even require Perl expression argument and allow
+	  quickly change DOM node content.
+	  Perl expressions may also provide lists of strings to iterate over
+	  with a <ulink url="s_foreach.html">foreach</ulink> loop, or serve as
+	  conditions for <ulink url="s_if.html">if</ulink>, <ulink url="s_unless.html">unless</ulink>, and 
+	  <ulink url="s_while.html">while</ulink> statements.
+	</para>
+	<para>
+	  To prevent conflict between XSH2 internals and the evaluated
+	  Perl code, XSH2 runs such code in the context of a special
+	  namespace <literal>XML::XSH2::Map</literal>. As described in
+	  the section <ulink url="s_Variables.html">Variables</ulink>, XSH2 string
+	  variables may be accessed and possibly assigned from Perl
+	  code in the most obvious way, since they actually
+	  <emphasis>are</emphasis> Perl variables defined in the
+	  <literal>XML::XSH2::Map</literal> namespace.</para>
+	<para>
+	  The interaction between XSH2 and Perl actually works the
+	  other way round as well, so that you may call back XSH2 from the
+	  evaluated Perl code.  For this, Perl function
+	  <literal>xsh</literal> is defined in the
+	  <literal>XML::XSH2::Map</literal> namespace.  All parameters
+	  passed to this function are interpreted as XSH2 commands.</para>
+	<para>Moreover, the following Perl helper functions are defined:
+	</para>
+	<para><literal>xsh(string,....)</literal> - evaluates
+	  given string(s) as XSH2 commands.
+	</para>
+	<para><literal>call(name)</literal> - call a given
+	  XSH2 subroutine.
+	</para>
+	<para><literal>count(string)</literal> - evaluates
+	  given string as an XPath expression and returns
+	  either literal value of the result (in case of
+	  boolean, string and float result type) or
+	  number of nodes in a returned node-set.
+	</para>
+	<para><literal>literal(string|object)</literal> -
+	  if passed a string, evaluates it as a XSH2 expression 
+	  and returns the literal value of the result;
+	  if passed an object, returns literal value of
+	  the object.
+	  For example,
+	  <literal>literal('$doc/expression')</literal> returns the same
+	  value as <literal>count('string($doc/expression)')</literal>.
+	</para>
+	<para>
+	  <literal>serialize(string|object)</literal> - 
+	  if passed a string, it first evaluates the string
+	  as a XSH2 expression to obtain a node-list object. 
+	  Then it serializes the object into XML.
+	  The resulting string is equal to the output of the XSH2 command <ulink url="s_list_command.html">ls</ulink> applied on the same expression or object
+	  expression only without indentation and folding.
+	</para>
+	<para>
+	  <literal>type(string|object)</literal> - 
+	  if passed a string, it first evaluates
+	  the string as XSH2 expression to obtain a node-list object.
+	  It returns a list of strings representing
+	  the types of nodes in the node-list
+	  (ordered in the canonical document order).
+	  The returned type strings are: 
+	  <literal>element</literal>,
+	  <literal>attribute</literal>,
+	  <literal>text</literal>,
+	  <literal>cdata</literal>,
+	  <literal>pi</literal>,
+	  <literal>entity_reference</literal>,
+	  <literal>document</literal>,
+	  <literal>chunk</literal>,
+	  <literal>comment</literal>,
+	  <literal>namespace</literal>,
+	  <literal>unknown</literal>.
+	</para>
+	<para>
+	  <literal>nodelist(string|object,...)</literal> - 
+	  converts its arguments to objects if necessary
+	  and returns a node-list consisting of the objects.
+	</para>
+	<para>
+	  <literal>xpath(string, node?)</literal> - 
+	  evaluates a given string as an XPath expression
+	  in the context of a given node and returns
+	  the result.
+	</para>
+	<para>
+	  <literal>echo(string,...)</literal> - prints
+	  given strings on XSH2 output.
+	  Note, that in the interactive mode,
+	  XSH2 redirects all output to a specific terminal file handle
+	  stored in the variable <literal>$OUT</literal>.
+	  So, if you for example mean to pipe the result 
+	  to a shell command, you should avoid using STDOUT filehandle
+	  directly. You may either use the usual <literal>print</literal>
+	  without a filehandle, 
+	  use the <literal>echo</literal> function,
+	  or use <literal>$OUT</literal> as a filehandle.
+	</para>
+	<para>
+	  In the following examples we use Perl to populate the
+	  Middle-Earth with Hobbits whose names are read from a text
+	  file called <literal>hobbits.txt</literal>, unless there are
+	  some Hobbits in Middle-Earth already.
+	</para>
+	<example id="gen-000">
+	  <title>Use Perl to read text files</title>
+	  <programlisting>unless (//creature[@race='hobbit']) {
+  perl {
+    open my $fh, "hobbits.txt" };
+    @hobbits=&lt;$file&gt;;
+    close $fh;
+  }
+  foreach { @hobbits } {
+    copy xsh:new-element("creature","name",.,"race","hobbit")
+      into m:/middle-earth/creatures;
+  }
+}
+</programlisting>
+	</example>
+	<example id="gen-001">
+	  <title>The same code as a single Perl block</title>
+	  <programlisting>perl {
+  unless (count(//creature[@race='hobbit'])) {
+    open my $file, "hobbits.txt";
+    foreach (&lt;$file&gt;) {
+      xsh(qq{insert element "&lt;creature name='$_' race='hobbit'&gt;"
+        into m:/middle-earth/creatures});
+    }
+    close $file;
+  }
+};</programlisting>
+	</example>
+      </section>
+      <section id="binding_perl_xpathextensions">
+        <title>Writing your own XPath extension functions in Perl</title>
+        <para>
+	  XSH2 allows users to extend the set of XPath functions by
+	  providing extension functions written in Perl.  This can
+	  be achieved using the <ulink url="s_registerfunc_command.html">register-function</ulink>
+	  command. The perl code implementing an extension function
+	  works as a usual perl routine accepting its arguments in
+	  <literal>@_</literal> and returning the result. The
+	  following conventions are used:
+	</para>
+	<para>
+	  The arguments passed to the perl implementation by the XPath
+	  engine are simple scalars for string, boolean and float
+	  argument types and
+	  <literal>XML::LibXML::NodeList</literal> objects for node-set
+	  argument types. The implementation is
+	  responsible for checking the argument number and types. The
+	  implementation may use general Perl functions as well as
+	  <literal>XML::LibXML</literal>
+	  methods to process the arguments and return the result.
+	  Documentation for the <literal>XML::LibXML</literal> Perl module
+	  can be found for example at <ulink url="http://search.cpan.org/~pajas/XML-LibXML/">http://search.cpan.org/~pajas/XML-LibXML/</ulink>.
+	</para>
+	<para>
+	  Extension functions SHOULD NOT MODIFY the document DOM tree.
+	  Doing so could not only confuse the XPath engine but possibly 
+	  even result in an critical error (such as segmentation fault).
+	  Calling XSH2 commands from extension function implementations
+	  is also dangerous and isn't generally recommended.
+	</para>
+	<para>
+	  The extension function implementation must return 
+	  a single value, which can be of
+	  one of the following types: simple scalar (a number or
+	  string), <literal>XML::LibXML::Boolean</literal> object
+	  reference (result is a boolean value),
+	  <literal>XML::LibXML::Literal</literal> object reference
+	  (result is a string), <literal>XML::LibXML::Number</literal>
+	  object reference (result is a float),
+	  <literal>XML::LibXML::Node</literal> (or derived) object
+	  reference (result is a node-set consisting of a single node),
+	  or <literal>XML::LibXML::NodeList</literal> (result is a
+	  node-set). For convenience, simple (non-blessed) array
+	  references consisting of
+	  <literal>XML::LibXML::Node</literal> objects can also be
+	  used for a node-set result instead of a
+	  <literal>XML::LibXML::NodeList</literal>.
+        </para>
+      </section>
+      <section id="binding_shell">
+	<title>Calling the System Shell</title>
+	<para>
+	  In the interactive mode, XSH2 interprets all lines starting
+	  with the exclamation mark (<literal>!</literal>) as shell
+	  commands and invokes the system shell to interpret the line
+	  (this is to mimic FTP and similar command-line interpreters).
+	</para>
+	<example id="gen-002">
+	  <programlisting>xsh&gt; <userinput>!ls -l</userinput>
+-rw-rw-r--    1 pajas    pajas        6355 Mar 14 17:08 Artistic
+drwxrwxr-x    2 pajas    users         128 Sep  1 10:09 CVS
+-rw-r--r--    1 pajas    pajas       14859 Aug 26 15:19 ChangeLog
+-rw-r--r--    1 pajas    pajas        2220 Mar 14 17:03 INSTALL
+-rw-r--r--    1 pajas    pajas       18009 Jul 15 17:35 LICENSE
+-rw-rw-r--    1 pajas    pajas         417 May  9 15:16 MANIFEST
+-rw-rw-r--    1 pajas    pajas         126 May  9 15:16 MANIFEST.SKIP
+-rw-r--r--    1 pajas    pajas       20424 Sep  1 11:04 Makefile
+-rw-r--r--    1 pajas    pajas         914 Aug 26 14:32 Makefile.PL
+-rw-r--r--    1 pajas    pajas        1910 Mar 14 17:17 README
+-rw-r--r--    1 pajas    pajas         438 Aug 27 13:51 TODO
+drwxrwxr-x    5 pajas    users         120 Jun 15 10:35 blib
+drwxrwxr-x    3 pajas    users        1160 Sep  1 10:09 examples
+drwxrwxr-x    4 pajas    users          96 Jun 15 10:35 lib
+-rw-rw-r--    1 pajas    pajas           0 Sep  1 16:23 pm_to_blib
+drwxrwxr-x    4 pajas    users         584 Sep  1 21:18 src
+drwxrwxr-x    3 pajas    users         136 Sep  1 10:09 t
+-rw-rw-r--    1 pajas    pajas          50 Jun 16 00:06 test
+drwxrwxr-x    3 pajas    users         496 Sep  1 20:18 tools
+-rwxr-xr-x    1 pajas    pajas        5104 Aug 30 17:08 xsh</programlisting>
+	</example>
+	<para>
+	  To invoke a system shell command or program
+	  from the non-interactive mode or from a complex
+	  XSH2 construction, use the <ulink url="s_exec_command.html">exec</ulink>
+	  command.
+	</para>
+	<para>
+	  Since UNIX shell commands are very powerful tool for
+	  processing textual data, XSH2 supports direct redirection of
+	  XSH2 commands output to system shell command.  This is very
+	  similarly to the redirection known from UNIX shells, except
+	  that here, of course, the first command in the pipe-line
+	  colone is an XSH2 <ulink url="s_command.html">command</ulink>. Since semicolon (<literal>;</literal>)
+	  is used in XSH2 to separate commands, it has to be prefixed
+	  with a backslash if it should be used for other purposes.
+	</para>
+	<example id="gen-003">
+	  <title>Use grep and less to display context of `funny'</title>
+	  <programlisting>xsh&gt; ls //chapter[5]/para | grep funny | less</programlisting>
+	</example>
+	<example id="gen-004">
+	  <title>The same on Windows 2000/XP systems</title>
+	  <programlisting>xsh&gt; ls //chapter[5]/para | find "funny" | more</programlisting>
+	</example>
+      </section>
+    <simplesect role="related" id="gen-005">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_cd_command.html">lcd</ulink></term>
+      <listitem>change system working directory</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_exec_command.html">exec</ulink></term>
+      <listitem>execute a shell command</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_exp.html">expression</ulink></term>
+      <listitem>expression argument type</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_hash_command.html">hash</ulink></term>
+      <listitem>index selected nodes by some key value</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_map_command.html">map</ulink></term>
+      <listitem>transform node value/data using Perl or XPath expression</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_perl_code.html">perl-code</ulink></term>
+      <listitem>in-line code in Perl programming language</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_perl_command.html">perl</ulink></term>
+      <listitem>evaluate in-line Perl code</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_rename_command.html">rename</ulink></term>
+      <listitem>quickly rename nodes with in-line Perl code</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

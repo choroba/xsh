@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="path_function">
+  <title>xsh:path function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:path(node-set NODE)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function returns a string containing
+	    canonical XPath leading
+	    to <literal>NODE</literal>.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_pwd_command.html">pwd</ulink>
+    </para>
+  </simplesect>
+</section>

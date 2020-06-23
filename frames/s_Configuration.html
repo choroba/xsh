@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Global settings</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="Configuration" target="_self"></a>Global settings</h2></div></div>
+<hr>
+</div>
+<p>The commands listed below
+      can be used to modify the default behavior of the XML parser or
+      XSH2 itself.  Some of the commands switch between two different
+      modes according to a given expression (which is expected to
+      result either in zero or non-zero value). Other commands also
+      working as a flip-flop have their own explicit counterparts
+      (e.g.  <a class="ulink" href="s_verbose.html" target="_self">verbose</a> and <a class="ulink" href="s_quiet.html" target="_self">quiet</a> or
+      <a class="ulink" href="s_debug.html" target="_self">debug</a> and <a class="ulink" href="s_nodebug.html" target="_self">nodebug</a>).  This
+      inconsistency is due to historical reasons.
+      </p>
+<p>
+	The <a class="ulink" href="s_encoding.html" target="_self">encoding</a> and <a class="ulink" href="s_query_encoding.html" target="_self">query-encoding</a>
+	settings 
+	allow to specify character
+	encodings of user's input and XSH2's own output. This is particularly
+	useful when you work with UTF-8 encoded documents on a console
+	which only supports 8-bit characters.
+      </p>
+<p>
+	The <a class="ulink" href="s_options_command.html" target="_self">settings</a> command
+	displays current settings by means of XSH2 commands.
+	Thus it can not only be used to review current values, but
+	also to store them for future use, e.g. in ~/.xsh2rc file.
+      </p>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>settings | cat &gt; ~/.xsh2rc</code></strong></pre></div>
+</div>
+<br class="example-break"><div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Related Topics</h3></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><a class="ulink" href="s_backups.html" target="_self">backups</a></span></dt>
+<dd>turn on backup file creation</dd>
+<dt><span class="term"><a class="ulink" href="s_cdonopen.html" target="_self">switch-to-new-documents</a></span></dt>
+<dd>set on/off changing current document to newly
+	  open/created files</dd>
+<dt><span class="term"><a class="ulink" href="s_complete_attributes.html" target="_self">parser-completes-attributes</a></span></dt>
+<dd>turn on/off parser's ability to fill default attribute values</dd>
+<dt><span class="term"><a class="ulink" href="s_debug.html" target="_self">debug</a></span></dt>
+<dd>display many annoying debugging messages</dd>
+<dt><span class="term"><a class="ulink" href="s_empty_tags.html" target="_self">empty-tags</a></span></dt>
+<dd>turn on/off serialization of empty tags</dd>
+<dt><span class="term"><a class="ulink" href="s_enc_string.html" target="_self">encoding</a></span></dt>
+<dd>character encoding (codepage) identifier</dd>
+<dt><span class="term"><a class="ulink" href="s_encoding.html" target="_self">encoding</a></span></dt>
+<dd>choose output charset</dd>
+<dt><span class="term"><a class="ulink" href="s_indent.html" target="_self">indent</a></span></dt>
+<dd>turn on/off pretty-printing</dd>
+<dt><span class="term"><a class="ulink" href="s_keep_blanks.html" target="_self">keep-blanks</a></span></dt>
+<dd>turn on/off ignorable whitespace preservation</dd>
+<dt><span class="term"><a class="ulink" href="s_load_ext_dtd.html" target="_self">load-ext-dtd</a></span></dt>
+<dd>turn on/off external DTD fetching</dd>
+<dt><span class="term"><a class="ulink" href="s_nobackups.html" target="_self">nobackups</a></span></dt>
+<dd>turn off backup file creation</dd>
+<dt><span class="term"><a class="ulink" href="s_nodebug.html" target="_self">nodebug</a></span></dt>
+<dd>turn off debugging messages</dd>
+<dt><span class="term"><a class="ulink" href="s_options_command.html" target="_self">settings</a></span></dt>
+<dd>list current settings using XSH2 syntax</dd>
+<dt><span class="term"><a class="ulink" href="s_parser_expands_entities.html" target="_self">parser-expands-entities</a></span></dt>
+<dd>turn on/off parser's tendency to expand entities</dd>
+<dt><span class="term"><a class="ulink" href="s_parser_expands_xinclude.html" target="_self">parser-expands-xinclude</a></span></dt>
+<dd>turn on/off transparent XInclude insertion by parser</dd>
+<dt><span class="term"><a class="ulink" href="s_pedantic_parser.html" target="_self">pedantic-parser</a></span></dt>
+<dd>make the parser more pedantic</dd>
+<dt><span class="term"><a class="ulink" href="s_query_encoding.html" target="_self">query-encoding</a></span></dt>
+<dd>declare the charset of XSH2 source files and terminal input</dd>
+<dt><span class="term"><a class="ulink" href="s_quiet.html" target="_self">quiet</a></span></dt>
+<dd>turn off many XSH2 messages</dd>
+<dt><span class="term"><a class="ulink" href="s_recovering.html" target="_self">recovering</a></span></dt>
+<dd>turn on/off parser's ability to fix broken XML</dd>
+<dt><span class="term"><a class="ulink" href="s_registerfunc_command.html" target="_self">register-function</a></span></dt>
+<dd>define XPath extension function (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_registerns_command.html" target="_self">register-namespace</a></span></dt>
+<dd>register namespace prefix to use XPath expressions</dd>
+<dt><span class="term"><a class="ulink" href="s_registerns_xhtml_command.html" target="_self">register-xhtml-namespace</a></span></dt>
+<dd>register a prefix for the XHTML namespace</dd>
+<dt><span class="term"><a class="ulink" href="s_registerns_xsh_command.html" target="_self">register-xsh-namespace</a></span></dt>
+<dd>register a prefix for the XSH2 namespace</dd>
+<dt><span class="term"><a class="ulink" href="s_run_mode.html" target="_self">run-mode</a></span></dt>
+<dd>switch into normal execution mode (quit <a class="ulink" href="s_test_mode.html" target="_self">test-mode</a>)</dd>
+<dt><span class="term"><a class="ulink" href="s_skip_dtd.html" target="_self">skip-dtd</a></span></dt>
+<dd>turn on/off serialization of DTD DOCTYPE declaration</dd>
+<dt><span class="term"><a class="ulink" href="s_test_mode.html" target="_self">test-mode</a></span></dt>
+<dd>do not execute any command, only check the syntax</dd>
+<dt><span class="term"><a class="ulink" href="s_unregisterfunc_command.html" target="_self">unregister-function</a></span></dt>
+<dd>undefine extension function (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_unregisterns_command.html" target="_self">unregister-namespace</a></span></dt>
+<dd>unregister namespace prefix</dd>
+<dt><span class="term"><a class="ulink" href="s_validation.html" target="_self">validation</a></span></dt>
+<dd>turn on/off validation in XML parser</dd>
+<dt><span class="term"><a class="ulink" href="s_verbose.html" target="_self">verbose</a></span></dt>
+<dd>make XSH2 print many messages</dd>
+<dt><span class="term"><a class="ulink" href="s_xpath_axis_completion_command.html" target="_self">xpath-axis-completion</a></span></dt>
+<dd>sets TAB completion for axes in xpath expressions in
+	the interactive mode</dd>
+<dt><span class="term"><a class="ulink" href="s_xpath_completion_command.html" target="_self">xpath-completion</a></span></dt>
+<dd>turn on/off TAB completion for xpath expressions in
+	the interactive mode</dd>
+<dt><span class="term"><a class="ulink" href="s_xpath_extensions_command.html" target="_self">xpath-extensions</a></span></dt>
+<dd>map predefined XSH2 XPath extension functions to
+	  no or other namespace
+	</dd>
+</dl></div>
+</div>
+</div></body>
+</html>

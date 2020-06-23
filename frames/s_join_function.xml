@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="join_function">
+  <title>xsh:join function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:join(string DELIM, object EXPRESSION,...)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Joins the separate string values computed from 
+	    <literal>EXPRESSION</literal>(s) into a single
+	    string with fields separated by the 
+	    value of <literal>DELIM</literal>,
+	    and returns that new string.
+	    If <literal>EXPRESSION</literal> evaluates to a node-set,
+	    joins string values of individual nodes.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="try_catch">
+  <title>try command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>try <ulink url="s_block.html">block</ulink> catch [[local|my] <ulink url="s_varname.html">$variable</ulink>] <ulink url="s_block.html">block</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Execute the <ulink url="s_block.html">block</ulink> following the
+	    <literal>try</literal> keyword.  If an error or exception
+	    occurs during the evaluation, execute the
+	    <literal>catch</literal> <ulink url="s_block.html">block</ulink>.  If the
+	    <literal>catch</literal> keyword is followed by a 
+	    variable (possibly localized for the following block using
+	    <ulink url="s_my_command.html">my</ulink> or <ulink url="s_local_command.html">local</ulink>)
+	    and the <literal>try</literal> block fails
+	    with an exception, the error message of
+	    the exception is stored to the variable before the
+	    <literal>catch</literal> block is executed.
+	  </para>
+	  <para>
+	    The <ulink url="s_throw_command.html">throw</ulink> command as well as an equivalent
+	    Perl construction <literal>perl { die "error message" }</literal> allow user to throw custom exceptions.
+	  </para>
+	  <para>
+	    Unless exception is raised or error occurs, this command
+	    returns the return value of the <literal>try</literal> block;
+	    otherwise it returns the return value of 
+	    the <literal>catch</literal> block.
+	  </para>
+	  <example id="gen-002">
+	    <title>Handle parse errors</title>
+	    <programlisting>try {
+  $doc:=open --format xml $input;
+} catch {
+  try {
+    echo "XML parser failed, trying HTML";
+    $doc := open --format html $input;
+  } catch my $error {
+    echo "Stopping due to errors: $error";
+    exit 1;
+  }
+}
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_throw_command.html">throw</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

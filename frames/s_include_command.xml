@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="include_command">
+  <title>include command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>include [--encoding|:e <ulink url="s_enc_string.html">encoding</ulink>] <ulink url="s_filename.html">filename</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> .</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Load a file named <ulink url="s_filename.html">filename</ulink> and execute it as a XSH2
+	    script.
+	  </para>
+	  <para>Use <literal>--encoding</literal> or <literal>:e</literal>
+	    parameter to specify character encoding used in
+	    the included file.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_ifinclude_command.html">ifinclude</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Information">
+      <title>Retrieving more information</title>
+      <para> Beside the possibility to browse the DOM tree and
+	list some parts of it (as described in <ulink url="s_Navigation.html">Tree navigation</ulink>), 
+        XSH2 provides commands to obtain other
+	information related to open documents as well as the XSH2
+	interpreter itself. These commands are listed bellow.
+      </para>
+    <simplesect role="related" id="gen-000">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_apropos_command.html">apropos</ulink></term>
+      <listitem>search the documentation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_c14n_command.html">canonical</ulink></term>
+      <listitem>serialize nodes as to canonical XML</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_count_command.html">count</ulink></term>
+      <listitem>calculate a <ulink url="s_exp.html">expression</ulink> and enumerate node-lists</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_doc_info_command.html">doc-info</ulink></term>
+      <listitem>displays various information about a document</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_expression_command.html">get</ulink></term>
+      <listitem>calculate a given expression and return the result.</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_files_command.html">documents</ulink></term>
+      <listitem>display a list of open documents</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_help_command.html">help</ulink></term>
+      <listitem>on-line documentation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_lineno_command.html">lineno</ulink></term>
+      <listitem>print line-numbers corresponding to matching nodes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_list_command.html">ls</ulink></term>
+      <listitem>list a given part of a document as XML</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_list_defs_command.html">defs</ulink></term>
+      <listitem>list all user-defined subroutines</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_list_dtd_command.html">dtd</ulink></term>
+      <listitem>show document's DTD</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_locate_command.html">locate</ulink></term>
+      <listitem>show a given node location (as a canonical XPath)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_namespaces_command.html">namespaces</ulink></term>
+      <listitem>List namespaces available in a context of
+	  a given nodes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_options_command.html">settings</ulink></term>
+      <listitem>list current settings using XSH2 syntax</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_print_command.html">print</ulink></term>
+      <listitem>print stuff on standard or standard error output</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_print_enc_command.html">enc</ulink></term>
+      <listitem>show document's original character encoding</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_pwd_command.html">pwd</ulink></term>
+      <listitem>show current context node location (as a canonical XPath)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_validate_command.html">validate</ulink></term>
+      <listitem>validate a document against a DTD, RelaxNG, or XSD schemas</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_var_command.html">variables</ulink></term>
+      <listitem>list global variables</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_version.html">version</ulink></term>
+      <listitem>show version information</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

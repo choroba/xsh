@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>foreach command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="foreach" target="_self"></a>foreach command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">foreach <a class="ulink" href="s_exp.html" target="_self">expression</a> 
+	  <a class="ulink" href="s_command.html" target="_self">command</a>|<a class="ulink" href="s_block.html" target="_self">block</a>
+	</code></p>
+<p><code class="literal">foreach [my|local] <a class="ulink" href="s_varname.html" target="_self">$variable</a> in <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	  <a class="ulink" href="s_command.html" target="_self">command</a>|<a class="ulink" href="s_block.html" target="_self">block</a>
+	</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> for</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Evaluate given <a class="ulink" href="s_exp.html" target="_self">expression</a> to a node-list and for each
+	    resulting node execute given <a class="ulink" href="s_command.html" target="_self">command</a> or 
+	    <a class="ulink" href="s_block.html" target="_self">block</a>. If used without a loop <a class="ulink" href="s_varname.html" target="_self">$variable</a>, the loop temporarily sets current node to
+	    the node being processed. Otherwise, the processed node is assigned
+	    to the loop variable.
+	  </p>
+<p>
+	    The <a class="ulink" href="s_exp.html" target="_self">expression</a> may be <a class="ulink" href="s_xpath.html" target="_self">xpath</a> as well as
+	    a <a class="ulink" href="s_perl_code.html" target="_self">perl-code</a>.
+	    In the latter case, if used without a loop variable, 
+	    the loop automatically converts Perl objects to
+	    nodes. No conversion is performed when
+	    a loop variable is used.
+	  </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Move all employee sub-elements in a company element
+	      into the first staff subelement of the same company</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>foreach //company xmove employee into staff[1];</code></strong></pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;List content of all XML files in current directory</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>foreach my $filename in { glob('*.xml') } {
+  $f := open $filename;
+  do_something $f; 
+}</code></strong>
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

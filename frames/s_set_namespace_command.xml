@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="set_namespace_command">
+  <title>set-ns command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>set-ns [:p|--prefix <ulink url="s_exp.html">expression</ulink>] <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command takes one argument, the namespace URI,
+	    possibly accompanied by a prefix provided in
+	    the option <literal>--prefix</literal> <literal>:p</literal>;
+	    both these expressions are evaluated as names.
+	    The command changes the namespace of the current element to a given
+	    namespace URI. The current node must be in the scope
+	    of a namespace declaration associating the namespace URI
+	    with a prefix; if prefix option is given, then
+	    one of such declarations must associate the particular given prefix
+	    with the namespace URI. If this condition
+	    is not met or the current node is neither element nor
+	    attribute, an error is issued.
+	    The command also changes the prefix of the current element accordingly.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_declare_namespace_command.html">declare-ns</ulink>, <ulink url="s_change_namespace_uri_command.html">change-ns-uri</ulink>, <ulink url="s_change_namespace_prefix_command.html">change-ns-prefix</ulink>, <ulink url="s_namespaces_command.html">namespaces</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Namespaces.html">Namespaces in XML and XPath</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

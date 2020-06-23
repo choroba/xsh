@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>xmove command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="xmove_command" target="_self"></a>xmove command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">xmove [--respective|:r] [--preserve-order|:p] <a class="ulink" href="s_xpath.html" target="_self">xpath</a> <a class="ulink" href="s_loc.html" target="_self">location</a> <a class="ulink" href="s_xpath.html" target="_self">xpath</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> xmv</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>Like <a class="ulink" href="s_xcopy_command.html" target="_self">xcopy</a>, except that
+	    <code class="literal">xmove</code> <span class="emphasis"><em>removes</em></span> the source
+	    nodes after a successful copy.  Remember that the moved nodes are
+	    actually <span class="emphasis"><em>different nodes</em></span> from the original
+	    ones (which may not be obvious when moving nodes within a single
+	    document into locations that do not require type conversion). So,
+	    after the move, the original nodes don't belong to any document and
+	    are automatically destroyed unless still contained in some variable.
+	  </p>
+<p>
+	    This command returns a node-list consisting of all nodes
+	    it created on the target locations.
+	  </p>
+<p>
+	    If <code class="literal">--respective|:r</code> option
+	    is used, then the target node-list <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    is evaluated in the context of the source node
+	    being copied.
+	  </p>
+<p>
+	    The <code class="literal">--preserve-order|:p</code> option can be
+	    used to ensure that the copied nodes are in the same
+	    relative order as the corresponding source nodes.
+	    Otherwise, if <a class="ulink" href="s_loc.html" target="_self">location</a> is
+	    <code class="literal">after</code> or <code class="literal">prepend</code>,
+	    the relative order of the copied nodes will be reversed,
+	    because source nodes are placed to the target location one
+	    by one.
+	  </p>
+<p>
+	    See <a class="ulink" href="s_xcopy_command.html" target="_self">xcopy</a> for more details on
+	    how the copies of the moved nodes are created.
+	  </p>
+<p>
+	    The following example demonstrates how <code class="literal">xmove</code>
+	    can be used to get rid of HTML <code class="literal">&lt;font&gt;</code>
+	    elements while preserving their content. As an exercise,
+	    try to figure out why simple
+	    <code class="literal">foreach //font { xmove node() replace . }</code>
+	    would not work here.
+	  </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Get rid of all &lt;font&gt; tags</b></p>
+<div class="example-contents"><pre class="programlisting">while //font {
+  foreach //font {
+    xmove node() replace .;
+  }
+}
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_move_command.html" target="_self">move</a>, <a class="ulink" href="s_copy_command.html" target="_self">copy</a>, <a class="ulink" href="s_xcopy_command.html" target="_self">xcopy</a>, <a class="ulink" href="s_insert_command.html" target="_self">insert</a>, <a class="ulink" href="s_xinsert_command.html" target="_self">xinsert</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

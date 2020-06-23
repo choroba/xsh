@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="wrap_span_command">
+  <title>wrap-span command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>wrap-span [--namespace <ulink url="s_exp.html">expression</ulink>] <ulink url="s_exp.html">expression</ulink> <ulink url="s_exp.html">expression</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> wrap_span</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    This command is very similar to <ulink url="s_wrap_command.html">wrap</ulink>
+	    command, except that it works on spans of nodes.
+	    It wraps spans (i.e. sequence of adjacent nodes between (and including)
+	    a start node and an end node) with a new element
+	    whose name is specified as the first argument. 
+	    Nodes within each span must have the same parent node.
+	    The spans to be wrapped are defined
+	    by a pair of node-lists in the second and third argument.
+	    The first node-list specifies the
+	    start node of one or more spans, while
+	    the second node-list should contain the corresponding 
+	    end nodes.
+	    The two node-lists must evaluate to the exactly same number of
+	    nodes, otherwise a runtime error is reported.
+	    The N'th span is then defined as a span
+	    starting on the N'th node in the start node-list
+	    and ending at the N'th node in the end node-list.
+	  </para>
+	  <para>
+	    All nodes within the spans are removed from
+	    the document and placed into the newly generated elements.
+	    The wrapping elements are put back into the document tree
+	    at the positions previously occupied by the node-spans.</para>
+	  <para>
+	    The command returns a node-list containing the newly created
+	    wrapping elements.
+	  </para>
+	  <example id="gen-003">
+	    <programlisting>xsh $scratch/&gt; $foo := create { "&lt;root&gt;\n&lt;a/&gt;&lt;b/&gt;\n&lt;a/&gt;&lt;b/&gt;\n&lt;a/&gt;&lt;b/&gt;\n&lt;/root&gt;" };
+xsh $foo/&gt; wrap-span 'span' //a //b;
+xsh $foo/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;span&gt;&lt;a/&gt;&lt;b/&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a/&gt;&lt;b/&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a/&gt;&lt;b/&gt;&lt;/span&gt;
+&lt;/root&gt;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_xinsert_command.html">xinsert</ulink>, <ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_xmove_command.html">xmove</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

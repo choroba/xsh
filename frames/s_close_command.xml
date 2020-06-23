@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="close_command">
+  <title>close command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>close [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Close a given <ulink url="s_document.html">document</ulink>
+	    (or, if called with no argument,
+	    the current document)
+	    by trying to remove all references
+	    from XSH2 variables to nodes
+	    belonging to the document. If no references
+	    to the document are left,
+	    the garbage-collector destroys
+	    the DOM tree and frees the memory it occupied
+	    for later reuse (depending on architecture, this
+	    may or may not give the allocated memory back
+	    to the system).
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

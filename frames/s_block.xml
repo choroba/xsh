@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="block">
+  <title>block argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>
+	    a block of semicolon-separated
+	     XSH2 commands enclosed within braces.
+	  </para>
+	  <example id="gen-001">
+	    <title>Count paragraphs in each chapter</title>
+	    <programlisting>$i=0;
+foreach //chapter {
+  $c=count(./para);
+  $i=$i+1;
+  print "$c paragraphs in chapter no.$i";
+}
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Flow.html">Flow control</ulink></para>
+  </simplesect>
+</section>

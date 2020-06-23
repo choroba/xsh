@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>try command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="try_catch" target="_self"></a>try command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">try <a class="ulink" href="s_block.html" target="_self">block</a> catch [[local|my] <a class="ulink" href="s_varname.html" target="_self">$variable</a>] <a class="ulink" href="s_block.html" target="_self">block</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Execute the <a class="ulink" href="s_block.html" target="_self">block</a> following the
+	    <code class="literal">try</code> keyword.  If an error or exception
+	    occurs during the evaluation, execute the
+	    <code class="literal">catch</code> <a class="ulink" href="s_block.html" target="_self">block</a>.  If the
+	    <code class="literal">catch</code> keyword is followed by a 
+	    variable (possibly localized for the following block using
+	    <a class="ulink" href="s_my_command.html" target="_self">my</a> or <a class="ulink" href="s_local_command.html" target="_self">local</a>)
+	    and the <code class="literal">try</code> block fails
+	    with an exception, the error message of
+	    the exception is stored to the variable before the
+	    <code class="literal">catch</code> block is executed.
+	  </p>
+<p>
+	    The <a class="ulink" href="s_throw_command.html" target="_self">throw</a> command as well as an equivalent
+	    Perl construction <code class="literal">perl { die "error message" }</code> allow user to throw custom exceptions.
+	  </p>
+<p>
+	    Unless exception is raised or error occurs, this command
+	    returns the return value of the <code class="literal">try</code> block;
+	    otherwise it returns the return value of 
+	    the <code class="literal">catch</code> block.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Handle parse errors</b></p>
+<div class="example-contents"><pre class="programlisting">try {
+  $doc:=open --format xml $input;
+} catch {
+  try {
+    echo "XML parser failed, trying HTML";
+    $doc := open --format html $input;
+  } catch my $error {
+    echo "Stopping due to errors: $error";
+    exit 1;
+  }
+}
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_throw_command.html" target="_self">throw</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

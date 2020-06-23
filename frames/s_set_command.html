@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>set command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="set_command" target="_self"></a>set command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">set <a class="ulink" href="s_xpath.html" target="_self">xpath</a> [<a class="ulink" href="s_xpath.html" target="_self">xpath</a>]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>This command provides very easy way to create
+            or modify content of a document.
+            It takes two XPath expressions. The first one
+	    should be a node location path which specifies the target node,
+	    the second is optional and provides new content for the target
+            node.
+	    If a node matches the first XPath expression, then its content
+	    is replaced with the given value. If no node matches, then XSH2 tries
+	    to magically extend the current document by adding nodes in order to
+            add missing steps of the location path so as to make the expression
+	    match a node. This node is then populated with
+	    a copy of the content value (either text or, if the content <a class="ulink" href="s_xpath.html" target="_self">xpath</a> results in a node-list and the target
+            node is an element, nodes).
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Try the following on an empty scratch document</b></p>
+<div class="example-contents"><pre class="programlisting">$scratch/&gt; ls /
+&lt;scratch/&gt;
+$scratch/&gt; set scratch/@say "hallo world"
+&lt;scratch say="hello world"/&gt;
+
+$scratch/&gt; set scratch/foo[2]/../foo[1]/following-sibling::bar/baz[3] "HALLO"
+$scratch/&gt; ls /
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch say="hello world"&gt;
+  &lt;foo/&gt;
+    &lt;bar&gt;
+      &lt;baz/&gt;
+      &lt;baz/&gt;
+      &lt;baz&gt;HALLO&lt;/baz&gt;
+    &lt;/bar&gt;
+  &lt;foo/&gt;
+&lt;scratch/&gt;
+</pre></div>
+</div>
+<br class="example-break"><p>
+	    Only a limited subset of XPath is currently supported by
+	    this command. Namely, the XPath expression must be a
+	    location path consisting of a /-separated sequence of one
+	    or more location steps and new nodes
+	    can only be magically created along the child, sibling, or
+	    attribute axes.
+	    The node-test part of the expression
+	    can neither be a wildcard (<code class="literal">*</code>,
+	    <code class="literal">@*</code>, <code class="literal">prefix:*</code>, ...),
+	    nor the <code class="literal">node()</code> function. If a namespace
+	    prefix is used, then either the namespace must already be
+	    declared in the document or registered with XSH. 
+	  </p>
+<p>
+	    Location steps may contain arbitrary predicates (filters), however,
+	    only a limited subset is supported for magically created
+	    nodes.
+	    In particular, if a filter predicate of a location step
+	    specifies a position of a node (e.g. with
+	    <code class="literal">[4]</code>, or
+	    <code class="literal">[position()&gt;3]</code>, etc), then the
+	    parser tries to automatically create empty siblings nodes
+	    until it finally creates one with for which the predicate
+	    is true.
+	  </p>
+<p>
+	    Note, that this command only processes one location step
+	    at a time and always picks the first matching node. So,
+	    expressions like <code class="literal">/root/a/b</code> are treated
+	    as <code class="literal">/root/a[1]/b[1]</code>.  This means that an
+	    expression <code class="literal">/root/a/b</code> will magically
+	    create element <code class="literal">&lt;b&gt;</code> in a first
+	    matching <code class="literal">&lt;a&gt;</code> even if some
+	    following <code class="literal">&lt;a&gt;</code> already contains a
+	    <code class="literal">&lt;b&gt;</code>.
+	  </p>
+<p>
+	    To prevent this, either explicitly state that <code class="literal">b</code> must
+	    exist with e.g. <code class="literal">/root/a[b]/b</code> or make the corresponding
+	    element <code class="literal">&lt;a&gt;</code> the context
+	    node and use a relative location path:
+	  </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">for /root/a/b set b 'foo'</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

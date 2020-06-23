@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="id2_function">
+  <title>xsh:id2 function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:id2(node-set DOC, string IDs)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function is like XPath built-in <literal>id(IDs)</literal>
+            function, except that it operates on the document
+            specified in the first argument. It returns a node-set
+            consisting of nodes that belong to the document DOC
+            and whose ID belongs to the list of space separated
+            IDs specified in the second argument.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="encoding">
+  <title>encoding command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>encoding <ulink url="s_enc_string.html">encoding</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Set the default character encoding used
+	    for standard (e.g. terminal) output. This doesn't influence
+	    the encoding used for saving XML documents.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$ENCODING</literal> variable.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_query_encoding.html">query-encoding</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

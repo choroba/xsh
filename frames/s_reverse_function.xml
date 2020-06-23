@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="reverse_function">
+  <title>xsh:reverse function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:reverse(string STR)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a string value same as <literal>STR</literal>
+	    but with all characters in the opposite order.
+	  </para>
+	</simplesect>
+</section>

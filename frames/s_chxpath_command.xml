@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="chxpath_command">
+  <title>cd command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>cd [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> chxpath</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Evaluate given <ulink url="s_exp.html">expression</ulink>
+	    to a node-list and 
+	    change current context node to
+	    the first node in it.
+          </para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Navigation.html">Tree navigation</ulink>
+    </para>
+  </simplesect>
+</section>

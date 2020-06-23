@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="uc_function">
+  <title>xsh:uc function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:uc(string STR)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a uppercased version of <literal>STR</literal>.
+	  </para>
+	</simplesect>
+</section>

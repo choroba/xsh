@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>ls command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="list_command" target="_self"></a>ls command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">ls [--fold|:f] [--fold-attrs|:A] [--indent|:i | --no-indent|:I]
+	  [--depth|:d <a class="ulink" href="s_exp.html" target="_self">expression</a>] [<a class="ulink" href="s_exp.html" target="_self">expression</a>]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> list</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Print XML representation of a given
+	    <a class="ulink" href="s_exp.html" target="_self">expression</a>, in particular,
+	    if used with an <a class="ulink" href="s_xpath.html" target="_self">xpath</a>,
+	    list parts of the document matching given expression.
+	  </p>
+<p>
+	    If used without an argument,
+	    current node is listed to the depth 1 (see below).
+	  </p>
+<p>
+	    <code class="literal">--depth</code> or <code class="literal">:d</code>
+	    argument may be used to specify depth of the XML listing.
+	    If negative, the listing depth is unlimited.
+	    All content below the specified depth is replaced with
+	    an ellipsis (<code class="literal">...</code>).
+	  </p>
+<p>
+	    <code class="literal">--fold</code> or <code class="literal">:f</code>
+	    option makes the listing fold elements marked using the
+	    <a class="ulink" href="s_fold_command.html" target="_self">fold</a> command are folded, i.e. listed
+	    only to the depth specified in the folding mark.
+	  </p>
+<p>
+	    <code class="literal">--fold-attrs</code> or <code class="literal">:A</code>
+	    option avoids listing of attributes of the folded
+	    elements (i.e. elements on the lowest level of listing).
+	    Folded attributes are replaced with
+	    ellipsis (<code class="literal">...</code>).
+	  </p>
+<p>
+	    <code class="literal">--indent</code> (<code class="literal">:i</code>)
+	    and 
+	    <code class="literal">--no-indent</code> (<code class="literal">:I</code>)
+	    may be used to enforce/suppress
+	    indentation, overriding current setting
+	    (see command <a class="ulink" href="s_indent.html" target="_self">indent</a>).
+	  </p>
+<p>
+	    Unless in <a class="ulink" href="s_quiet.html" target="_self">quiet</a> mode, 
+	    this command also prints the number of
+	    (top-level) nodes listed.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_count_command.html" target="_self">count</a>, <a class="ulink" href="s_fold_command.html" target="_self">fold</a>, <a class="ulink" href="s_unfold_command.html" target="_self">unfold</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Navigation.html" target="_self">Tree navigation</a>, <a class="ulink" href="s_Information.html" target="_self">Retrieving more information</a></p>
+</div>
+</div></body>
+</html>

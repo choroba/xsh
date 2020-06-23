@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="doc_function">
+  <title>xsh:doc function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:doc(node-set)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a node-set consisting of the owner document nodes
+	    of all nodes in the given node-set.
+	  </para>
+	</simplesect>
+</section>

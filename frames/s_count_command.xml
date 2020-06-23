@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="count_command">
+  <title>count command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>count [--quiet|:q] <ulink url="s_xpath.html">xpath</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Calculates a given <ulink url="s_exp.html">expression</ulink> expression. If
+	    the result is a node-list, print number of nodes in the
+	    node-list.  If the <ulink url="s_exp.html">expression</ulink> results in a
+	    boolean, numeric or literal value, print the value.
+	  </para>
+	  <para>
+	    If <literal>--quiet</literal> or <literal>:q</literal>
+	    option is used, output is suppressed and the value
+	    is returned.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_expression_command.html">get</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

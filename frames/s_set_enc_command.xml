@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="set_enc_command">
+  <title>set-enc command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>set-enc <ulink url="s_enc_string.html">encoding</ulink> [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Changes character encoding of a given document. 
+	    If no <ulink url="s_document.html">document</ulink>
+	    is given, the command applies to the
+	    current document. This has two effects:
+	    changing the XMLDecl encoding declaration 
+	    in the document prolog to display the new
+	    encoding and making all future <ulink url="s_save_command.html">save</ulink> operations
+	    on the document default to the given charset.
+	  </para>
+	  <example id="gen-002">
+	    <programlisting>xsh&gt; <userinput>ls</userinput>
+&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;
+&lt;foo&gt;...&lt;/foo&gt;
+xsh&gt; <userinput>set-enc "utf-8"</userinput>
+xsh&gt; <userinput>ls</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;foo&gt;...&lt;/foo&gt;
+xsh&gt; <userinput>save</userinput># saves the file in UTF-8 encoding
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_print_enc_command.html">enc</ulink>, <ulink url="s_doc_info_command.html">doc-info</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

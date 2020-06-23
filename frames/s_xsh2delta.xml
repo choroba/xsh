@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xsh2delta">
+      <title>Changes since XSH 1.x</title>
+      <para>
+	This section briefly describes 
+	differences between XSH2 and previous XSH 1.x releases.
+	The list should not be considered complete.
+	Some syntax variations or amendments in 
+	the semantics of various commands may not be documented
+	in this section, neither are various improvements in the
+	XSH interpreter.
+      </para>
+      <section id="new_in_xsh2">
+	<title>Changes in XSH2</title>
+	<orderedlist>
+	  <listitem>
+	<para>
+	  In XSH2, subroutines can be called without a 
+	  <ulink url="s_call_command.html">call</ulink>. They can be 
+	  <ulink url="s_def.html">redefined</ulink> and 
+	  <ulink url="s_undef.html">undefined</ulink>.
+	  The command <ulink url="s_call_command.html">call</ulink>
+	  can still be used, but it's use only makes sense
+	  in indirect calls, where subroutine's name is computed
+	  from an expression.
+	</para>
+	<programlisting>def foo $param1 $param2 { 
+  # param1 and $param2 are lexical (a.k.a. my)
+  ls $param1; 
+  echo $param2 
+}
+foo (//chapter)[1] (//chapter)[1]/title
+
+def inc $param1 { return ($param1 + 1) }
+$two := inc 1;
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>
+	  XSH2 uses variables of the form <ulink url="s_varname.html">$variable</ulink> 
+	  for all kinds of objects, including node-sets
+	  (which, if evaluated as Perl expressions, preserve node order).
+	  Node-list variables of XSH 1.x have been deprecated.
+	</para>
+	<programlisting>$var = //foo/bar;                 # node set
+$var = "hallo world";             # string
+$var = xsh:new-element("foo");    # node object
+$var = { ['a','b','c'] };         # Perl array reference
+$var = {{ 'a'=&gt;'A', 'b'=&gt;'B' }};  # Perl hash reference
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>
+	  XSH2 allows variables to be used in XPath just as they are used in XSLT:
+	</para>
+	<programlisting>$var = //foo/bar;
+ls //baz[ . = $var[@test=1]/any ]
+</programlisting>
+	    <para>
+	  Variable interpolation is still available in XSH2 via ${var},
+	  but it's importance is diminished compared to XSH 1.x, 
+	  because the XPath engine now evaluates
+	  variables directly. Interpolation can still be used for
+	  things like "XPath-macros":
+	</para>
+	<programlisting>$filter = "[ . = $var[@test=1]/any ]";
+ls //baz${filter};
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>
+	  XSH2 equally supports XPath and
+	  Perl <ulink url="s_exp.html">expressions</ulink> 
+	  (written in braces { ... }).
+	  Unfortunately, Perl expressions can't be embedded in XPath 
+	  <ulink url="s_exp.html">expressions</ulink>,
+	  but one can still use variables as an agent:
+	</para>
+	<programlisting>perl { use MIME::Base64 };
+my $encoded = { encode_base64('open sesame') }
+ls //secret-cave[string(password) = $encoded]
+</programlisting>
+	<para>We can, however, use Perl-only expressions complemented with auto-conversion
+	      to do things like:</para>
+	<programlisting>copy { encode_base64('Pe do mellon a minno!') } replace //secret-cave/password/text();
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>
+	  Commands return values 
+	  (see <ulink url="s_assign_command.html">:= assignment</ulink>, 
+	  or <ulink url="s_exp.html">&amp;{ } expressions</ulink>).
+	</para>
+	<programlisting>$moved_paras := xmove //para replace .;
+$chapter := wrap chapter $moved_paras;
+ls $chapter;
+
+# or just
+
+ls &amp;{ wrap chapter &amp;{ xmove //para replace . } };
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>
+	  XSH2 deprecates "string" expressions of XSH 1.x.  However,
+	  for convenience, some XSH2 commands interpret name-like
+	  XPath expressions on certain argument positions as strings
+	  (mostly commands that expect file-name or node-name
+	  arguments):
+	</para>
+	<programlisting>insert element my_document into .;
+insert text "foo" into my_document;
+
+$doc := open my_document;         # opens file named "my_document"
+$doc := open "my_document";       # same
+$doc := open (my_document);       # opens file named "foo"
+$doc := open string(my_document); # same
+</programlisting>
+	  </listitem>
+	  <listitem>
+	<para>
+	  In XSH2, XML documents
+	  have no ID. 
+	  They are referred to using variables (which fits in well with the unified variable concept):
+	</para>
+	<programlisting>$doc1 := open "foo1.xml";
+$doc2 := open "foo2.xml";
+ls ($doc1//para|$doc2//para);
+cd $doc1;
+ls id('intro');             # finds ID intro in the current document ($doc1)
+ls xsh:id2($doc2, 'intro'); # finds ID intro in $doc2
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>
+	      XSH2 commands have options and flags instead of many optional (positional) arguments.
+	      Options/flags usually have both long forms (like --flag) and equivalent
+	      short forms (like :f) (colon is borrowed from Scheme, because dash is reserved for XPath minus).
+	    </para>
+	<programlisting>$doc := open --format html "version1.html";
+save --file "version2.xml" $doc;
+
+ls --fold /;
+ls :f /;
+ls --depth 1 /;
+ls :d 1 /;
+
+# all the same:
+$sorted = sort --key @name --locale --descending //user;
+$sorted = sort :l:d:k@name //user;
+$sorted = sort --key @name --compare { use locale; $b cmp $a } //user;
+
+validate --relaxng --file "test.rng" $mydoc;
+validate --public "-//OASIS//DTD DocBook XML V4.1.2//EN" $mydoc;
+validate --yesno $mydoc;
+</programlisting>
+	  </listitem>
+	  <listitem>
+	    <para>Finally, <ulink url="s_eval_command.html">eval</ulink> is no longer
+	      an alias for <ulink url="s_perl_command.html">perl</ulink> in XSH2,
+	      but instead evaluates strings containing XSH2 commands
+	      (so <literal>eval $string</literal> now practically works like old ugly
+	      <literal>perl { xsh($string) }</literal>). See the documentation for 
+	      <ulink url="s_eval_command.html">eval</ulink> for a handy usage example
+	      (no more PHP, XSTL and XPathScript :-)).
+	    </para>
+	  </listitem>
+	</orderedlist>
+      </section>
+      <section id="xsh2delta_examples">
+	<title>Examples</title>
+	<example id="gen-000">
+	  <title>Open command has changed.</title>
+	  <programlisting>XSH1:
+foo = file.xml;
+or
+foo = "file.xml";
+</programlisting>
+	  <programlisting>XSH2:
+$foo := open file.xml;        # file.xml is a bareword in file-name context
+or
+$foo := open "file.xml";      # "file.xml" is a XPath string
+or
+$foo := open {"file.xml"};    # "file.xml" is a Perl string
+or
+$foo = xsh:open("file.xml");  # righthand side is an XPath extension function
+</programlisting>
+	</example>
+	<example id="gen-001">
+	  <title>XSH2 commands have options</title>
+	  <programlisting>XSH1:
+open HTML FILE foo2 = "file.html";
+</programlisting>
+	  <programlisting>XSH2:
+$foo2 := open --format html "file.html";
+</programlisting>
+	</example>
+
+
+	<example id="gen-002">
+	  <title>documents</title>
+	  <programlisting>XSH1:
+foo = file.xml;
+ls foo:(//bar|//baz);
+</programlisting>
+	  <programlisting>XSH2:
+$foo := open file.xml;
+ls ($foo//bar|$foo//baz);
+</programlisting>
+	</example>
+
+
+	<example id="gen-003">
+	  <title>variable interpretation</title>
+	  <programlisting>XSH1:
+$family = "Arial";
+ls //font[@family="$family"];   # interpolation
+or
+ls //font[@family="${family}"]; # interpolation
+</programlisting>
+	  <programlisting>XSH2:
+$family = "Arial";
+ls //font[@family=$family];     # evaluation by XPath engine
+or
+ls //font[@family="${family}"]; # interpolation
+</programlisting>
+	</example>
+
+
+
+	<example id="gen-004">
+	  <title>adding new nodes</title>
+	  <programlisting>XSH1:
+insert attribute "foo=bar" into /scratch;
+</programlisting>
+	  <programlisting>XSH2:
+insert attribute "foo=bar" into /scratch;
+or
+copy xsh:new-attribute("foo","bar") into /scratch;
+</programlisting>
+	</example>
+
+
+	<example id="gen-005">
+	  <title>foreach with perl expression</title>
+	  <programlisting>XSH1:
+foreach { glob('*.xml') } {
+  open doc = $__;
+  ...
+}
+</programlisting>
+	  <programlisting>XSH2:
+foreach { glob('*.xml') } {
+  my $doc := open .;
+  ...
+} 
+</programlisting>
+	</example>
+	<example id="gen-006">
+	  <title>foreach (perl expression) with variable</title>
+	  <programlisting>XSH2:
+foreach my $filename in { glob('*.xml') } {
+  my $doc := open $filename;
+  ...
+} 
+</programlisting>
+	</example>
+	<example id="gen-007">
+	  <title>sorting nodes</title>
+	  <programlisting>XSH1:
+%list = //player;
+sort @best_score { $a &lt;=&gt; $b } %list;
+copy %list into .;
+</programlisting>
+	  <programlisting>XSH2:
+$list := sort --numeric --key @best_score //player;
+copy { $list } into .;
+or
+copy &amp;{ sort --numeric --key @best_score //player } into .;
+or (using short options)
+copy &amp;{ sort :n :k @best_score //player } into .;
+</programlisting>
+	</example>
+      </section>
+    </section>

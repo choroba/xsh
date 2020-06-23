@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Redirection">
+      <title>Command output redirection</title>
+      <para>WARNING: XSH2 redirection syntax is not
+	yet finished. It is currently the same as in XSH1
+	but this may be changed in the future releases.
+      </para>
+      <para>
+	Output redirection can be used to pipe output of some XSH <ulink url="s_command.html">command</ulink> to some external program, or to capture it
+	to a variable. Redirection of output of more than one XSH
+	command can be achieved using the <ulink url="s_do_command.html">do</ulink> command.
+      </para> 
+      <section id="Redirection_pipe">
+	<title>Redirect output to an external program</title>
+	<para>The syntax for redirecting the output of a XSH command to
+	  an external program, is <literal>xsh-command | shell-command
+	    ;</literal>, where <literal>xsh-command</literal> is any XSH2
+	  command and <literal>shell-command</literal> is any command
+	  (or code) recognized by the default shell interpreter of the
+	  operating system (i.e. on UNIX systems by
+	  <literal>/bin/sh</literal> or <literal>/bin/csh</literal>, on
+	  Windows systems by <literal>cmd</literal>).  The shell command
+	  may contain further redirections (as supported by the system
+	  shell interpreter), but should not contain semicolons, except when
+	  the whole shell command is enclosed in brackets.
+	</para>
+	<example id="gen-000">
+	  <title>Use well-known UNIX commands to filter XPath-based XML
+	    listing from a document and count the results</title>
+	  <programlisting>xsh&gt; <userinput>ls //something/* | grep foo | wc</userinput></programlisting>
+	</example>
+      </section>
+      <section id="Redirection_variable">
+	<title>Capture output to a variable</title>
+	<para>
+	  The syntax for capturing the output of an XSH command to a variable is
+	  <literal>xsh-command |&gt; $variable</literal>, 
+	  where <literal>xsh-command</literal> is
+	  any XSH <ulink url="s_command.html">command</ulink> and 
+	  <literal>$variable</literal> is any valid
+	  name for a <ulink url="s_Variables.html">variable</ulink>.
+	</para>
+	<example id="gen-001">
+	  <title>Store the number of all words in a variable named count.</title>
+	  <programlisting>xsh&gt; <userinput>count //words |&gt; $count</userinput></programlisting>
+	</example>
+      </section>
+    </section>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="nodename">
+  <title>node-name argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>An <ulink url="s_exp.html">expression</ulink> which evaluates to a valid
+	    name of an element, attribute or processing-instruction
+	    node. As long as the expression contains no
+	    whitespace, no brackets of any type, quotes,
+	    double-quotes, <literal>$</literal> character,
+	    nor <literal>@</literal> character, it is treated as a literal token
+	    which evaluates to itself.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-001">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

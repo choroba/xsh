@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="catalog_command">
+  <title>catalog command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>catalog <ulink url="s_filename.html">filename</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Make use of a given XML file as a catalog during all parsing
+	    processes. Using a catalog may significantly speed up
+	    parsing processes if many external resources are loaded
+	    into the parsed documents (such as DTDs or XIncludes).
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

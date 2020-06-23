@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="subst_function">
+  <title>xsh:subst function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:subst(string STR,string REGEXP,string
+	REPLACEMENT, [string OPTIONS])</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Acts in the very same way as perl substitution operation
+	    <literal>STRING =~ s/REGEXP/REPLACEMENT/OPTIONS</literal>,
+	    returning the resulting string.
+	    Searches a string for a pattern, and if found,
+	    replaces that pattern with the replacement text.	    
+	    If the <literal>REPLACEMENT</literal> string
+	    contains a <literal>$</literal>  that looks like a variable,
+	    the variable will be interpolated
+	    into the </para>
+	  <para><literal>REPLACEMENT</literal> at run-time.
+	    Options are:
+	    </para>
+	  <para>
+	    <literal>e</literal> - evaluate <literal>REPLACEMENT</literal> 
+	    as a Perl expression,</para>
+	  <para>
+	    <literal>g</literal> - replace globally, i.e., all occurrences,</para>
+	  <para>
+	    <literal>i</literal> - do case-insensitive pattern matching,</para>
+	  <para>
+	    <literal>m</literal> - treat string as multiple lines,
+	    that is, change <literal>^</literal>
+	    and <literal>$</literal> from matching the start or end 
+	    of the string to matching the start or end of any line anywhere
+	    within the string,</para>
+	  <para>
+	    <literal>s</literal> - treat string as single line,
+	    that is, change <literal>.</literal>
+	    to match any character whatsoever, even a newline, which
+	    normally it would not match,</para>
+	  <para>
+	    <literal>x</literal> - use extended regular expressions.
+	  </para>
+	</simplesect>
+</section>

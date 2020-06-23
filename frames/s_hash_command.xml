@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="hash_command">
+  <title>hash command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>$hash := hash <ulink url="s_exp.html">expression</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command takes two arguments: an expression computing
+	    a key from a given node (1st argument) and a node-set (2nd
+	    argument). For each node in the node-set, the key value is
+	    computed and the node is stored under the given key in
+	    the resulting hash. For a given key, the value stored
+	    in the hash table is a node-list consisting of all nodes
+	    for which the 1st expression evaluated to an object
+	    string-wise equal to the key. It is therefore possible to
+	    index more than one node under the same key.
+	  </para>
+	  <para>
+	    The XPath function
+	    <literal>xsh:lookup(varname,key)</literal> can
+            be used to retrieve values from hashes in XPath expressions.
+	  </para>
+	  <example id="gen-002">
+	    <title>Index books by author</title>
+	    <programlisting>my $books_by_author := hash concat(author/firstname," ",author/surname) //book;</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Lookup books by Jack London.</title>
+	    <programlisting>ls { $books_by_author-&gt;{'Jack London'} };
+ls xsh:lookup('books_by_author','Jack London');</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_lookup_function.html">xsh:lookup</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para><ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

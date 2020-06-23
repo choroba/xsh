@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="sort_command">
+  <title>sort command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>$result := sort [ --key|:k <ulink url="s_exp.html">expression</ulink> ]
+	  --compare|:c <ulink url="s_perl_code.html">perl-code</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+    <para>
+      <literal>$result := sort [ --key|:k <ulink url="s_exp.html">expression</ulink> ]
+	  [ --numeric|:n ] [ --descending|:d ] [ --locale|:l]  <ulink url="s_exp.html">expression</ulink>
+	  </literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>This command sorts a given node-list,
+	    returning a node-list ordered according to a given
+	    key and ordering function.
+	  </para>
+	  <para>
+	    <literal>--key|:k</literal> followed by an expression
+	    specifies the key to be computed for each member of the
+	    node-list and the result used as the sorting key. If omitted,
+	    keys are created by converting the nodes
+	    to string as if XPath expression <literal>string(.)</literal>
+	    was used.
+	  </para>
+	  <para>
+	    <literal>--numeric|:n</literal> specifies, that
+	    keys should be compared by their numerical values
+	    (the default is string comparison).
+	  </para>
+	  <para>
+	    <literal>--descending|:d</literal> specifies,
+	    that the result should be ordered in descending order
+	    (default is ascending).
+	  </para>
+	  <para>
+	    <literal>--locale|:l</literal> forces using
+	    current locale settings for string comparison
+	    (default is no locale).
+	  </para>
+	  <para>
+	    <literal>--compare</literal> argument followed
+	    by a <ulink url="s_perl_code.html">perl-code</ulink> allows to define a custom
+	    comparison method in a similar way to Perl <literal>sort</literal>
+	    command. The keys to be compared are passed
+	    to the code in variables <literal>$a</literal> and 
+	    <literal>$b</literal>. The code is supposed to return 1 if
+	    the key in <literal>$a</literal> is  greater than
+	    <literal>$b</literal>, 0 if the keys are equal
+	    and <literal>-1</literal> if <literal>$a</literal>
+	    is less than <literal>$b</literal>, depending
+            on how the corresponding elements are to be ordered.
+	    It is a run-time error to use
+	    <literal>--compare</literal> together with either
+	    <literal>--numeric</literal> or
+	    <literal>--descending</literal>. 
+	  </para>
+	  <example id="gen-002">
+	    <title>Case-insensitive sort of a given node-list</title>
+	    <programlisting>$ordered := sort --key xsh:lc(.) $unordered;</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Reorder creature elements by name attribute
+	      in ascending order using Czech locale settings
+	    </title>
+	    <programlisting>perl {
+# setup locale collating function
+# Note, that the collating function must be UTF8 aware.
+use POSIX qw(locale_h);
+setlocale(LC_COLLATE,'cs_CZ.UTF-8');
+};
+
+xmove &amp;{ sort :k@name :l * } into /middle-earth[1]/creatures;
+</programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>Sort a node-list by a pre-computed score (Perl-based sort)</title>
+	    <programlisting>$results := sort --numeric --descending --key { $scores{literal('@name')} } $players;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

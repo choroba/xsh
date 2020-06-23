@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="load_ext_dtd">
+  <title>load-ext-dtd command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>load-ext-dtd <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> load_ext_dtd</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Non-zero <ulink url="s_exp.html">expression</ulink> instructs 
+	    the XML parser to load external DTD
+	    subsets declared in XML documents. 
+	    This option is enabled by default.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$LOAD_EXT_DTD</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

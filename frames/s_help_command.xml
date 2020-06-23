@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="help_command">
+  <title>help command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>help <ulink url="s_command.html">command</ulink>|argument-type|xsh:xpath-function</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Print help on a given command, argument type or
+	    XPath extension function 
+	    (use <literal>xsh:</literal> as a prefix to XPath extensions
+	    function names, e.g <literal>help xsh:id2</literal>).
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

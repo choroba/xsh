@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>set-dtd command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="set_dtd_command" target="_self"></a>set-dtd command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">set-dtd [--internal] [--name|:n <a class="ulink" href="s_exp.html" target="_self">expression</a>] 
+	  [--public|:p <a class="ulink" href="s_exp.html" target="_self">expression</a>] 
+	  [--system|:s <a class="ulink" href="s_exp.html" target="_self">expression</a>] 
+	  [<a class="ulink" href="s_document.html" target="_self">document</a>]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> set_dtd</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Set external (default) or internal DTD for a given document.  If
+	    no <a class="ulink" href="s_document.html" target="_self">document</a> is given, the current
+	    document is used. At least one of <code class="literal">--public</code>
+	    and <code class="literal">--system</code> options should be used
+	    to specify the PUBLIC and SYSTEM identifiers of the DTD.
+	    If <code class="literal">--name</code> parameter is not provided, 
+	    name of the document root element is used as DTD name.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_list_dtd_command.html" target="_self">dtd</a>, <a class="ulink" href="s_validate_command.html" target="_self">validate</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

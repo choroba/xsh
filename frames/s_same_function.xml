@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="same_function">
+  <title>xsh:same function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>bool xsh:same(node-set N1, node-set N2)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns <literal>true</literal> if the given node sets
+	    both contain the same node
+	    (in XPath, this can also be expressed as
+	    <literal>count(N1|N2)+count(N1)+count(N2)=3</literal>).
+	  </para>
+	</simplesect>
+</section>

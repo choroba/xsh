@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="loc">
+  <title>location argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>One of: 
+	    <literal>after</literal>, 
+	    <literal>before</literal>, 
+	    <literal>into</literal>,
+	    <literal>append</literal>,
+	    <literal>prepend</literal>,
+	    <literal>replace</literal>.
+	  </para>
+	  <para>
+	    This argument is required by all commands that insert
+	    nodes to a document in some way to a destination described
+	    by an XPath expression. The meaning of the values listed
+	    above is supposed be obvious in most cases, however the
+	    exact semantics for location argument values depends on
+	    types of both the source node and the target node.
+	  </para>
+	  <para>
+	    <literal>after/before</literal> place the node right
+	    after/before the destination node, except for when the
+	    destination node is a document node or one of the source
+	    nodes is an attribute: If the destination node is a
+	    document node, the source node is attached to the
+	    end/beginning of the document (remember: there is no
+	    "after/before a document").  If both the source and
+	    destination nodes are attributes, then the source node is
+	    simply attached to the element containing the destination
+	    node (remember: there is no order on attribute nodes). If
+	    the destination node is an attribute but the source node
+	    is of a different type, then the textual content of the
+	    source node is appended to the value of the destination
+	    attribute (i.e. in this case after/before act just as
+	    append/prepend).
+	  </para>
+	  <para>
+	    <literal>append/prepend</literal> appends/prepends the
+	    source node to the destination node. If the destination
+	    node can contain other nodes (i.e. it is an element or a
+	    document node) then the entire source node is attached to
+	    it. In case of other destination node types, the textual
+	    content of the source node is appended/prepended to the
+	    content of the destination node.
+	  </para>
+	  <para>
+	    <literal>into</literal> can also be used to place
+	    the source node to the end of an element (in the same way
+	    as <literal>append</literal>), to attach an attribute
+	    to an element, or, if the destination node is a text node,
+	    cdata section, processing-instruction, attribute or comment,
+	    to replace its textual content with the textual content of 
+	    the source node.
+	  </para>
+	  <para>
+	    <literal>replace</literal> replaces the entire destination
+	    node with the source node except for the case when the
+	    destination node is an attribute and the source node is
+	    not. In such a case only the value of the destination
+	    attribute is replaced with the textual content of the
+	    source node. Note also that document node can never be
+	    replaced.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-001">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

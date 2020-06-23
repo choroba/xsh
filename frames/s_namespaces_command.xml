@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="namespaces_command">
+  <title>namespaces command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>namespaces [--registered|:r] [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    For each node in a given node-list lists
+	    all namespaces that are valid the scope of the node.
+	    Namespaces are listed in the form of
+	    <literal>xmlns:prefix="uri"</literal> declarations,
+	    preceded by a canonical xpath of the corresponding node
+	    on a separate line.
+	  </para>
+	  <para>
+	    If <literal>--registered</literal> or <literal>:r</literal>
+	    flag is used, list also namespaces registered with the
+	    <ulink url="s_registerns_command.html">register-namespace</ulink> command
+	    in XSH syntax.
+	  </para>
+	  <para>
+	    If called without the <literal>--registered</literal> flag and
+	    no <ulink url="s_xpath.html">xpath</ulink> is given, lists namespaces
+	    in the scope of the current node.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para><ulink url="s_Namespaces.html">Namespaces in XML and XPath</ulink>, <ulink url="s_Information.html">Retrieving more information</ulink></para>
+  </simplesect>
+</section>

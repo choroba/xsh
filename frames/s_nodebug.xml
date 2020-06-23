@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="nodebug">
+  <title>nodebug command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>nodebug</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Turn off debugging messages.</para>
+	  <para>This is equivalent to setting
+	    <literal>$DEBUG</literal> variable to 0.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_debug.html">debug</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

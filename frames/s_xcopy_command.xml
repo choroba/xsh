@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xcopy_command">
+  <title>xcopy command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xcopy [--respective|:r] [--preserve-order|:p] <ulink url="s_exp.html">expression</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> xcp</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    xcopy is similar to <ulink url="s_copy_command.html">copy</ulink>, but copies
+	    <emphasis>all</emphasis> nodes in the first node-list
+	    <ulink url="s_exp.html">expression</ulink> to <emphasis>all</emphasis>
+	    destinations determined by the
+	    <ulink url="s_loc.html">location</ulink> directive relative 
+	    to the second node-list <ulink url="s_exp.html">expression</ulink>. 
+	    See <ulink url="s_copy_command.html">copy</ulink> for detailed description of
+	    <literal>xcopy</literal> arguments.
+	  </para>
+	  <para>
+	    If <literal>--respective|:r</literal> option
+	    is used, then the target node-list <ulink url="s_exp.html">expression</ulink>
+	    is evaluated in the context of the source node
+	    being copied.
+	  </para>
+	  <para>
+	    The <literal>--preserve-order|:p</literal> option can be
+	    used to ensure that the copied nodes are in the same
+	    relative order as the corresponding source nodes.
+	    Otherwise, if <ulink url="s_loc.html">location</ulink> is
+	    <literal>after</literal> or <literal>prepend</literal>,
+	    the relative order of the copied nodes will be reversed,
+	    because source nodes are placed to the target location one
+	    by one.
+	  </para>
+	  <example id="gen-003">
+	    <title>Copy all middle-earth creatures within the document $a
+	      into every world of the document $b.</title>
+	    <programlisting>xsh&gt; <userinput>xcopy $a/middle-earth/creature into $b//world</userinput></programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_copy_command.html">copy</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_xmove_command.html">xmove</ulink>, <ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_xinsert_command.html">xinsert</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

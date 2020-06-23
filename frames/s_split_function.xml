@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="split_function">
+  <title>xsh:split function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:split(string PATTERN, string STRING)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function provides direct access to the very powerful
+	    Perl function <literal>split</literal>. It splits
+	    <literal>STRING</literal> to a list of
+	    fields. <literal>PATTERN</literal> is a regular expression
+	    specifying strings delimiting individual fields of
+	    <literal>STRING</literal>. If <literal>PATTERN</literal>
+	    is empty, <literal>STRING</literal> is split to individual
+	    characters. If the regular expression in
+	    <literal>PATTERN</literal> is enclosed in brackets, then
+	    strings matching <literal>PATTERN</literal> are also
+	    included in the resulting list.
+	  </para>
+	  <para>
+	    The function returns a node-set consisting of
+	    newly created <literal>&lt;xsh:string&gt;</literal>
+	    elements containing individual strings of the resulting
+	    list as their only text child nodes.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xslt_command">
+  <title>xslt command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>$result := xslt [--doc|:d | --precompiled|:p] [--string] <ulink url="s_exp.html">expression</ulink> [<ulink url="s_document.html">document</ulink> name=<ulink url="s_xpath.html">xpath</ulink> [name=<ulink url="s_xpath.html">xpath</ulink> ...]]</literal>
+    </para>
+    <para>
+      <literal>$pre_compiled := xslt [--compile|:c] <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> transform, xsl, xsltproc, process</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    This function compiles a given XSLT stylesheet 
+	    and/or transforms a given document with XSLT.
+	  </para>
+	  <para>A XSLT stylesheet is specified in the
+	    first argument either as a file name (default), or as a
+	    document (<literal>--doc</literal> or
+	    <literal>:d</literal>), or as a precompiled XSLT
+	    stylesheet object (<literal>--precompiled</literal> or
+	    <literal>:p</literal> - see <literal>--compile</literal>
+	    above).</para>
+	  <para>
+	    If <literal>--compile</literal> or <literal>:c</literal>
+	    is used, compile a given XSLT stylesheet and return a
+	    compiled XSLT stylesheet object. This object can be later
+	    passed as a XSLT stylesheet to <literal>xslt
+	    --precompiled</literal>.
+	  </para>
+	  <para>
+	    Without <literal>--compile</literal> or
+	    <literal>:c</literal>, transform a given <ulink url="s_document.html">document</ulink> (or - if used with
+	    only the stylesheet argument - the current document) 
+	    using a given XSLT stylesheet and
+	    return the result.</para>
+	  <para>
+	    All arguments following the second (document) argument are
+	    considered to be stylesheet parameters and (after
+	    expanding <literal>${...}</literal> interpolators) are
+	    directly passed to the XSLT engine without being evaluated
+	    by XSH2. All stylesheet parameters should be of the form
+	    <literal>name=<ulink url="s_xpath.html">xpath</ulink></literal> (possibly
+	    in brackets).
+	  </para>
+	  <example id="gen-003">
+	    <title>Process current document with XSLT</title>
+	    <programlisting>$result := xslt stylesheet.xsl . font='14pt' color='red'</programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>Same for several documents, reusing the XSLT stylesheet</title>
+	    <programlisting>$xslt := xslt --compile stylesheet.xsl;
+foreach my $file in {qw(f1.xml f2.xml f3.xml)} {
+  save --file {"out_$file"} &amp;{xslt --precompiled $xslt &amp;{ open $file } font='14pt' color='red'};
+}
+</programlisting>
+	  </example>
+
+	</simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

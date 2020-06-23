@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="next_command">
+  <title>next command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>next [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    <literal>next</literal> is like the continue statement in C; it starts the
+	    next iteration of an enclosing loop. 
+	    The command may be used with an optional argument evaluating
+	    to a positive integer number indicating which
+	    level of the nested loops should be restarted.
+	    If the argument is omitted, it defaults to 1, i.e. the innermost loop.
+	  </para>
+	  <para>
+	    Using this command outside a loop causes an
+	    immediate run-time error.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_foreach.html">foreach</ulink>, <ulink url="s_while.html">while</ulink>, <ulink url="s_iterate.html">iterate</ulink>, <ulink url="s_redo_command.html">redo</ulink>, <ulink url="s_last_command.html">last</ulink>, <ulink url="s_prev_command.html">prev</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

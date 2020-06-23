@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>set-ns command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="set_namespace_command" target="_self"></a>set-ns command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">set-ns [:p|--prefix <a class="ulink" href="s_exp.html" target="_self">expression</a>] <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This command takes one argument, the namespace URI,
+	    possibly accompanied by a prefix provided in
+	    the option <code class="literal">--prefix</code> <code class="literal">:p</code>;
+	    both these expressions are evaluated as names.
+	    The command changes the namespace of the current element to a given
+	    namespace URI. The current node must be in the scope
+	    of a namespace declaration associating the namespace URI
+	    with a prefix; if prefix option is given, then
+	    one of such declarations must associate the particular given prefix
+	    with the namespace URI. If this condition
+	    is not met or the current node is neither element nor
+	    attribute, an error is issued.
+	    The command also changes the prefix of the current element accordingly.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_declare_namespace_command.html" target="_self">declare-ns</a>, <a class="ulink" href="s_change_namespace_uri_command.html" target="_self">change-ns-uri</a>, <a class="ulink" href="s_change_namespace_prefix_command.html" target="_self">change-ns-prefix</a>, <a class="ulink" href="s_namespaces_command.html" target="_self">namespaces</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Namespaces.html" target="_self">Namespaces in XML and XPath</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

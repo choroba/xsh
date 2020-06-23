@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>local command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="local_command" target="_self"></a>local command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">local <a class="ulink" href="s_varname.html" target="_self">$variable</a> = <a class="ulink" href="s_xpath.html" target="_self">xpath</a></code></p>
+<p><code class="literal">local <a class="ulink" href="s_varname.html" target="_self">$variable</a> [ <a class="ulink" href="s_varname.html" target="_self">$variable</a> ... ] </code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p> 
+	    This command acts in a very similar way as
+	    <a class="ulink" href="s_assign_command.html" target="_self">assign</a> does, except
+	    that the variable assignment is done temporarily
+	    and lasts only for the rest of its enclosing
+	    <a class="ulink" href="s_block.html" target="_self">block</a> or subroutine. At the end of the
+	    enclosing block or subroutine, the original value
+	    is restored. This also reverts any later usual assignments to the
+	    variable done occurring before the end of the block.
+	    This command may also be used without the assignment part.
+	  </p>
+<p>Note, that the variable itself remains
+	    global in the sense that it is still visible to any
+	    subroutine called subsequently from the same block.
+	    Unlike <a class="ulink" href="s_my_command.html" target="_self">my</a>
+	    declaration, it does not <span class="emphasis"><em>create</em></span> a
+	    new lexically scoped variable.
+	  </p>
+<p>
+	    Hint for Perl programmers: <code class="literal">local</code>
+	    in XSH2 works exactly as <code class="literal">local</code>
+	    in Perl.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_assign_command.html" target="_self">assign</a>, <a class="ulink" href="s_my_command.html" target="_self">my</a>, <a class="ulink" href="s_def.html" target="_self">def</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Variables.html" target="_self">Variables</a></p>
+</div>
+</div></body>
+</html>

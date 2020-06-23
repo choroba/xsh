@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="sprintf_function">
+  <title>xsh:sprintf function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:sprintf(string FORMAT,object EXPRESSION,...)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a string formatted by the usual <literal>printf</literal>
+	    conventions of the C library function <literal>sprintf</literal>
+	    and <literal>sprintf</literal> Perl function.</para>
+	  <para>
+	    See C documentation for an explanation of the
+	    general principles and Perl documentation
+	    for a list of supported formatting conversions.
+	  </para>
+	</simplesect>
+</section>

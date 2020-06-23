@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>stream command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="stream_process_command" target="_self"></a>stream command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">stream 
+         [ --input-file|:f <a class="ulink" href="s_filename.html" target="_self">filename</a> |
+	   --input-pipe|:p <a class="ulink" href="s_filename.html" target="_self">filename</a> |
+           --input-string|:s <a class="ulink" href="s_exp.html" target="_self">expression</a>]
+	 [ --output-file|:F <a class="ulink" href="s_filename.html" target="_self">filename</a> |
+           --output-pipe|:P <a class="ulink" href="s_filename.html" target="_self">filename</a> |
+           --output-string|:S <a class="ulink" href="s_varname.html" target="_self">$variable</a> |
+           --no-output|:N ]
+           select <a class="ulink" href="s_xpath.html" target="_self">xpath</a> <a class="ulink" href="s_block.html" target="_self">block</a>
+         [ select <a class="ulink" href="s_xpath.html" target="_self">xpath</a> <a class="ulink" href="s_block.html" target="_self">block</a> ... ]
+                   </code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    EXPERIMENTAL!  This command provides a memory efficient
+	    (though slower) way to process selected parts of an XML
+	    document with XSH2. A streaming XML parser (SAX parser) is
+	    used to parse the input. The parser has two states which
+	    will be referred to as A and B below. The initial state of
+	    the parser is A.</p>
+<p>In the state A, only a
+	    limited vertical portion of the DOM tree is built. All XML
+	    data coming from the input stream other than start-tags
+	    are immediately copied to the output stream.  If a new
+	    start-tag of an element arrives, a new node is created in
+	    the tree. All siblings of the newly created node are
+	    removed. Thus, in the state A, there is exactly one node
+	    on every level of the tree. After a node is added to the
+	    tree, all the <a class="ulink" href="s_xpath.html" target="_self">xpath</a> expressions
+	    following the <code class="literal">select</code> keyword
+	    are
+	    checked. If none matches, the parser remains in state A
+	    and copies the start-tag to the output stream. Otherwise,
+	    the first expression that matches is remembered and the
+	    parser changes its state to B.
+	  </p>
+<p>
+	    In state B the parser builds a complete DOM subtree of the
+	    element that was last added to the tree before the parser
+	    changed its state from A to B. No data are sent to the
+	    output at this stage. When the subtree is complete
+	    (i.e. the corresponding end-tag for its topmost element is
+	    encountered), the <a class="ulink" href="s_block.html" target="_self">block</a> of instructions
+	    following the <a class="ulink" href="s_xpath.html" target="_self">xpath</a> expression that
+	    matched is invoked with the root element of the subtree as
+	    the current context node. The commands in <a class="ulink" href="s_block.html" target="_self">block</a> are allowed to transform the whole
+	    element subtree or even to replace it with a different DOM
+	    subtree or subtrees. They must, however, leave intact 
+	    all ancestor nodes of the subtree. 
+            Failing to do so can result in an error or
+	    unpredictable results.
+	  </p>
+<p>
+	    After the subtree processing <a class="ulink" href="s_block.html" target="_self">block</a>
+	    returns, all subtrees that now appear in the DOM tree in
+	    the place of the original subtree are serialized to the
+	    output stream. After that, they are deleted and the parser
+	    returns to state A.
+	  </p>
+<p>
+	    Note that this type of processing highly limits the amount
+	    of information the selecting XPath expressions can use. The first
+	    notable fact is, that elements can not be selected by their
+	    content. The only information present in the tree at the
+	    time of the XPath evaluation is the element's name and
+	    attributes plus the same information for all its
+	    ancestors (there is no information at all about its possible
+	    child nodes nor of the node's position
+	    within the list of its siblings).
+	  </p>
+<p>The input parameters below are mutually exclusive.
+	  If non is given, standard input is processed.</p>
+<p><code class="literal">--input-file</code> or <code class="literal">:f</code>
+	    instructs the processor to stream from a given file.</p>
+<p><code class="literal">--input-pipe</code> or <code class="literal">:p</code>
+	    instructs the processor to stream the output of a given a command.</p>
+<p><code class="literal">--input-string</code> or <code class="literal">:s</code>
+	    instructs the processor to use the result of a given
+	    expression as the input to be processed.
+	  </p>
+<p>The output parameters below are mutually exclusive.
+	    If none is given, standard output is used.
+	  </p>
+<p><code class="literal">--output-file</code> or <code class="literal">:F</code>
+	    instructs the processor to save the output
+	    to a given file.</p>
+<p><code class="literal">--output-pipe</code> or <code class="literal">:P</code>
+	    instructs the processor to pipe the output
+	    to a given command.
+	  </p>
+<p><code class="literal">--output-string</code> or <code class="literal">:S</code>
+	    followed by a variable name instructs the processor to 
+	    store the result in the given variable.
+	  </p>
+<p><code class="literal">--no-output</code> or <code class="literal">:N</code>
+            instructs the processor to throw the result away.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a>, <a class="ulink" href="s_Documents.html" target="_self">Files/Documents</a></p>
+</div>
+</div></body>
+</html>

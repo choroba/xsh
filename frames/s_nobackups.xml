@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="nobackups">
+  <title>nobackups command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>nobackups</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Disable creating backup files on save.</para>
+	  <para>This command is equivalent to setting the
+	    <literal>$BACKUPS</literal> variable to 0.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_nobackups.html">nobackups</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Configuration.html">Global settings</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

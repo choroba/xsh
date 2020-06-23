@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="files_command">
+  <title>documents command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>documents</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> files, docs</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>Try to identify open documents and list their URIs
+	    and variables that contain them.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_open_command.html">open</ulink>, <ulink url="s_close_command.html">close</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para><ulink url="s_Information.html">Retrieving more information</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

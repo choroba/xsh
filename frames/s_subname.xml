@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="subname">
+  <title>sub-routine name argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>
+	    A sub-routine name is an identifier
+	    matching the following regular
+	    expression <literal>[a-zA-Z_][a-zA-Z0-9_]*</literal>,
+	    i.e., it must be at least one character long, must
+	    beginning with a letter or
+	    underscore, and may only containing letters, underscores, and
+	    digits.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-001">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Variables.html">Variables</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

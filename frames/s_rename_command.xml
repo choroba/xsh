@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="rename_command">
+  <title>rename command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>rename <ulink url="s_nodename.html">nodename</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    NOTE: THE SEMANTICS OF COMMAND HAS CHANGED IN 2.1.0
+	  </para>
+	  <para>
+	    This command is very similar to the <ulink url="s_map_command.html">map</ulink>
+	    command, except that it operates on nodes' names rather
+	    than their content. It changes
+	    name of every element, attribute or
+	    processing-instruction contained
+	    in the node-list specified in the second argument <ulink url="s_exp.html">expression</ulink>, according to the value of the 
+	    <ulink url="s_nodename.html">nodename</ulink> expression,
+	    which is evaluated in the context of each node in turn.
+	  </para>
+	  <para>If the <ulink url="s_nodename.html">nodename</ulink> is a Perl
+	    expression, then the name of the node is also stored into Perl's
+	    <literal>$_</literal> variable prior to evaluation.
+	  </para>
+	  <para>The flag <literal>--in-place</literal> (<literal>:i</literal>)
+	    can be used to indicate that
+	    the new name should be collected from the <literal>$_</literal>
+	    variable rather than from the result of the expression itself.
+	  </para>
+	  <para>
+	    The <literal>--namespace</literal> (<literal>:n</literal>) argument
+	    may be used to provide namespace for the renamed nodes.
+	  </para>
+	  <para>
+	    <literal>--reverse</literal> (<literal>:r</literal>) flag
+	    instruct the map to process the nodelist
+	    in reversed order.
+	  </para>
+	  <para>Note: if the expression <ulink url="s_nodename.html">nodename</ulink>
+	    returns an undefined value for a particular node, the
+	    node's original name and namespace are preserved.
+	  </para>
+	  <example id="gen-002">
+	    <title>Renames all Hobbits to Halflings</title>
+	    <programlisting>xsh&gt; <userinput>rename halfling //hobbit</userinput></programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Make all elements and attributes uppercase (yack!)</title>
+	    <programlisting>xsh&gt; <userinput>rename { uc } (//*|//@*)</userinput></programlisting>	  
+	  </example>
+	  <example id="gen-004">
+	    <title>Substitute dashes with underscores in all node names</title>
+	    <programlisting>xsh&gt; <userinput>rename :i { s/-/_/g } (//*|//@*)</userinput></programlisting>	  
+	  </example>
+	  <example id="gen-005">
+	    <title>Make all elements start with the name of their parents</title>
+	    <programlisting>xsh&gt; <userinput>rename concat(local-name(parent::*),'.',local-name(.)) //*[parent::*]</userinput></programlisting>	  
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-006">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_map_command.html">map</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-007">
+    <title>Sections</title>
+    <para><ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

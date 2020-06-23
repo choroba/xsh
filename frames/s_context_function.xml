@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="context_function">
+  <title>xsh:context function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:context(node-set NODE, float BEFORE, float AFTER)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a node-set of sibling nodes surrounding NODE. The
+	    span consists of (up to) BEFORE-many nodes immediately
+	    preceding NODE, the NODE itself, and (up to) AFTER-many
+	    nodes immediately following NODE.  If the AFTER is not
+	    given, AFTER is set equal to BEFORE.
+	  </para>
+	</simplesect>
+</section>

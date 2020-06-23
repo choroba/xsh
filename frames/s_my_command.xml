@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="my_command">
+  <title>my command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>my <ulink url="s_varname.html">$variable</ulink> [$var2 ...];</literal>
+    </para>
+    <para>
+      <literal>my <ulink url="s_varname.html">$variable</ulink> = <ulink url="s_exp.html">expression</ulink>;</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Same as in Perl: a "my" declares the listed variables to be local
+	    (lexically) to the enclosing block, or sub-routine.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_local_command.html">local</ulink>
+    </para>
+  </simplesect>
+</section>

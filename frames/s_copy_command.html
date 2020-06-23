@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>copy command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="copy_command" target="_self"></a>copy command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">copy [--respective|:r] <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_loc.html" target="_self">location</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+<p><code class="literal">$results := copy [--respective|:r] <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_loc.html" target="_self">location</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> cp</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Copies nodes in the first node-list <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    (source nodes) to the destinations determined by the 
+	    the <a class="ulink" href="s_loc.html" target="_self">location</a> directive
+	    applied to nodes in the second node-list <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    (target nodes). If the source node-list contains
+	    more than one node, than N'th node in the source node-list
+	    is copied to the location relative to the N'th node in
+	    the target node-list.
+          </p>
+<p>
+	    If <code class="literal">--respective|:r</code> option
+	    is used, then the target node-list <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    is evaluated in the context of the source node
+	    being copied.
+	  </p>
+<p>Possible values for <a class="ulink" href="s_loc.html" target="_self">location</a> are:
+	    <code class="literal">after</code>, <code class="literal">before</code>,
+	    <code class="literal">into</code>, <code class="literal">replace</code>,
+	    <code class="literal">append</code> and <code class="literal">prepend</code>. The first
+	    three location directives cause making a copy of the source nodes
+	    after, before, and within (as the last child-node) the target
+	    nodes, respectively. 
+	    If <code class="literal">replace</code> location directive is used,
+            source node are copied before the respective
+	    target nodes and target nodes are removed.
+	    The <code class="literal">append</code> and <code class="literal">prepend</code>
+	    location directives allow,
+	    depending on the destination node type,
+	    either inserting copies of the
+	    source nodes as the first or last child nodes of
+	    a destination element or appending/prepending
+	    destination node data in case of non-element destination nodes.
+	    See <a class="ulink" href="s_loc.html" target="_self">location</a> argument type
+	    for more detail.
+	  </p>
+<p>The command returns a node-list consisting of 
+	    the copies of all source nodes created by the command.
+	  </p>
+<p>Despite the fact the command is named "copy", 
+	    nodes resulting from copying
+	    the source nodes may pass through certain type conversion before
+	    they are inserted at the appointed destinations. This, however,
+	    only happens in cases where the types of the source and target
+	    nodes are not compatible with the location
+	    directive. See <a class="ulink" href="s_loc.html" target="_self">location</a> argument
+	    type for more detail.
+	  </p>
+<p>Note that XSH2 refuses to create multiple top-level
+	    elements using <code class="literal">copy</code>, 
+	    <a class="ulink" href="s_move_command.html" target="_self">move</a> and similar commands.</p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Replace living-thing elements in the document b with copies
+	      of the corresponding creature elements from the document $a.</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>copy $a//creature replace $b//living-thing</code></strong></pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Copy every element into itself</b></p>
+<div class="example-contents">
+<pre class="programlisting">xsh&gt; <strong class="userinput"><code>copy --respective $a//* into .</code></strong></pre>
+<pre class="programlisting">xsh&gt; <strong class="userinput"><code>copy $a//* into $a//*</code></strong>#same as
+above</pre>
+</div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_xcopy_command.html" target="_self">xcopy</a>, <a class="ulink" href="s_move_command.html" target="_self">move</a>, <a class="ulink" href="s_xmove_command.html" target="_self">xmove</a>, <a class="ulink" href="s_insert_command.html" target="_self">insert</a>, <a class="ulink" href="s_xinsert_command.html" target="_self">xinsert</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-006" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

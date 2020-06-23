@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>map command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="map_command" target="_self"></a>map command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">map <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    NOTE: THE SEMANTICS OF COMMAND HAS CHANGED IN 2.1.0
+	  </p>
+<p>
+	    This command provides an easy way to transform node's data
+	    (content) using arbitrary expression.
+	    It takes two arguments: a mapping expression
+	    and a node-list.
+	  </p>
+<p>
+	    First the second argument is evaluated to a node-list.
+	    For each of the nodes,
+	    the mapping expression is evaluated 
+	    and the result is used to replace the original content
+	    of the node. 
+	    The node is made the context node for the time
+	    of evaluation of the mapping expression.
+	    Moreover, if the expression is a Perl code,
+	    it gets the original text content in 
+	    the variable <code class="literal">$_</code>.
+	  </p>
+<p>
+	    Note that if the processed node is an element
+	    than the mapping expression may even produce nodes
+	    which are then copied into the element discarding
+	    any previous content of the element.
+	  </p>
+<p>
+	    If the mapping expression returns an undefined value
+	    for a node, then its content is kept untouched.
+	  </p>
+<p>
+	    <code class="literal">--in-place</code> (<code class="literal">:i</code>) flag:
+	    if the expression is a Perl code, then
+	    it is sometimes convenient to change the value
+	    in place. In that case use this flag to indicate that the result
+	    should to be taken from the <code class="literal">$_</code> variable
+	    rather than from the value of the expression itself.
+	    Without this flag, <code class="literal">$_</code> is read-only.
+	  </p>
+<p>
+	    <code class="literal">--reverse</code> (<code class="literal">:r</code>) flag
+	    instruct the map to process the nodelist
+	    in reversed order.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Capitalizes all hobbit names</b></p>
+<div class="example-contents"><pre class="programlisting">map { ucfirst($_) } //hobbit/@name;</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Changes Goblins to Orcs in all hobbit tales (\b matches word boundary).</b></p>
+<div class="example-contents"><pre class="programlisting">map :i { s/\bgoblin\b/orc/gi } //hobbit/tale/text();</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;Recompute column sums in the last row of row-oriented table</b></p>
+<div class="example-contents"><pre class="programlisting">map sum(/table/row[position()&lt;last()]/
+cell[count(xsh:current()/preceding-sibling::cell)+1])
+/table/row[last()]/cell;</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-005" target="_self"></a><p class="title"><b>Example&nbsp;4.&nbsp;The following commands do all about the same:</b></p>
+<div class="example-contents"><pre class="programlisting">wrap --inner Z //*;
+map --reverse xsh:parse(concat("&lt;Z&gt;",xsh:serialize(node()),"&lt;/Z&gt;")) //*;
+map xsh:parse(concat("&lt;Z&gt;",xsh:serialize(node()),"&lt;/Z&gt;")) { reverse xpath('//*') };
+</pre></div>
+</div>
+<br class="example-break"><p>Note that in the last example we use
+	    <code class="literal">:r</code> (or Perl <code class="literal">reverse</code>
+	    function) to reverse the node list order so that child
+	    nodes get processed before their parents. Otherwise, the child
+	    nodes would be replaced by parent's new content before the
+	    processing could reach them.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-006" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_rename_command.html" target="_self">rename</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-007" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Perl_shell.html" target="_self">Interacting with Perl and Shell</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

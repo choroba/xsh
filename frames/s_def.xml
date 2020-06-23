@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="def">
+  <title>def command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>def <ulink url="s_subname.html">subroutine</ulink> [<ulink url="s_varname.html">$variable</ulink> ...] <ulink url="s_block.html">block</ulink>
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> define</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Define a new XSH2 sub-routine named <ulink url="s_subname.html">subroutine</ulink>.
+	    The subroutine may require zero or more parameters. 
+	    These are declared as a
+	    whitespace-separated list of <emphasis>parametric
+	    variables</emphasis>. The body of the
+	    subroutine is specified as a <ulink url="s_block.html">block</ulink>.
+	  </para>
+	  <para>A sub-routine can be invoked directly by its name
+	    followed by its arguments
+	    just as any XSH2 command, or indirectly
+	    using the <ulink url="s_call_command.html">call</ulink>
+	    command followed by an expression evaluating
+	    to the routine name and sub-routine arguments. 
+	    Sub-routine arguments can be arbitrary 
+	    expressions. These expressions are evaluated
+	    <emphasis>prior</emphasis> the sub-routine's code
+	    execution and are assigned to the sub-routine's 
+	    parametric variables in the respective order.
+	    The number of parameter variables in a sub-routine
+	    definition and the number of arguments in a call to it
+	    must match.
+	    Calling a sub-routine with less or more arguments
+	    than declared is a run-time error.
+	  </para>
+	  <para>	    
+	    Parametric variables are lexical 
+	    variables within the sub-routine body as if they
+	    were declared with <ulink url="s_my_command.html">my</ulink>.
+	  </para>
+	  <para>
+	    Note that a subroutine has to be defined before it is
+	    first called (in terms of execution -- depending on the structure
+	    of the program, the actual definition of the sub-routine
+	    must not necessarily precede all references to it).
+	  </para>
+	  <example id="gen-003">
+	    <programlisting>def l3 $nodes {
+  ls --depth 3 $nodes; # list given nodes upto depth 3
+}
+l3 //chapter;           # direct call
+$subref = 'l3';
+call $subref //chapter; # in-direct call
+</programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>Commenting and un-commenting pieces of document</title>
+	    <programlisting>def comment
+    $n      # nodes to move to comments
+    $mark   # maybe some handy mark to recognize such comments
+{
+  foreach $n {
+    if ( . = ../@* ) {
+      echo "Warning: attribute nodes are not supported!";
+    } else {
+      echo "Commenting out:";
+      ls --depth 0 .;
+      add comment concat($mark,xsh:serialize(.)) replace .;
+    }
+  }
+}
+
+def uncomment $n $mark {
+  foreach $n {
+    if (. = ../comment()) { # is this node a comment node
+      local $string = substring-after(.,"$mark");
+      add chunk $string replace .;
+    } else {
+      echo "Warning: Ignoring non-comment node:";
+      ls --depth 0 .;
+    }
+  }
+}
+
+# comment out all chapters with no paragraphs
+comment //chapter[not(para)] "COMMENT-NOPARA";
+
+# uncomment all comments stamped with COMMENT-NOPARA
+$mark="COMMENT-NOPARA";
+uncomment //comment()[starts-with(.,"$mark")] $mark;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-005">
+    <title>See Also</title>
+    <para><ulink url="s_call_command.html">call</ulink>, <ulink url="s_return_command.html">return</ulink>, <ulink url="s_my_command.html">my</ulink>, <ulink url="s_local_command.html">local</ulink></para>
+  </simplesect>
+  <simplesect id="gen-006">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

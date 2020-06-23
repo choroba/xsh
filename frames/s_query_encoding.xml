@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="query_encoding">
+  <title>query-encoding command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>query-encoding <ulink url="s_enc_string.html">encoding</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> query_encoding</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>Set the default query character encoding, i.e.
+	    encoding used when taking input from XSH2 prompt or standard input.</para>
+	  <para>This command is equivalent to setting the
+	    <literal>$QUERY_ENCODING</literal> variable.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_encoding.html">encoding</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

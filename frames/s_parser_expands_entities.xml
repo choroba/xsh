@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="parser_expands_entities">
+  <title>parser-expands-entities command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>parser-expands-entities <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> parser_expands_entities</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    If the
+	    <ulink url="s_exp.html">expression</ulink> is non-zero
+	    enable the entity expansion during the parse process; disable it otherwise.
+	    If entity expansion is disabled, any external entity references in parsed
+	    documents are preserved as references. By default, entity expansion
+	    is enabled.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$PARSER_EXPANDS_ENTITIES</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

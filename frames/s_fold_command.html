@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>fold command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="fold_command" target="_self"></a>fold command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">fold [--depth|:d <a class="ulink" href="s_exp.html" target="_self">expression</a>] [<a class="ulink" href="s_exp.html" target="_self">expression</a>]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This feature is still EXPERIMENTAL and
+	    may change in the future! 
+	    Fold command may be used to
+	    mark elements with a
+	    <code class="literal">xsh:fold</code> attribute from the
+	    <code class="literal">http://xsh.sourceforge.net/xsh/</code> namespace. 
+	    When
+	    listing the DOM tree using 
+	    <code class="literal"><a class="ulink" href="s_list_command.html" target="_self">ls</a> --fold <a class="ulink" href="s_xpath.html" target="_self">xpath</a></code>, 
+	    elements marked in this
+	    way are folded to a given depth (default is 0 = fold immediately).
+	  </p>
+<p>
+	    The option <code class="literal">--depth</code> (<code class="literal">:d</code>)
+	    may be used to specify the depth at which
+	    subtrees of given elements are to be folded.
+	  </p>
+<p>
+	    If called without arguments,
+	    the command applies to the current element,
+	    otherwise the <a class="ulink" href="s_exp.html" target="_self">expression</a> is evaluated to the node-list
+	    and folding is applied to all elements within this node-list.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>fold --depth 1 //chapter</code></strong>
+xsh&gt; <strong class="userinput"><code>ls --fold  //chapter[1]</code></strong>
+&lt;chapter id="intro" xsh:fold="1"&gt;
+  &lt;title&gt;...&lt;/title&gt;
+  &lt;para&gt;...&lt;/para&gt;
+  &lt;para&gt;...&lt;/para&gt;
+&lt;/chapter&gt;
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_unfold_command.html" target="_self">unfold</a>, <a class="ulink" href="s_list_command.html" target="_self">ls</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Navigation.html" target="_self">Tree navigation</a></p>
+</div>
+</div></body>
+</html>

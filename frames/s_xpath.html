@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>XPath argument type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="xpath" target="_self"></a>XPath argument type</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    XSH2 can evaluate XPath expressions as defined in W3C
+	    recommendation at <a class="ulink" href="http://www.w3.org/TR/xpath" target="_self">http://www.w3.org/TR/xpath</a>
+	    with only a little limitation on use of syntactically
+	    ignorable whitespace. 
+	    (Nice interactive XPath tutorials and references
+	    can be found at <a class="ulink" href="http://www.zvon.org" target="_self">http://www.zvon.org</a>.)
+	  </p>
+<p>
+	    In order to allow XSH2 to use white-space as a command
+	    argument delimiter (which is far more convenient to type
+	    than, say, commas), the use of white-space in XPath is
+	    slightly restricted. Thus, in XSH2, white-space can only occur in
+	    those parts of an XPath expression, that are surrounded by
+	    either brackets, square brackets, single or double quotes.
+	    So, for example, otherwise valid XPath expression like
+	  </p>
+<pre class="programlisting">/ foo / bar [ @baz = "bar" ]</pre>
+<p>
+	    should in XSH2 be written as either of
+	  </p>
+<pre class="programlisting">/foo/bar[ @baz = "bar" ]</pre>
+<p>
+	    avoiding any white-space outside the square brackets,
+	    or completely enclosed in brackets as in
+	  </p>
+<pre class="programlisting">( / foo / bar [ @baz = "bar" ] ).</pre>
+<p>
+	    XSH2 provides a number of powerful XPath extension
+	    functions, listed below and described in separate
+	    sections. XPath extension
+	    functions by default belong to XSH2 namespace
+	    <code class="literal">http://xsh.sourceforge.net/xsh/</code> with
+	    a namespace prefix set to <code class="literal">xsh</code>. A
+	    program may however call the <a class="ulink" href="s_xpath_extensions_command.html" target="_self">xpath-extensions</a> command to map XSH2
+	    XPath extension functions into the default namespace, so
+	    that they may be used directly without any prefix.
+	  </p>
+<p>
+	    XPath extension functions defined in XSH2:
+	    <span class="simplelist"><a class="ulink" href="s_doc_function.html" target="_self">xsh:doc</a>, <a class="ulink" href="s_document_uri_function.html" target="_self">xsh:document-uri</a>, <a class="ulink" href="s_filename_function.html" target="_self">xsh:filename</a>, <a class="ulink" href="s_base_uri_function.html" target="_self">xsh:base-uri</a>, <a class="ulink" href="s_resolve_uri_function.html" target="_self">xsh:resolve-uri</a>, <a class="ulink" href="s_lineno_function.html" target="_self">xsh:lineno</a>, <a class="ulink" href="s_var_function.html" target="_self">xsh:var</a>, <a class="ulink" href="s_matches_function.html" target="_self">xsh:matches</a>, <a class="ulink" href="s_match_function.html" target="_self">xsh:match</a>, <a class="ulink" href="s_grep_function.html" target="_self">xsh:grep</a>, <a class="ulink" href="s_substr_function.html" target="_self">xsh:substr</a>, <a class="ulink" href="s_reverse_function.html" target="_self">xsh:reverse</a>, <a class="ulink" href="s_lc_function.html" target="_self">xsh:lc</a>, <a class="ulink" href="s_uc_function.html" target="_self">xsh:uc</a>, <a class="ulink" href="s_lcfirst_function.html" target="_self">xsh:lcfirst</a>, <a class="ulink" href="s_ucfirst_function.html" target="_self">xsh:ucfirst</a>, <a class="ulink" href="s_same_function.html" target="_self">xsh:same</a>, <a class="ulink" href="s_max_function.html" target="_self">xsh:max</a>, <a class="ulink" href="s_min_function.html" target="_self">xsh:min</a>, <a class="ulink" href="s_strmax_function.html" target="_self">xsh:strmax</a>, <a class="ulink" href="s_strmin_function.html" target="_self">xsh:strmin</a>, <a class="ulink" href="s_sum_function.html" target="_self">xsh:sum</a>, <a class="ulink" href="s_join_function.html" target="_self">xsh:join</a>, <a class="ulink" href="s_subst_function.html" target="_self">xsh:subst</a>, <a class="ulink" href="s_sprintf_function.html" target="_self">xsh:sprintf</a>, <a class="ulink" href="s_serialize_function.html" target="_self">xsh:serialize</a>, <a class="ulink" href="s_parse_function.html" target="_self">xsh:parse</a>, <a class="ulink" href="s_current_function.html" target="_self">xsh:current</a>, <a class="ulink" href="s_path_function.html" target="_self">xsh:path</a>, <a class="ulink" href="s_if_function.html" target="_self">xsh:if</a>, <a class="ulink" href="s_new_attribute_function.html" target="_self">xsh:new-attribute</a>, <a class="ulink" href="s_new_element_function.html" target="_self">xsh:new-element</a>, <a class="ulink" href="s_new_element_ns_function.html" target="_self">xsh:new-element-ns</a>, <a class="ulink" href="s_new_text_function.html" target="_self">xsh:new-text</a>, <a class="ulink" href="s_new_comment_function.html" target="_self">xsh:new-comment</a>, <a class="ulink" href="s_new_pi_function.html" target="_self">xsh:new-pi</a>, <a class="ulink" href="s_new_cdata_function.html" target="_self">xsh:new-cdata</a>, <a class="ulink" href="s_new_chunk_function.html" target="_self">xsh:new-chunk</a>, <a class="ulink" href="s_map_function.html" target="_self">xsh:map</a>, <a class="ulink" href="s_evaluate_function.html" target="_self">xsh:evaluate</a>, <a class="ulink" href="s_split_function.html" target="_self">xsh:split</a>, <a class="ulink" href="s_times_function.html" target="_self">xsh:times</a>, <a class="ulink" href="s_id2_function.html" target="_self">xsh:id2</a>, <a class="ulink" href="s_lookup_function.html" target="_self">xsh:lookup</a>, <a class="ulink" href="s_document_function.html" target="_self">xsh:document</a>, <a class="ulink" href="s_documents_function.html" target="_self">xsh:documents</a>, <a class="ulink" href="s_span_function.html" target="_self">xsh:span</a>, <a class="ulink" href="s_context_function.html" target="_self">xsh:context</a></span></p>
+<div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Open a document and count all sections containing a
+	      subsection
+	    </b></p>
+<div class="example-contents"><pre class="programlisting">xsh $scratch/&gt; <strong class="userinput"><code>$v := open mydocument1.xml;</code></strong>
+xsh $v/&gt; <strong class="userinput"><code>$k := open mydocument2.xml;</code></strong>
+xsh $k/&gt; <strong class="userinput"><code>count //section[subsection];</code></strong># searches k
+xsh $k/&gt; <strong class="userinput"><code>count $v//section[subsection];</code></strong># searches v
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Argtypes.html" target="_self">Argument Types</a>, <a class="ulink" href="s_Navigation.html" target="_self">Tree navigation</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a>, <a class="ulink" href="s_Variables.html" target="_self">Variables</a></p>
+</div>
+</div></body>
+</html>

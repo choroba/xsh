@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>iterate command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="iterate" target="_self"></a>iterate command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">iterate <a class="ulink" href="s_xpath.html" target="_self">xpath</a> <a class="ulink" href="s_block.html" target="_self">block</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Iterate works very much like a <a class="ulink" href="s_foreach.html" target="_self">foreach</a> loop with the
+	    same <a class="ulink" href="s_xpath.html" target="_self">xpath</a> expression, except that it
+	    evaluates the <a class="ulink" href="s_block.html" target="_self">block</a> as soon as a new node
+	    matching a given <a class="ulink" href="s_xpath.html" target="_self">xpath</a> is found. As a
+	    limitation, an <a class="ulink" href="s_xpath.html" target="_self">xpath</a> expression
+	    used with <code class="literal">iterate</code> may consist of one XPath
+	    step only, i.e. it may not contain an XPath step separator
+	    <code class="literal">/</code>.
+	  </p>
+<p>
+	    A possible benefit of using <code class="literal">iterate</code> instead of
+	    <a class="ulink" href="s_foreach.html" target="_self">foreach</a> is some efficiency when
+	    iterating over huge node-sets. Since
+	    <code class="literal">iterate</code> doesn't compute
+	    the resulting node-set in advance, it
+	    doesn't have to 1) allocate extra memory for it
+	    and 2) (more importantly) doesn't have to sort
+	    the node-list in the document order (which
+	    tends to be slow on large node-sets, unless
+	    <a class="ulink" href="s_index_command.html" target="_self">index</a> is used). On the other
+	    hand, <code class="literal">iterate</code> suffers from a considerable
+	    speed penalty since it isn't implemented in C (unlike
+	    libxml2's XPath engine).
+	  </p>
+<p>
+	    Author's experience shows that, unless <a class="ulink" href="s_index_command.html" target="_self">index</a>
+	    is used, <code class="literal">iterate</code> beats
+	    <a class="ulink" href="s_foreach.html" target="_self">foreach</a> in speed on large
+	    node-lists (&gt;=1500 nodes, but your milage may vary) while
+	    <a class="ulink" href="s_foreach.html" target="_self">foreach</a> wins on smaller node-lists.
+	  </p>
+<p>The following two examples give equivalent results.
+	    However, the one using <code class="literal">iterate</code> 
+	    may be faster if the number of nodes being counted 
+	    is huge and document order isn't indexed.</p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Count inhabitants of the kingdom of Rohan in productive age</b></p>
+<div class="example-contents">
+<pre class="programlisting">cd rohan/inhabitants;</pre>
+<pre class="programlisting">iterate child::*[@age&gt;=18 and @age&lt;60] { perl $productive++ };</pre>
+<pre class="programlisting">echo "$productive inhabitants in productive age";</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Using XPath</b></p>
+<div class="example-contents">
+<pre class="programlisting">$productive=count(rohan/inhabitants/*[@age&gt;=18 and @age&lt;60]);</pre>
+<pre class="programlisting">echo "$productive inhabitants in productive age";</pre>
+</div>
+</div>
+<br class="example-break"><p>
+	    Hint: use e.g. <code class="literal">| time cut</code> pipe-line
+	    redirection to benchmark a XSH2 command on a UNIX system.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_foreach.html" target="_self">foreach</a>, <a class="ulink" href="s_index_command.html" target="_self">index</a>, <a class="ulink" href="s_next_command.html" target="_self">next</a>, <a class="ulink" href="s_prev_command.html" target="_self">prev</a>, <a class="ulink" href="s_last_command.html" target="_self">last</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="change_namespace_uri_command">
+  <title>change-ns-uri command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>change-ns-uri <ulink url="s_exp.html">expression</ulink> [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command takes one or two arguments.  The first
+	    argument is a new namespace URI and the second, optional,
+	    argument is a namespace prefix. It changes the URI value
+	    of a namespace declaration of the context node to the new
+	    value. If no prefix is given, the change applies to a
+	    declaration on the context node whose prefix equals to the
+	    prefix of the context node, otherwise the change applies
+	    to a declaration with the given prefix.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_change_namespace_prefix_command.html">change-ns-prefix</ulink>, <ulink url="s_set_namespace_command.html">set-ns</ulink>, <ulink url="s_declare_namespace_command.html">declare-ns</ulink>, <ulink url="s_namespaces_command.html">namespaces</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Namespaces.html">Namespaces in XML and XPath</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

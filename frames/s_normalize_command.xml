@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="normalize_command">
+  <title>normalize command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>normalize <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para><literal>normalize</literal> 
+	    evaluates given <ulink url="s_exp.html">expression</ulink> to a node-list
+	    and puts all text nodes in the full depth of the sub-tree
+	    underneath each node in the node-list 
+	    into a "normal" form where only structure (e.g., elements,
+	    comments, processing instructions, CDATA sections, and
+	    entity references) separates text nodes, i.e., there are
+	    neither adjacent text nodes nor empty text nodes.
+	  </para>
+	  <para>
+	    Note, that most XSH2 commands automatically join adjacent text nodes.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

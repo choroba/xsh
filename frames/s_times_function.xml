@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="times_function">
+  <title>xsh:times function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:times(string STRING, float COUNT)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function returns a string
+	    resulting from concatenation of <literal>COUNT</literal>
+	    copies of <literal>STRING</literal>.
+	    <literal>COUNT</literal> must be a non-negative integer value.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="perl_command">
+  <title>perl command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>perl <ulink url="s_perl_code.html">perl-code</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Evaluate a given perl expression and return
+	    the result.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_count_command.html">count</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink>
+    </para>
+  </simplesect>
+</section>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="complete_attributes">
+  <title>parser-completes-attributes command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>parser-completes-attributes <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> complete_attributes, complete-attributes, parser_completes_attributes</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    If the expression is non-zero, the command makes XML parser
+	    add missing attributes with default values as specified in 
+	    a DTD. By default, this option is enabled.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$PARSER_COMPLETES_ATTRIBUTES</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

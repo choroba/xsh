@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="declare_namespace_command">
+  <title>declare-ns command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>declare-ns <ulink url="s_exp.html">expression</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command takes one or two arguments: prefix and URI,
+	    both evaluated as names.
+	    It creates a namespace declaration
+	    of the form <literal>xmlns:prefix="URI"</literal>
+	    on the current node.
+	    The command produces an error if
+	    the prefix is already declared in the scope of the current node
+	    with a different namespace URI.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_set_namespace_command.html">set-ns</ulink>, <ulink url="s_change_namespace_uri_command.html">change-ns-uri</ulink>, <ulink url="s_change_namespace_prefix_command.html">change-ns-prefix</ulink>, <ulink url="s_namespaces_command.html">namespaces</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Namespaces.html">Namespaces in XML and XPath</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

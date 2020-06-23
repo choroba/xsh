@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>open command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="open_command" target="_self"></a>open command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">$doc := open [--format|:F html|xml|docbook]
+          [--file|:f | --pipe|:p | --string|:s]
+	  [--switch-to|:w | --no-switch-to|:W]
+	  [--validate|:v | --no-validate|:V]
+	  [--recover|:r | --no-recover|:R]
+	  [--expand-entities|:e | --no-expand-entities|:E]
+	  [--xinclude|:x | --no-xinclude|:X]
+	  [--keep-blanks|:b  | --no-keep-blanks|:B]
+	  [--pedantic|:n | --no-pedantic|:N]
+	  [--load-ext-dtd|:d | --no-load-ext-dtd|:D]
+	  [--complete-attributes|:a | --no-complete-attributes|:A]
+	  <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Parse a XML, HTML or SGML DOCBOOK document from a file or URL,
+	    command output or string and return a node-set consisting
+	    of the root of the resulting DOM tree.
+	  </p>
+<p><code class="literal">--format</code> (<code class="literal">:F</code>)
+	    option may be used
+	    to specify file format. Possible values are
+	    <code class="literal">xml</code> (default), 
+	    <code class="literal">html</code>, and 
+	    <code class="literal">docbook</code>. Note, however,
+	    that the support for parsing <code class="literal">DocBook</code> SGML
+	    files has been deprecated in recent <code class="literal">libxml2</code>
+	    versions.
+	  </p>
+<p><code class="literal">--file</code> (<code class="literal">:f</code>)
+	    instructs the parser to consider a given <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    as a file name or URL.
+	  </p>
+<p>
+	    <code class="literal">--pipe</code> (<code class="literal">:p</code>)
+	    instructs the parser to consider a given <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    as a system command and parse its output.
+	  </p>
+<p>
+	    <code class="literal">--string</code> (<code class="literal">:s</code>)
+	    instructs the parser to consider a given <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    as a string of XML or HTML to parse.
+	  </p>
+<p>
+	  <code class="literal">--switch-to</code> (<code class="literal">:w</code>)
+	    and <code class="literal">--no-switch-to</code> (<code class="literal">:W</code>)
+	    control whether the new document's root should
+	    become current node. These option override
+	    current global setting of
+	    <a class="ulink" href="s_cdonopen.html" target="_self">switch-to-new-documents</a>.
+	  </p>
+<p>
+	  <code class="literal">--validate</code> (<code class="literal">:v</code>)
+	    and <code class="literal">--no-validate</code> (<code class="literal">:V</code>)
+	    turn on/off DTD-validation of the parsed document.
+	    These option override
+	    current global setting of
+	    <a class="ulink" href="s_validation.html" target="_self">validation</a>.
+	  </p>
+<p>
+	  <code class="literal">--recover</code> (<code class="literal">:r</code>)
+	    and <code class="literal">--no-recover</code> (<code class="literal">:R</code>)
+	    turn on/off parser's ability to recover from
+	    non-fatal errors.
+	    These option override
+	    current global setting of
+	    <a class="ulink" href="s_recovering.html" target="_self">recovering</a>.	    
+	  </p>
+<p>
+	  <code class="literal">--expand-entities</code> (<code class="literal">:e</code>)
+	    and <code class="literal">--no-expand-entities</code> (<code class="literal">:E</code>)
+	    turn on/off entity expansion, overriding current global
+	    setting of <a class="ulink" href="s_parser_expands_entities.html" target="_self">parser-expands-entities</a>.
+	  </p>
+<p>
+	  <code class="literal">--xinclude</code> (<code class="literal">:x</code>) and
+	    <code class="literal">--no-xinclude</code> (<code class="literal">:X</code>) turn
+	    on/off XInclude processing, overriding current global settings of
+	    <a class="ulink" href="s_parser_expands_xinclude.html" target="_self">parser-expands-xinclude</a>.
+	  </p>
+<p>
+	  <code class="literal">--keep-blanks</code> (<code class="literal">:b</code>) 
+	    and <code class="literal">--no-keep-blanks</code> (<code class="literal">:B</code>)
+	    control whether the parser should preserve so called ignorable
+	    whitespace. These option override
+	    current global setting of <a class="ulink" href="s_keep_blanks.html" target="_self">keep-blanks</a>.
+	  </p>
+<p>
+	  <code class="literal">--pedantic</code> (<code class="literal">:n</code>)
+	    and <code class="literal">--no-pedantic</code> (<code class="literal">:N</code>)
+	    turn on/off pedantic parser flag.
+	  </p>
+<p>
+	  <code class="literal">--load-ext-dtd</code> (<code class="literal">:d</code>)
+	    and <code class="literal">--no-load-ext-dtd</code> (<code class="literal">:D</code>)
+	    control whether the external DTD subset should be loaded
+	    with the document. 
+	    These option override
+	    current global setting of <a class="ulink" href="s_load_ext_dtd.html" target="_self">load-ext-dtd</a>.
+	  </p>
+<p>
+	  <code class="literal">--complete-attributes</code> (<code class="literal">:a</code>)
+	    and <code class="literal">--no-complete-attributes</code>
+	    (<code class="literal">:A</code>)
+	    turn on/off parse-time default attribute completion
+	    based on default values specified in the DTD.
+	    These option override
+	    current global setting of <a class="ulink" href="s_complete_attributes.html" target="_self">parser-completes-attributes</a>.	    
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">$scratch/&gt; <strong class="userinput"><code>$x := open mydoc.xml # open an XML document</code></strong>
+
+# open a HTML document from the Internet
+<strong class="userinput"><code>$h:=open --format html "http://www.google.com/?q=xsh"</code></strong>
+# quote file name if it contains whitespace
+<strong class="userinput"><code>$y := open "document with a long name with spaces.xml"</code></strong>
+
+# use --format html or --format docbook to load these types
+$z := open --format html <strong class="userinput"><code>index.htm</code></strong>
+
+# use --pipe flag to read output of a command
+$z := open --format html --pipe <strong class="userinput"><code>'wget -O - xsh.sourceforge.net/index.html'</code></strong>
+
+# use document variable to restrict XPath search to a
+# given document
+<strong class="userinput"><code>ls $z//chapter/title</code></strong>
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Documents.html" target="_self">Files/Documents</a></p>
+</div>
+</div></body>
+</html>

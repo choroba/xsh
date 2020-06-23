@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="redo_command">
+  <title>redo command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>redo [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    <literal>redo</literal> restarts a loop block without evaluating
+	    the conditional again. The optional <ulink url="s_exp.html">expression</ulink> argument
+	    may evaluate to a positive integer number that indicates which
+	    level of the nested loops should be restarted. If omitted, it
+	    defaults to 1, i.e. the innermost loop.
+	  </para>
+	  <para>
+	    Using this command outside a loop causes an immediate
+	    run-time error.
+	  </para>
+	  <example id="gen-002">
+	    <title>Restart a higher level loop from an inner one</title>
+	    <programlisting>while ($i&lt;100) { 
+  # ...
+  foreach //para {
+    # some code
+    if $param { 
+      redo; # redo foreach loop
+    } else {
+      redo 2; # redo while loop
+    }
+  }
+}
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_foreach.html">foreach</ulink>, <ulink url="s_while.html">while</ulink>, <ulink url="s_iterate.html">iterate</ulink>, <ulink url="s_next_command.html">next</ulink>, <ulink url="s_last_command.html">last</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="recovering">
+  <title>recovering command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>recovering <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    If the <ulink url="s_exp.html">expression</ulink> evaluates to non-zero value,
+	    turn on the recovering parser mode on; turn it off otherwise.
+	    Defaults to off.</para>
+	  <para>Note, that the in the recovering mode,
+            validation is not performed by the parser even if
+	    the validation flag is on.
+	  </para>
+	  <para>The recover mode helps to efficiently recover
+	  documents that are almost well-formed. This for example
+	  includes documents without a close tag for the document
+	  element (or any other element inside the document).</para>
+	  <para>This command is equivalent to setting the
+	    <literal>$RECOVERING</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="assign_command">
+  <title>assign command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>[assign] <ulink url="s_varname.html">$variable</ulink> = <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+    <para>
+      <literal>[assign] <ulink url="s_varname.html">$variable</ulink> := <ulink url="s_command.html">command</ulink></literal>
+    </para>
+    <para>
+      <literal>[assign]
+	  <ulink url="s_varname.html">$variable</ulink> [-= | += | *= | /= | %= | x= | .= | ||= | &amp;&amp;= ] <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+    <para>
+      <literal>[assign]
+	  <ulink url="s_varname.html">$variable</ulink> [-:= | +:= | *:= | /:= | %:= | x:= | .:= | ||:= | &amp;&amp;:= ] <ulink url="s_command.html">command</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Evaluate the expression (= assignment) 
+	    or command (:= assignment) on the right 
+	    side of the assignment and store the result in 
+	    a given variable. Optionally a Perl operator
+	    (- subtraction, + addition, * multiplication,
+	    / division, % modulo, x repeat string n-times,
+	    . concatenation, || logical OR, &amp;&amp; logical AND)
+	    can precede the assignment, in which
+	    case the variable is assigned the result
+	    of applying given operator on its previous
+	    value and the value of the right side of the assignment.
+	  </para>
+	  <example id="gen-002">
+	    <title>Assign XPath (node-set, string), or Perl results</title>
+	    <programlisting>xsh&gt; <userinput>$a=chapter/title;</userinput>
+xsh&gt; <userinput>$b="hallo world";</userinput>
+xsh&gt; <userinput>$c={ `uname` };</userinput>
+xsh&gt; <userinput>ls $a;</userinput>
+</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Arithmetic expressions (XPath)</title>
+	    <programlisting>xsh&gt; <userinput>$a=5*100 </userinput># assign 500 to $a
+xsh&gt; <userinput>$a += 20 </userinput># add 20 to $a
+xsh&gt; <userinput>$a = (($a+5) div 10) </userinput>
+</programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>Arithmetic expressions (Perl)</title>
+	    <programlisting>xsh&gt; <userinput>$a={ 5*100 } </userinput>
+xsh&gt; <userinput>$a = { join ';', split //,"hallo" } </userinput># assigns "h;a;l;l;o" to $a
+</programlisting>
+	  </example>
+	  <example id="gen-005">
+	    <title>Command result assignment</title>
+	    <programlisting>xsh&gt; <userinput>$doc := open "file.xml" </userinput># open a document
+xsh&gt; <userinput>$copies := xcopy //foo into //bar </userinput># copy elements and store the copies
+xsh&gt; <userinput>$wrappers := wrap "wrapper" $copies </userinput># wrap each node from $copies to a new element "wrapper" and store the wrapping elements
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-006">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_var_command.html">variables</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-007">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Variables.html">Variables</ulink>
+    </para>
+  </simplesect>
+</section>

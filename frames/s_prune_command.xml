@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="prune_command">
+  <title>remove command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>remove <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> rm, prune, delete, del</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>Unlink all nodes in a given node-list
+	    from their respective documents. Nodes, which
+	    are neither attached to a document or stored in a variable
+	    are automatically garbage-collected.
+	  </para>
+	  <para>Returns a number of nodes removed.</para>
+	  <example id="gen-003">
+	    <title>Get rid of all evil creatures.</title>
+	    <programlisting>xsh&gt; <userinput>del //creature[@manner='evil']</userinput></programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

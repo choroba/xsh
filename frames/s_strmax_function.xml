@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="strmax_function">
+  <title>xsh:strmax function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:strmax(object EXPRESSION, ...)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a string value computed as the maximum
+	    (in lexicographical order)
+	    of all string values computed from given 
+	    <literal>EXPRESSION</literal>(s).
+	    If <literal>EXPRESSION</literal> evaluates to a node-set,
+	    string values of individual nodes are used.
+	  </para>
+	</simplesect>
+</section>

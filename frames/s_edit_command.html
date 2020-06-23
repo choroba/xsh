@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>edit command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="edit_command" target="_self"></a>edit command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">edit [--editor|:E <a class="ulink" href="s_filename.html" target="_self">filename</a>]
+	  [--all|:A] [--noindent|:n] [--recover|:r] [--keep-blanks|:k]
+	  [--allow-empty|:0] [--no-coment|:q] [--encoding|:e <a class="ulink" href="s_enc_string.html" target="_self">encoding</a>] <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>This command may be used to interactively edit parts of a XML
+	    document directly in your favorite editor.
+	  </p>
+<p>
+	    A given <a class="ulink" href="s_exp.html" target="_self">expression</a> is evaluated to a node-list and the
+	    first the first resulting node is opened
+	    in an external editor as a XML fragment. 
+	    When the editor exits, the (possibly modified) fragment
+	    is parsed and returned to the original document. Unless
+	    <code class="literal">--no-comment</code> (<code class="literal">:q</code>) flag is
+	    used, the XML fragment is preceded with a XML comment specifying
+	    canonical XPath of the node being edited.
+	  </p>
+<p>
+	    The command returns a node-list consisting of nodes
+	    that resulted from parsing the individual edits.
+	  </p>
+<p>
+	    <code class="literal">--editor</code> or <code class="literal">:E</code>
+	    option may be used to specify external editor command.
+	    If not specified, environment variables
+	    <code class="literal">EDITOR</code> and <code class="literal">VISUAL</code>
+	    are tried first, then <code class="literal">vi</code> editor
+	    is used as a fallback.
+	  </p>
+<p>
+	    If <code class="literal">--all</code> or <code class="literal">:A</code>
+	    flag is present, all nodes from the node-list
+	    are opened in the editor, one at a time.
+	  </p>
+<p>
+	    If <code class="literal">--recover</code> or <code class="literal">:r</code>
+	    is specified, the parser tries to recover from possible 
+	    syntax errors when parsing the resulting XML.
+	  </p>
+<p>
+	    <code class="literal">--keep-blanks</code> or <code class="literal">:b</code>
+	    option may be used to force the parser to
+	    include ignorable white space.
+	  </p>
+<p>If the result saved
+	    by the editor is empty, the interactive
+	    XSH2 shell asks user to confirm this was correct.
+	    This confirmation can be suppressed using
+	    <code class="literal">--allow-empty</code> or
+	    <code class="literal">:0</code> (zero) options.
+	  </p>
+<p>
+	    The <code class="literal">--encoding</code> or <code class="literal">:e</code>
+	    parameter can be used to specify character encoding to
+	    use when communicating with the external editor.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Edit all chapter elements (one by one) with emacs</b></p>
+<div class="example-contents"><pre class="programlisting">edit --editor 'emacs -nw' --encoding iso-8859-1 --all //chapter</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>block argument type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="block" target="_self"></a>block argument type</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    a block of semicolon-separated
+	     XSH2 commands enclosed within braces.
+	  </p>
+<div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Count paragraphs in each chapter</b></p>
+<div class="example-contents"><pre class="programlisting">$i=0;
+foreach //chapter {
+  $c=count(./para);
+  $i=$i+1;
+  print "$c paragraphs in chapter no.$i";
+}
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Argtypes.html" target="_self">Argument Types</a>, <a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

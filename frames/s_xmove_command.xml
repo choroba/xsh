@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xmove_command">
+  <title>xmove command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xmove [--respective|:r] [--preserve-order|:p] <ulink url="s_xpath.html">xpath</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_xpath.html">xpath</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> xmv</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>Like <ulink url="s_xcopy_command.html">xcopy</ulink>, except that
+	    <literal>xmove</literal> <emphasis>removes</emphasis> the source
+	    nodes after a successful copy.  Remember that the moved nodes are
+	    actually <emphasis>different nodes</emphasis> from the original
+	    ones (which may not be obvious when moving nodes within a single
+	    document into locations that do not require type conversion). So,
+	    after the move, the original nodes don't belong to any document and
+	    are automatically destroyed unless still contained in some variable.
+	  </para>
+	  <para>
+	    This command returns a node-list consisting of all nodes
+	    it created on the target locations.
+	  </para>
+	  <para>
+	    If <literal>--respective|:r</literal> option
+	    is used, then the target node-list <ulink url="s_exp.html">expression</ulink>
+	    is evaluated in the context of the source node
+	    being copied.
+	  </para>
+	  <para>
+	    The <literal>--preserve-order|:p</literal> option can be
+	    used to ensure that the copied nodes are in the same
+	    relative order as the corresponding source nodes.
+	    Otherwise, if <ulink url="s_loc.html">location</ulink> is
+	    <literal>after</literal> or <literal>prepend</literal>,
+	    the relative order of the copied nodes will be reversed,
+	    because source nodes are placed to the target location one
+	    by one.
+	  </para>
+	  <para>
+	    See <ulink url="s_xcopy_command.html">xcopy</ulink> for more details on
+	    how the copies of the moved nodes are created.
+	  </para>
+	  <para>
+	    The following example demonstrates how <literal>xmove</literal>
+	    can be used to get rid of HTML <literal>&lt;font&gt;</literal>
+	    elements while preserving their content. As an exercise,
+	    try to figure out why simple
+	    <literal>foreach //font { xmove node() replace . }</literal>
+	    would not work here.
+	  </para>
+	  <example id="gen-003">
+	    <title>Get rid of all &lt;font&gt; tags</title>
+	    <programlisting>while //font {
+  foreach //font {
+    xmove node() replace .;
+  }
+}
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_move_command.html">move</ulink>, <ulink url="s_copy_command.html">copy</ulink>, <ulink url="s_xcopy_command.html">xcopy</ulink>, <ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_xinsert_command.html">xinsert</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

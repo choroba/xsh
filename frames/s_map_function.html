@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>xsh:map function</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="map_function" target="_self"></a>xsh:map function</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">node-set xsh:map(node-set NODE, string XPATH)</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This function is very similar to EXSLT
+	    <code class="literal">dynamic:map</code> function.  The description
+	    below is almost literally taken from the <a class="ulink" href="http://www.exslt.org/dyn/functions/map/index.html" target="_self">EXSLT
+	    specification</a>.
+	  </p>
+<p>
+	    The <code class="literal">xsh:map</code> function evaluates the 
+	    expression passed as the second argument for each of 
+	    the nodes passed as the first argument, and returns a 
+	    node-set of those values. 
+	  </p>
+<p>
+	    The expressions are evaluated relative to the nodes 
+	    passed as the first argument. In other words, the value 
+	    for each node is calculated by evaluating the XPath 
+	    expression with all context information being the same as 
+	    that for the call to the <code class="literal">xsh:map</code>
+	    function itself, except for the following: 
+	  </p>
+<p>
+	    1) the context node is the node whose value is being
+	    calculated, 2) the context position is the position of the
+	    node within the node set passed as the first argument to
+	    the <code class="literal">xsh:map</code> function, arranged in
+	    document order, and 3) the context size is the number of
+	    nodes passed as the first argument to the dyn:map function.
+	  </p>
+<p>
+	    If the expression string passed as the second argument is
+	    an invalid XPath expression (including an empty string),
+	    this function returns an empty node set.
+	  </p>
+<p>
+	    If <code class="literal">XPATH</code> evaluates as a node set, the
+	    <code class="literal">xsh:map</code> function returns the union of
+	    the node sets returned by evaluating the expression for
+	    each of the nodes in the first argument. Note that this
+	    may mean that the node set resulting from the call to the
+	    <code class="literal">xsh:map</code> function contains a different
+	    number of nodes from the number in the node set passed as
+	    the first argument to the function.
+	  </p>
+<p>
+	    If <code class="literal">XPATH</code> evaluates as a number, the
+	    <code class="literal">xsh:map</code> function returns a node set
+	    containing one <code class="literal">xsh:number</code> element
+	    (namespace
+	    <code class="literal">http://xsh.sourceforge.net/xsh/</code>) for
+	    each node in the node set passed as the first argument to
+	    the dyn:map function, in document order. The string value
+	    of each <code class="literal">xsh:number</code> element is the same
+	    as the result of converting the number resulting from
+	    evaluating the expression to a string as with the number
+	    function, with the exception that Infinity results in an
+	    <code class="literal">xsh:number</code> holding the highest number
+	    the implementation can store, and -Infinity results in an
+	    <code class="literal">xsh:number</code> holding the lowest number
+	    the implementation can store.
+	  </p>
+<p>
+	    If <code class="literal">XPATH</code> evaluates as a boolean, the
+	    <code class="literal">xsh:map</code> function returns a node set
+	    containing one <code class="literal">xsh:boolean</code> element
+	    (namespace
+	    <code class="literal">http://xsh.sourceforge.net/xsh/</code>) for
+	    each node in the node set passed as the first argument to
+	    the <code class="literal">xsh:map</code> function, in document
+	    order. The string value of each
+	    <code class="literal">xsh:boolean</code> element is
+	    <code class="literal">true</code> if the expression evaluates as
+	    true for the node, and is empty if the expression evaluates as
+	    false.
+	  </p>
+<p>
+	    Otherwise, the <code class="literal">xsh:map</code> function returns
+	    a node set containing one <code class="literal">xsh:string</code>
+	    element (namespace
+	    <code class="literal">http://xsh.sourceforge.net/xsh/</code>) for
+	    each node in the node set passed as the first argument to
+	    the <code class="literal">xsh:map</code> function, in document
+	    order. The string value of each
+	    <code class="literal">xsh:string</code> element is the same as the
+	    result of converting the result of evaluating the
+	    expression for the relevant node to a string as with the
+	    string function.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_evaluate_function.html" target="_self">xsh:evaluate</a></p>
+</div>
+</div></body>
+</html>

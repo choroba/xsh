@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>assign command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="assign_command" target="_self"></a>assign command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">[assign] <a class="ulink" href="s_varname.html" target="_self">$variable</a> = <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+<p><code class="literal">[assign] <a class="ulink" href="s_varname.html" target="_self">$variable</a> := <a class="ulink" href="s_command.html" target="_self">command</a></code></p>
+<p><code class="literal">[assign]
+	  <a class="ulink" href="s_varname.html" target="_self">$variable</a> [-= | += | *= | /= | %= | x= | .= | ||= | &amp;&amp;= ] <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+<p><code class="literal">[assign]
+	  <a class="ulink" href="s_varname.html" target="_self">$variable</a> [-:= | +:= | *:= | /:= | %:= | x:= | .:= | ||:= | &amp;&amp;:= ] <a class="ulink" href="s_command.html" target="_self">command</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>Evaluate the expression (= assignment) 
+	    or command (:= assignment) on the right 
+	    side of the assignment and store the result in 
+	    a given variable. Optionally a Perl operator
+	    (- subtraction, + addition, * multiplication,
+	    / division, % modulo, x repeat string n-times,
+	    . concatenation, || logical OR, &amp;&amp; logical AND)
+	    can precede the assignment, in which
+	    case the variable is assigned the result
+	    of applying given operator on its previous
+	    value and the value of the right side of the assignment.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Assign XPath (node-set, string), or Perl results</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>$a=chapter/title;</code></strong>
+xsh&gt; <strong class="userinput"><code>$b="hallo world";</code></strong>
+xsh&gt; <strong class="userinput"><code>$c={ `uname` };</code></strong>
+xsh&gt; <strong class="userinput"><code>ls $a;</code></strong>
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Arithmetic expressions (XPath)</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>$a=5*100 </code></strong># assign 500 to $a
+xsh&gt; <strong class="userinput"><code>$a += 20 </code></strong># add 20 to $a
+xsh&gt; <strong class="userinput"><code>$a = (($a+5) div 10) </code></strong>
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;Arithmetic expressions (Perl)</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>$a={ 5*100 } </code></strong>
+xsh&gt; <strong class="userinput"><code>$a = { join ';', split //,"hallo" } </code></strong># assigns "h;a;l;l;o" to $a
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-005" target="_self"></a><p class="title"><b>Example&nbsp;4.&nbsp;Command result assignment</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>$doc := open "file.xml" </code></strong># open a document
+xsh&gt; <strong class="userinput"><code>$copies := xcopy //foo into //bar </code></strong># copy elements and store the copies
+xsh&gt; <strong class="userinput"><code>$wrappers := wrap "wrapper" $copies </code></strong># wrap each node from $copies to a new element "wrapper" and store the wrapping elements
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-006" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_var_command.html" target="_self">variables</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-007" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Variables.html" target="_self">Variables</a></p>
+</div>
+</div></body>
+</html>

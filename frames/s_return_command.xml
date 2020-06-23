@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="return_command">
+  <title>return command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>return [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command immediately stops the execution of a
+	    procedure it occurs in and returns the execution to the
+	    place of the script from which the subroutine was called.
+	    Optional argument may be used as a return value for the
+	    subroutine call.
+	  </para>
+	  <para>
+	    Using this command outside a subroutine causes an
+	    immediate run-time error.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_def.html">def</ulink>, <ulink url="s_call_command.html">call</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

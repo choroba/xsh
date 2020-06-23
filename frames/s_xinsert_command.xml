@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xinsert_command">
+  <title>xinsert command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xinsert [--namespace <ulink url="s_exp.html">expression</ulink>] <ulink url="s_nodetype.html">node-type</ulink> <ulink url="s_exp.html">expression</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_xpath.html">xpath</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> xadd</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Create new nodes of the 
+	    <ulink url="s_nodetype.html">node-type</ulink> given in the 1st argument
+	    of name specified in the 2nd argument and insert them 
+	    to <ulink url="s_loc.html">location</ulink>s  relative to nodes
+	    in the node-list specified in the 4th argument.
+	  </para>
+	  <para>
+	    For element nodes, the the 2nd argument <ulink url="s_exp.html">expression</ulink> 
+	    should evaluate to something like
+	      "&lt;element-name att-name='attvalue' ...&gt;".  The
+	      <literal>&lt;</literal> and <literal>&gt;</literal>
+	      characters are optional. If no attributes are used, the
+	      expression may simply consist the element name. Note,
+	      that in the first case, the quotes are required since
+	      the expression contains spaces.
+	  </para>
+	  <para>
+	    Attribute nodes use the following syntax:
+	    "att-name='attvalue' [...]".
+	  </para>
+	  <para>
+	    For the other types of nodes (text, cdata, comments) the
+	    expression should contain the node's literal content. Again,
+	    it is necessary to quote all whitespace and special
+	    characters as in any expression argument.
+	  </para>
+	  <para>
+	    The <ulink url="s_loc.html">location</ulink> argument should be one of:
+	    <literal>after</literal>, <literal>before</literal>,
+	    <literal>into</literal>,
+	    <literal>replace</literal>, <literal>append</literal>
+	    or <literal>prepend</literal>. See documentation
+	    of the <ulink url="s_loc.html">location</ulink> argument type for more detail.
+	  </para>
+	  <para>
+	    Optionally, for element and attribute nodes,
+	    a namespace may be specified with <literal>--namespace</literal>
+	    or <literal>:n</literal>. If used, 
+	    the expression should evaluate to the desired namespace
+	    URI and the name of the element or attribute being inserted 
+	    <emphasis>must have a prefix</emphasis>.
+	  </para>
+	  <para>
+	    The command returns a node-list consisting of nodes it created.
+	  </para>
+	  <para>
+	    Note, that instead of <literal>xinsert</literal>, you can alternatively use 
+	    one of <ulink url="s_new_attribute_function.html">xsh:new-attribute</ulink>,
+	    <ulink url="s_new_cdata_function.html">xsh:new-cdata</ulink>,
+	    <ulink url="s_new_chunk_function.html">xsh:new-chunk</ulink>,
+	    <ulink url="s_new_comment_function.html">xsh:new-comment</ulink>,
+	    <ulink url="s_new_element_function.html">xsh:new-element</ulink>,
+	    <ulink url="s_new_element_ns_function.html">xsh:new-element-ns</ulink>,
+	    <ulink url="s_new_pi_function.html">xsh:new-pi</ulink>, and
+	    <ulink url="s_new_text_function.html">xsh:new-text</ulink>
+	    together with the command <ulink url="s_xcopy_command.html">xcopy</ulink>.
+	  </para>
+	  <example id="gen-003">
+	    <title>Give each chapter a provisional title element.</title>
+	    <programlisting>xsh&gt; <userinput>my $new_titles := xinsert element "&lt;title font-size=large underline=yes&gt;" \
+  into /book/chapter</userinput>
+xsh&gt; <userinput>xinsert text "Change me!" into $new_titles;</userinput></programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>Same as above, using xcopy and xsh:new-... instead of xinsert</title>
+	    <programlisting>xsh&gt; <userinput>my $new_titles := xcopy xsh:new-element("title","font-size","large","underline","yes") \
+  into /book/chapter</userinput>
+xsh&gt; <userinput>xcopy xsh:new-text("Change me!") into $new_titles;</userinput></programlisting>
+	  </example>
+
+	</simplesect>
+  <simplesect role="seealso" id="gen-005">
+    <title>See Also</title>
+    <para><ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_xmove_command.html">xmove</ulink></para>
+  </simplesect>
+  <simplesect id="gen-006">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

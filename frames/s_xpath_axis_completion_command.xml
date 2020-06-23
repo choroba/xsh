@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xpath_axis_completion_command">
+  <title>xpath-axis-completion command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xpath-axis-completion <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> xpath_axis_completion</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    The following values are allowed:
+	    <literal>always</literal>, <literal>never</literal>,
+	    <literal>when-empty</literal>. Note, that all other values
+	    (including 1) work as <literal>never</literal>!
+	  </para>
+	  <para>
+	    If the <ulink url="s_exp.html">expression</ulink> evaluates 
+	    to <literal>always</literal>, TAB completion for
+	    XPath expressions always includes axis names.
+	  </para>
+	  <para>
+	    If the <ulink url="s_exp.html">expression</ulink> evaluates to
+	    <literal>when-empty</literal>, the TAB completion list for
+	    XPath expressions includes axis names only if no element name
+	    matches the completion.
+	  </para>
+	  <para>
+	    If the <ulink url="s_exp.html">expression</ulink> evaluates to
+	    <literal>never</literal>, the TAB completion list for
+	    XPath expressions never includes axis names.
+	  </para>
+	  <para>
+	    The default value for this option is
+	    <literal>always</literal>.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$XPATH_AXIS_COMPLETION</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

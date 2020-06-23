@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="type">
+  <title>list of commands list</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para><simplelist type="inline"><member><ulink url="s_command.html">command</ulink></member><member><ulink url="s_block.html">block</ulink></member><member><ulink url="s_enc_string.html">encoding</ulink></member><member><ulink url="s_varname.html">$variable</ulink></member><member><ulink url="s_subname.html">subroutine</ulink></member><member><ulink url="s_document.html">document</ulink></member><member><ulink url="s_filename.html">filename</ulink></member><member><ulink url="s_nodename.html">nodename</ulink></member><member><ulink url="s_xpath.html">xpath</ulink></member><member><ulink url="s_exp.html">expression</ulink></member><member><ulink url="s_nodetype.html">node-type</ulink></member><member><ulink url="s_loc.html">location</ulink></member><member><ulink url="s_perl_code.html">perl-code</ulink></member></simplelist></para>
+	</simplesect>
+</section>

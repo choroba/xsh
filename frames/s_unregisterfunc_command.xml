@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="unregisterfunc_command">
+  <title>unregister-function command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>unregister-function <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> unregfunc</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    EXPERIMENTAL!  Unregister XPath extension function of a
+	    given name previously registered using <ulink url="s_registerfunc_command.html">register-function</ulink>.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Navigation.html">Tree navigation</ulink>, <ulink url="s_Configuration.html">Global settings</ulink></para>
+  </simplesect>
+</section>

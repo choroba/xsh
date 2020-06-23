@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="nodetype">
+  <title>node-type argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>
+	    One of: element, attribute, text, cdata, comment, chunk
+	    and (EXPERIMENTALLY!) entity_reference.  A
+	    chunk is a character string which forms a well-balanced
+	    piece of XML.
+	  </para>
+	  <example id="gen-001">
+	    <programlisting>add element hobbit into //middle-earth/creatures;
+add attribute 'name="Bilbo"' into //middle-earth/creatures/hobbit[last()];
+add chunk '&lt;hobbit name="Frodo"&gt;A small guy from &lt;place&gt;Shire&lt;/place&gt;.&lt;/hobbit&gt;' 
+  into //middle-earth/creatures;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="strip_ws_command">
+  <title>strip-whitespace command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>strip-whitespace <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> strip_whitespace</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para><literal>strip-whitespace</literal> removes all leading and
+	    trailing whitespace from given nodes. If applied to an
+	    element node, it removes all leading and trailing child
+	    whitespace-only text nodes and CDATA sections.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

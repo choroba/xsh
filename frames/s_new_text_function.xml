@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="new_text_function">
+  <title>xsh:new-text function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:new-text(string DATA)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Create a new text node containing given
+	    <literal>DATA</literal> and return a node-set containing
+	    the new node as its only member.
+	  </para>
+	</simplesect>
+</section>

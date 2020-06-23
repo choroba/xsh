@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xupdate_command">
+  <title>xupdate command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xupdate <ulink url="s_document.html">document</ulink> [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Modify the current document or the document specified
+	    by the second <ulink url="s_document.html">document</ulink> argument according to
+	    XUpdate commands of the first <ulink url="s_document.html">document</ulink>
+	    argument. 
+	    XUpdate, or more specifically the XML Update Language, aims to
+	    be a language for updating XML documents.
+	  </para>
+	  <para>
+	    XUpdate language is described in XUpdate Working Draft at
+            <ulink url="http://xmldb-org.sourceforge.net/xupdate/xupdate-wd.html">http://xmldb-org.sourceforge.net/xupdate/xupdate-wd.html</ulink>.	    	    
+	  </para>
+	  <para>XUpdate output can be generated for example by
+            Python xmldiff utility from
+	    <ulink url="http://www.logilab.org/projects/xmldiff/">http://www.logilab.org/projects/xmldiff/</ulink>.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

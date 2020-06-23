@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="parse_function">
+  <title>xsh:parse function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:parse(string XML-STRING)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function runs XML parser on <literal>XML-STRING</literal>
+	    and returns a node-set consisting
+	    of the top-level nodes of the resulting document node.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>xsh:split function</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="split_function" target="_self"></a>xsh:split function</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">node-set xsh:split(string PATTERN, string STRING)</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This function provides direct access to the very powerful
+	    Perl function <code class="literal">split</code>. It splits
+	    <code class="literal">STRING</code> to a list of
+	    fields. <code class="literal">PATTERN</code> is a regular expression
+	    specifying strings delimiting individual fields of
+	    <code class="literal">STRING</code>. If <code class="literal">PATTERN</code>
+	    is empty, <code class="literal">STRING</code> is split to individual
+	    characters. If the regular expression in
+	    <code class="literal">PATTERN</code> is enclosed in brackets, then
+	    strings matching <code class="literal">PATTERN</code> are also
+	    included in the resulting list.
+	  </p>
+<p>
+	    The function returns a node-set consisting of
+	    newly created <code class="literal">&lt;xsh:string&gt;</code>
+	    elements containing individual strings of the resulting
+	    list as their only text child nodes.
+	  </p>
+</div>
+</div></body>
+</html>

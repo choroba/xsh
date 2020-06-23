@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xpath_extensions_command">
+  <title>xpath-extensions command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>xpath-extensions [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> xpath_extensions</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    <literal>xpath-extensions</literal>
+	    remaps all extra
+	    XPath extension functions provided by XSH2
+	    (which by default belong to the namespace
+	    <literal>http://xsh.sourceforge.net/xsh/</literal>)
+	    to a new namespace given by <ulink url="s_exp.html">expression</ulink>.
+	    If the argument is omitted, the functions
+	    are re-registered without any namespace,
+	    so that they may be called without a
+	    namespace prefix, just by their function
+	    names. This quite convenient.
+	  </para>
+	  <example id="gen-003">
+	    <programlisting>xpath-extensions;
+ls grep(//word,"^.*tion$");</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_set_enc_command.html">set-enc</ulink>, <ulink url="s_set_standalone_command.html">set-standalone</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

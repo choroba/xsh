@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="set_standalone_command">
+  <title>set-standalone command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>set-standalone <ulink url="s_exp.html">expression</ulink> [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Changes the value of <literal>standalone</literal> declaration
+            in the XMLDecl prolog of a document. The <ulink url="s_exp.html">expression</ulink> should evaluate to either 1 or 0 
+	    or <literal>'yes'</literal> or <literal>'no'</literal>.
+	    The result of applying the command on other values is not specified.
+	    If no <ulink url="s_document.html">document</ulink> is given, 
+	    the command applies to the current document. 
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_doc_info_command.html">doc-info</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

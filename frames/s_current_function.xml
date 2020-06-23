@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="current_function">
+  <title>xsh:current function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:current()</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function (very similar to XSLT <literal>current()</literal>
+	    extension function) returns a node-set having the
+	    current node as its only
+	    member.
+	  </para>
+	</simplesect>
+</section>

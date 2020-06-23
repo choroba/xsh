@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="cdonopen">
+  <title>switch-to-new-documents command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>switch-to-new-documents <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> switch_to_new_documents</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>If non-zero, XSH2 changes
+	    current node to the document node of a newly open/created
+	    files every time a new document is opened or created with
+	    <ulink url="s_open_command.html">open</ulink> or <ulink url="s_create_command.html">create</ulink>.
+	    Default value for this option is 1. 
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$SWITCH_TO_NEW_DOCUMENTS</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Configuration.html">Global settings</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

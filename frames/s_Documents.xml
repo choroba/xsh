@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Documents">
+      <title>Files/Documents</title>
+      <para>
+	XSH2 is designed as an environment for querying and manipulating XML and
+	HTML documents. Use <ulink url="s_open_command.html">open</ulink> or <ulink url="s_create_command.html">create</ulink> commands to load an XML or HTML
+	document from a local file, external URL (such as http:// or ftp://),
+	string or pipe. XSH2 can optionally validate the document during parse
+	process (see <ulink url="s_validation.html">validation</ulink> and
+	<ulink url="s_load_ext_dtd.html">load-ext-dtd</ulink>). Parsed documents are stored in memory
+	as <ulink url="http://www.w3.org/DOM/">DOM</ulink> trees, that can be
+	<ulink url="s_Navigation.html">navigated</ulink> and <ulink url="s_Manipulation.html">manipulated</ulink> with XSH2 commands and XPath
+	language, whose names and syntax make working with
+	the DOM tree a flavor of working in a UNIX filesystem.
+      </para>
+      <para>
+	A parsed document is usually stored in a variable. 
+	XSH2 shares variables
+	with the XPath engine, so if e.g. <literal>$doc</literal> is a XSH2
+	variable holding a document (or, more generally any node-set), then
+	<literal>$doc//section/title</literal> is an
+	XPath expression selecting all <literal>title</literal> 
+	subelements of all
+	<literal>section</literal> elements within the (sub)tree of $doc.
+      </para>
+      <para>
+	Although XSH2 is able to parse remote documents via
+	<literal>http://</literal> or <literal>ftp://</literal>, it is only
+	able to save them locally.  To upload a document to a remote server
+	(e.g. using FTP) or to store it into a database, use <ulink url="s_save_command.html">save</ulink> command with a <literal>--pipe</literal>
+	parameter, in connection with an external program able to store
+	its standard input (XML) to the desired location. 
+	You can also use similar
+	parameter with <ulink url="s_open_command.html">open</ulink> in order to parse
+	documents from standard output of some external program.
+      </para>
+      <example id="gen-000">
+	<title>Store a XSH2 document 
+	  on a remote machine using the Secure Shell</title>
+	<programlisting>xsh&gt; <userinput>save --pipe "ssh my.remote.org 'cat &gt; test.xml'" $doc</userinput></programlisting>
+      </example>
+    <simplesect role="related" id="gen-001">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_backups.html">backups</ulink></term>
+      <listitem>turn on backup file creation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_catalog_command.html">catalog</ulink></term>
+      <listitem>use a catalog file during all parsing processes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_cdonopen.html">switch-to-new-documents</ulink></term>
+      <listitem>set on/off changing current document to newly
+	  open/created files</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_clone_command.html">clone</ulink></term>
+      <listitem>clone a given document</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_close_command.html">close</ulink></term>
+      <listitem>close document (without saving)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_create_command.html">create</ulink></term>
+      <listitem>make a new document from a given XML fragment</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_document.html">document</ulink></term>
+      <listitem>specifying documents</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_filename.html">filename</ulink></term>
+      <listitem>specifying filenames</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_files_command.html">documents</ulink></term>
+      <listitem>display a list of open documents</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_index_command.html">index</ulink></term>
+      <listitem>index a static document for faster XPath lookup</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nobackups.html">nobackups</ulink></term>
+      <listitem>turn off backup file creation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nodename.html">nodename</ulink></term>
+      <listitem>specifying names of DOM nodes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_open_command.html">open</ulink></term>
+      <listitem>load an XML, HTML, or Docbook SGML document from a
+	file, pipe or URI</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_process_xinclude_command.html">process-xinclude</ulink></term>
+      <listitem>load and insert XInclude sections</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_save_command.html">save</ulink></term>
+      <listitem>save a document as XML or HTML</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_set_filename_command.html">set_filename</ulink></term>
+      <listitem>change filename or URL associated with a document</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_stream_process_command.html">stream</ulink></term>
+      <listitem>process selected elements from an XML stream (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_subname.html">subroutine</ulink></term>
+      <listitem>name of a sub-routine</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_varname.html">$variable</ulink></term>
+      <listitem/>
+    </varlistentry></variablelist>
+               </simplesect></section>

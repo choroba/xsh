@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="map_command">
+  <title>map command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>map <ulink url="s_exp.html">expression</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    NOTE: THE SEMANTICS OF COMMAND HAS CHANGED IN 2.1.0
+	  </para>
+	  <para>
+	    This command provides an easy way to transform node's data
+	    (content) using arbitrary expression.
+	    It takes two arguments: a mapping expression
+	    and a node-list.
+	  </para>
+	  <para>
+	    First the second argument is evaluated to a node-list.
+	    For each of the nodes,
+	    the mapping expression is evaluated 
+	    and the result is used to replace the original content
+	    of the node. 
+	    The node is made the context node for the time
+	    of evaluation of the mapping expression.
+	    Moreover, if the expression is a Perl code,
+	    it gets the original text content in 
+	    the variable <literal>$_</literal>.
+	  </para>
+	  <para>
+	    Note that if the processed node is an element
+	    than the mapping expression may even produce nodes
+	    which are then copied into the element discarding
+	    any previous content of the element.
+	  </para>
+	  <para>
+	    If the mapping expression returns an undefined value
+	    for a node, then its content is kept untouched.
+	  </para>
+	  <para>
+	    <literal>--in-place</literal> (<literal>:i</literal>) flag:
+	    if the expression is a Perl code, then
+	    it is sometimes convenient to change the value
+	    in place. In that case use this flag to indicate that the result
+	    should to be taken from the <literal>$_</literal> variable
+	    rather than from the value of the expression itself.
+	    Without this flag, <literal>$_</literal> is read-only.
+	  </para>
+	  <para>
+	    <literal>--reverse</literal> (<literal>:r</literal>) flag
+	    instruct the map to process the nodelist
+	    in reversed order.
+	  </para>
+	  <example id="gen-002">
+	    <title>Capitalizes all hobbit names</title>
+	    <programlisting>map { ucfirst($_) } //hobbit/@name;</programlisting>	  
+	  </example>
+	  <example id="gen-003">
+	    <title>Changes Goblins to Orcs in all hobbit tales (\b matches word boundary).</title>
+	    <programlisting>map :i { s/\bgoblin\b/orc/gi } //hobbit/tale/text();</programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>Recompute column sums in the last row of row-oriented table</title>
+	    <programlisting>map sum(/table/row[position()&lt;last()]/
+cell[count(xsh:current()/preceding-sibling::cell)+1])
+/table/row[last()]/cell;</programlisting>
+	  </example>
+	  <example id="gen-005">
+	    <title>The following commands do all about the same:</title>
+	    <programlisting>wrap --inner Z //*;
+map --reverse xsh:parse(concat("&lt;Z&gt;",xsh:serialize(node()),"&lt;/Z&gt;")) //*;
+map xsh:parse(concat("&lt;Z&gt;",xsh:serialize(node()),"&lt;/Z&gt;")) { reverse xpath('//*') };
+</programlisting>
+	  </example>
+	  <para>Note that in the last example we use
+	    <literal>:r</literal> (or Perl <literal>reverse</literal>
+	    function) to reverse the node list order so that child
+	    nodes get processed before their parents. Otherwise, the child
+	    nodes would be replaced by parent's new content before the
+	    processing could reach them.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-006">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_rename_command.html">rename</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-007">
+    <title>Sections</title>
+    <para><ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink></para>
+  </simplesect>
+</section>

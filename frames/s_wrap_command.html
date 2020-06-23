@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>wrap command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="wrap_command" target="_self"></a>wrap command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">wrap [--namespace <a class="ulink" href="s_exp.html" target="_self">expression</a>] 
+	  [ [--inner] | [--while|:W <a class="ulink" href="s_exp.html" target="_self">expression</a>] [--until|:U <a class="ulink" href="s_exp.html" target="_self">expression</a>]
+	    [--skip-whitespace|:w] [--skip-comments|:c] [--skip-pi|:p] ]
+	  <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_xpath.html" target="_self">xpath</a>
+	</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    For each node matching the <a class="ulink" href="s_xpath.html" target="_self">xpath</a> argument,
+	    this command creates a new element node according to a
+	    given <a class="ulink" href="s_exp.html" target="_self">expression</a> (in the same
+	    way as <a class="ulink" href="s_xinsert_command.html" target="_self">xinsert</a> does)
+	    which replaces the matching node, and
+	    moves the matching node into this newly created element.
+	    If namespace <a class="ulink" href="s_exp.html" target="_self">expression</a> is given,
+	    the namespace is applied on the created element.
+	    The command returns a node-list consisting
+	    of the elements created.
+	  </p>
+<p>
+	    With <code class="literal">--inner</code> (or <code class="literal">:i</code>)
+	    flag the command 
+	    wraps children nodes of the matching node
+	    rather than the node it self
+	    the following sense:
+	    for each matching node
+	    a new element node is created,
+	    but this time it is placed into 
+	    the matching node and 
+	    all previous children of the matching node
+	    are moved into the newly created node.
+	    In this mode, all non-element matching
+	    nodes are ignored. This flag cannot be used together
+	    with <code class="literal">--while</code>
+	    and <code class="literal">--until</code>, which we describe next.
+	  </p>
+<p>
+	    <code class="literal">--while</code> (<code class="literal">:W</code>)
+	    and/or <code class="literal">--until</code> (<code class="literal">:U</code>) 
+	    arguments can be provided in order to move a sequence
+	    of adjacent siblings following the matching node into
+	    the newly created element. In this way the newly created element wraps
+	    not just the matching node itself but a range of nodes starting
+	    at the matching node and ending either before a first following node matching
+	    the expression of <code class="literal">--until</code>, or
+	    before a first following node not matching the expression
+	    of <code class="literal">--while</code>, or at the last sibling if
+	    neither of the prior apply. Both these expressions are
+	    evaluated in the context of the currently tested sibling and prior to
+	    the creation of the wrapping element. The context
+	    position for these expressions is 1 at the first sibling
+	    following the matching node and increases with each tested
+	    sibling; the context size is the number of all
+	    siblings following the matching node.
+	    It is important to mention that siblings wrapped in this
+	    way are excluded from further processing by <a class="ulink" href="s_wrap_command.html" target="_self">wrap</a> even if included in the node-list
+	    produced by the <a class="ulink" href="s_xpath.html" target="_self">xpath</a> argument. This allows to easily wrap
+	    certain adjacent elements without worrying about some
+	    elements being wrapped multiple times
+	    (for example, <code class="literal">wrap :W x y //x</code> wraps
+	    each sequence of adjacent elements <code class="literal">&lt;x&gt;</code> in a <code class="literal">&lt;y&gt;</code>).
+	  </p>
+<p><code class="literal">--skip-whitespace</code> (<code class="literal">:w</code>),
+	    <code class="literal">--skip-comments</code> (<code class="literal">:c</code>), and 
+	    <code class="literal">--skip-pi</code> (<code class="literal">:p</code>) can be used
+	    in combination with <code class="literal">--while</code> (<code class="literal">:W</code>)
+	    and/or <code class="literal">--until</code> (<code class="literal">:U</code>)
+	    to skip testing the expressions on white-space text
+	    nodes, comments, and/or processing instruction, respectively.
+	    Such nodes are only included in the wrapped range if
+	    followed by a sibling that is to be wrapped.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">$scratch/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch/&gt;
+
+$scratch/&gt; wrap 'foo' *;
+$scratch/&gt; insert attribute 'bar=baz' into /foo;
+$scratch/&gt; insert text 'some text' into //scratch;
+$scratch/&gt; wrap --namespace 'http://foo/bar' 'a:A' //@*;
+$scratch/&gt; $wrapper := wrap 'text aaa="bbb"' //text();
+$scratch/&gt; wrap '&lt;elem ccc=ddd&gt;' //*;
+$scratch/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;elem ccc="ddd"&gt;
+  &lt;foo xmlns:a="http://foo/bar"&gt;
+    &lt;elem ccc="ddd"&gt;
+      &lt;scratch&gt;
+        &lt;elem ccc="ddd"&gt;
+          &lt;text aaa="bbb"&gt;some text&lt;/text&gt;
+        &lt;/elem&gt;
+      &lt;/scratch&gt;
+    &lt;/elem&gt;
+    &lt;elem ccc="ddd"&gt;
+      &lt;a:A xmlns:a="http://foo/bar" bar="baz"/&gt;
+    &lt;/elem&gt;
+  &lt;/foo&gt;
+&lt;/elem&gt;
+
+$scratch/&gt; ls $wrapper;
+&lt;text aaa="bbb"&gt;some text&lt;/text&gt;
+
+
+$scratch/&gt; wrap --inner bar //foo
+$scratch/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;elem ccc="ddd"&gt;
+  &lt;foo xmlns:a="http://foo/bar"&gt;
+    &lt;bar&gt;
+      &lt;elem ccc="ddd"&gt;
+        &lt;scratch&gt;
+          &lt;elem ccc="ddd"&gt;
+            &lt;text aaa="bbb"&gt;some text&lt;/text&gt;
+          &lt;/elem&gt;
+        &lt;/scratch&gt;
+      &lt;/elem&gt;
+      &lt;elem ccc="ddd"&gt;
+        &lt;a:A xmlns:a="http://foo/bar" bar="baz"/&gt;
+      &lt;/elem&gt;
+    &lt;/bar&gt;
+  &lt;/foo&gt;
+&lt;/elem&gt;
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Wrapping a range of adjacent nodes</b></p>
+<div class="example-contents"><pre class="programlisting"># prepare the test document
+$scratch/&gt; rm /scratch/node(); # cleanup the document
+$scratch/&gt; set /scratch/li[5]; # create 5 &lt;li&gt; elements
+$scratch/&gt; set /scratch/li[3]/following-sibling::li; # add &lt;br/&gt; after the 3rd &lt;li&gt;
+$scratch/&gt; for //li set . position(); # number the &lt;li&gt; elements 
+$scratch/&gt; ls /
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch&gt;
+  &lt;li&gt;1&lt;/li&gt;
+  &lt;li&gt;2&lt;/li&gt;
+  &lt;li&gt;3&lt;/li&gt;
+  &lt;br/&gt;
+  &lt;li&gt;4&lt;/li&gt;
+  &lt;li&gt;5&lt;/li&gt;
+&lt;/scratch&gt;
+# wrap adjacent elements &lt;li&gt; into an &lt;ol&gt;
+$scratch/&gt; wrap --skip-whitespace --while self::li ol //li;
+$scratch/&gt; ls /
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch&gt;
+  &lt;ol&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;br/&gt;
+  &lt;ol&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/scratch&gt;
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_xinsert_command.html" target="_self">xinsert</a>, <a class="ulink" href="s_insert_command.html" target="_self">insert</a>, <a class="ulink" href="s_move_command.html" target="_self">move</a>, <a class="ulink" href="s_xmove_command.html" target="_self">xmove</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

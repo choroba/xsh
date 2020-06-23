@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Changes since XSH 1.x</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="xsh2delta" target="_self"></a>Changes since XSH 1.x</h2></div></div>
+<hr>
+</div>
+<p>
+	This section briefly describes 
+	differences between XSH2 and previous XSH 1.x releases.
+	The list should not be considered complete.
+	Some syntax variations or amendments in 
+	the semantics of various commands may not be documented
+	in this section, neither are various improvements in the
+	XSH interpreter.
+      </p>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="new_in_xsh2" target="_self"></a>Changes in XSH2</h3></div></div></div>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>
+	  In XSH2, subroutines can be called without a 
+	  <a class="ulink" href="s_call_command.html" target="_self">call</a>. They can be 
+	  <a class="ulink" href="s_def.html" target="_self">redefined</a> and 
+	  <a class="ulink" href="s_undef.html" target="_self">undefined</a>.
+	  The command <a class="ulink" href="s_call_command.html" target="_self">call</a>
+	  can still be used, but it's use only makes sense
+	  in indirect calls, where subroutine's name is computed
+	  from an expression.
+	</p>
+<pre class="programlisting">def foo $param1 $param2 { 
+  # param1 and $param2 are lexical (a.k.a. my)
+  ls $param1; 
+  echo $param2 
+}
+foo (//chapter)[1] (//chapter)[1]/title
+
+def inc $param1 { return ($param1 + 1) }
+$two := inc 1;
+</pre>
+</li>
+<li class="listitem">
+<p>
+	  XSH2 uses variables of the form <a class="ulink" href="s_varname.html" target="_self">$variable</a> 
+	  for all kinds of objects, including node-sets
+	  (which, if evaluated as Perl expressions, preserve node order).
+	  Node-list variables of XSH 1.x have been deprecated.
+	</p>
+<pre class="programlisting">$var = //foo/bar;                 # node set
+$var = "hallo world";             # string
+$var = xsh:new-element("foo");    # node object
+$var = { ['a','b','c'] };         # Perl array reference
+$var = {{ 'a'=&gt;'A', 'b'=&gt;'B' }};  # Perl hash reference
+</pre>
+</li>
+<li class="listitem">
+<p>
+	  XSH2 allows variables to be used in XPath just as they are used in XSLT:
+	</p>
+<pre class="programlisting">$var = //foo/bar;
+ls //baz[ . = $var[@test=1]/any ]
+</pre>
+<p>
+	  Variable interpolation is still available in XSH2 via ${var},
+	  but it's importance is diminished compared to XSH 1.x, 
+	  because the XPath engine now evaluates
+	  variables directly. Interpolation can still be used for
+	  things like "XPath-macros":
+	</p>
+<pre class="programlisting">$filter = "[ . = $var[@test=1]/any ]";
+ls //baz${filter};
+</pre>
+</li>
+<li class="listitem">
+<p>
+	  XSH2 equally supports XPath and
+	  Perl <a class="ulink" href="s_exp.html" target="_self">expressions</a> 
+	  (written in braces { ... }).
+	  Unfortunately, Perl expressions can't be embedded in XPath 
+	  <a class="ulink" href="s_exp.html" target="_self">expressions</a>,
+	  but one can still use variables as an agent:
+	</p>
+<pre class="programlisting">perl { use MIME::Base64 };
+my $encoded = { encode_base64('open sesame') }
+ls //secret-cave[string(password) = $encoded]
+</pre>
+<p>We can, however, use Perl-only expressions complemented with auto-conversion
+	      to do things like:</p>
+<pre class="programlisting">copy { encode_base64('Pe do mellon a minno!') } replace //secret-cave/password/text();
+</pre>
+</li>
+<li class="listitem">
+<p>
+	  Commands return values 
+	  (see <a class="ulink" href="s_assign_command.html" target="_self">:= assignment</a>, 
+	  or <a class="ulink" href="s_exp.html" target="_self">&amp;{ } expressions</a>).
+	</p>
+<pre class="programlisting">$moved_paras := xmove //para replace .;
+$chapter := wrap chapter $moved_paras;
+ls $chapter;
+
+# or just
+
+ls &amp;{ wrap chapter &amp;{ xmove //para replace . } };
+</pre>
+</li>
+<li class="listitem">
+<p>
+	  XSH2 deprecates "string" expressions of XSH 1.x.  However,
+	  for convenience, some XSH2 commands interpret name-like
+	  XPath expressions on certain argument positions as strings
+	  (mostly commands that expect file-name or node-name
+	  arguments):
+	</p>
+<pre class="programlisting">insert element my_document into .;
+insert text "foo" into my_document;
+
+$doc := open my_document;         # opens file named "my_document"
+$doc := open "my_document";       # same
+$doc := open (my_document);       # opens file named "foo"
+$doc := open string(my_document); # same
+</pre>
+</li>
+<li class="listitem">
+<p>
+	  In XSH2, XML documents
+	  have no ID. 
+	  They are referred to using variables (which fits in well with the unified variable concept):
+	</p>
+<pre class="programlisting">$doc1 := open "foo1.xml";
+$doc2 := open "foo2.xml";
+ls ($doc1//para|$doc2//para);
+cd $doc1;
+ls id('intro');             # finds ID intro in the current document ($doc1)
+ls xsh:id2($doc2, 'intro'); # finds ID intro in $doc2
+</pre>
+</li>
+<li class="listitem">
+<p>
+	      XSH2 commands have options and flags instead of many optional (positional) arguments.
+	      Options/flags usually have both long forms (like --flag) and equivalent
+	      short forms (like :f) (colon is borrowed from Scheme, because dash is reserved for XPath minus).
+	    </p>
+<pre class="programlisting">$doc := open --format html "version1.html";
+save --file "version2.xml" $doc;
+
+ls --fold /;
+ls :f /;
+ls --depth 1 /;
+ls :d 1 /;
+
+# all the same:
+$sorted = sort --key @name --locale --descending //user;
+$sorted = sort :l:d:k@name //user;
+$sorted = sort --key @name --compare { use locale; $b cmp $a } //user;
+
+validate --relaxng --file "test.rng" $mydoc;
+validate --public "-//OASIS//DTD DocBook XML V4.1.2//EN" $mydoc;
+validate --yesno $mydoc;
+</pre>
+</li>
+<li class="listitem"><p>Finally, <a class="ulink" href="s_eval_command.html" target="_self">eval</a> is no longer
+	      an alias for <a class="ulink" href="s_perl_command.html" target="_self">perl</a> in XSH2,
+	      but instead evaluates strings containing XSH2 commands
+	      (so <code class="literal">eval $string</code> now practically works like old ugly
+	      <code class="literal">perl { xsh($string) }</code>). See the documentation for 
+	      <a class="ulink" href="s_eval_command.html" target="_self">eval</a> for a handy usage example
+	      (no more PHP, XSTL and XPathScript :-)).
+	    </p></li>
+</ol></div>
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="xsh2delta_examples" target="_self"></a>Examples</h3></div></div></div>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Open command has changed.</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+foo = file.xml;
+or
+foo = "file.xml";
+</pre>
+<pre class="programlisting">XSH2:
+$foo := open file.xml;        # file.xml is a bareword in file-name context
+or
+$foo := open "file.xml";      # "file.xml" is a XPath string
+or
+$foo := open {"file.xml"};    # "file.xml" is a Perl string
+or
+$foo = xsh:open("file.xml");  # righthand side is an XPath extension function
+</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;XSH2 commands have options</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+open HTML FILE foo2 = "file.html";
+</pre>
+<pre class="programlisting">XSH2:
+$foo2 := open --format html "file.html";
+</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;documents</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+foo = file.xml;
+ls foo:(//bar|//baz);
+</pre>
+<pre class="programlisting">XSH2:
+$foo := open file.xml;
+ls ($foo//bar|$foo//baz);
+</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;4.&nbsp;variable interpretation</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+$family = "Arial";
+ls //font[@family="$family"];   # interpolation
+or
+ls //font[@family="${family}"]; # interpolation
+</pre>
+<pre class="programlisting">XSH2:
+$family = "Arial";
+ls //font[@family=$family];     # evaluation by XPath engine
+or
+ls //font[@family="${family}"]; # interpolation
+</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;5.&nbsp;adding new nodes</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+insert attribute "foo=bar" into /scratch;
+</pre>
+<pre class="programlisting">XSH2:
+insert attribute "foo=bar" into /scratch;
+or
+copy xsh:new-attribute("foo","bar") into /scratch;
+</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-005" target="_self"></a><p class="title"><b>Example&nbsp;6.&nbsp;foreach with perl expression</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+foreach { glob('*.xml') } {
+  open doc = $__;
+  ...
+}
+</pre>
+<pre class="programlisting">XSH2:
+foreach { glob('*.xml') } {
+  my $doc := open .;
+  ...
+} 
+</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-006" target="_self"></a><p class="title"><b>Example&nbsp;7.&nbsp;foreach (perl expression) with variable</b></p>
+<div class="example-contents"><pre class="programlisting">XSH2:
+foreach my $filename in { glob('*.xml') } {
+  my $doc := open $filename;
+  ...
+} 
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-007" target="_self"></a><p class="title"><b>Example&nbsp;8.&nbsp;sorting nodes</b></p>
+<div class="example-contents">
+<pre class="programlisting">XSH1:
+%list = //player;
+sort @best_score { $a &lt;=&gt; $b } %list;
+copy %list into .;
+</pre>
+<pre class="programlisting">XSH2:
+$list := sort --numeric --key @best_score //player;
+copy { $list } into .;
+or
+copy &amp;{ sort --numeric --key @best_score //player } into .;
+or (using short options)
+copy &amp;{ sort :n :k @best_score //player } into .;
+</pre>
+</div>
+</div>
+<br class="example-break">
+</div>
+</div></body>
+</html>

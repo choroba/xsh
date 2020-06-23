@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="copy_command">
+  <title>copy command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>copy [--respective|:r] <ulink url="s_exp.html">expression</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+    <para>
+      <literal>$results := copy [--respective|:r] <ulink url="s_exp.html">expression</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> cp</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Copies nodes in the first node-list <ulink url="s_exp.html">expression</ulink>
+	    (source nodes) to the destinations determined by the 
+	    the <ulink url="s_loc.html">location</ulink> directive
+	    applied to nodes in the second node-list <ulink url="s_exp.html">expression</ulink>
+	    (target nodes). If the source node-list contains
+	    more than one node, than N'th node in the source node-list
+	    is copied to the location relative to the N'th node in
+	    the target node-list.
+          </para>
+	  <para>
+	    If <literal>--respective|:r</literal> option
+	    is used, then the target node-list <ulink url="s_exp.html">expression</ulink>
+	    is evaluated in the context of the source node
+	    being copied.
+	  </para>
+          <para>Possible values for <ulink url="s_loc.html">location</ulink> are:
+	    <literal>after</literal>, <literal>before</literal>,
+	    <literal>into</literal>, <literal>replace</literal>,
+	    <literal>append</literal> and <literal>prepend</literal>. The first
+	    three location directives cause making a copy of the source nodes
+	    after, before, and within (as the last child-node) the target
+	    nodes, respectively. 
+	    If <literal>replace</literal> location directive is used,
+            source node are copied before the respective
+	    target nodes and target nodes are removed.
+	    The <literal>append</literal> and <literal>prepend</literal>
+	    location directives allow,
+	    depending on the destination node type,
+	    either inserting copies of the
+	    source nodes as the first or last child nodes of
+	    a destination element or appending/prepending
+	    destination node data in case of non-element destination nodes.
+	    See <ulink url="s_loc.html">location</ulink> argument type
+	    for more detail.
+	  </para>
+	  <para>The command returns a node-list consisting of 
+	    the copies of all source nodes created by the command.
+	  </para>
+	  <para>Despite the fact the command is named "copy", 
+	    nodes resulting from copying
+	    the source nodes may pass through certain type conversion before
+	    they are inserted at the appointed destinations. This, however,
+	    only happens in cases where the types of the source and target
+	    nodes are not compatible with the location
+	    directive. See <ulink url="s_loc.html">location</ulink> argument
+	    type for more detail.
+	  </para>
+	  <para>Note that XSH2 refuses to create multiple top-level
+	    elements using <literal>copy</literal>, 
+	    <ulink url="s_move_command.html">move</ulink> and similar commands.</para>
+	  <example id="gen-003">
+	    <title>Replace living-thing elements in the document b with copies
+	      of the corresponding creature elements from the document $a.</title>
+	    <programlisting>xsh&gt; <userinput>copy $a//creature replace $b//living-thing</userinput></programlisting>             
+	  </example>
+	  <example id="gen-004">
+	    <title>Copy every element into itself</title>
+	    <programlisting>xsh&gt; <userinput>copy --respective $a//* into .</userinput></programlisting>
+	    <programlisting>xsh&gt; <userinput>copy $a//* into $a//*</userinput>#same as
+above</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-005">
+    <title>See Also</title>
+    <para><ulink url="s_xcopy_command.html">xcopy</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_xmove_command.html">xmove</ulink>, <ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_xinsert_command.html">xinsert</ulink></para>
+  </simplesect>
+  <simplesect id="gen-006">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

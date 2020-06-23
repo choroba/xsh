@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Tree navigation</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="Navigation" target="_self"></a>Tree navigation</h2></div></div>
+<hr>
+</div>
+<p>
+	With XSH2, it is possible to browse a <a class="ulink" href="s_Documents.html" target="_self">document tree</a> 
+	(XML data represented as a DOM-tree) as if it was a local
+        filesystem, except that <a class="ulink" href="s_xpath.html" target="_self">XPath</a> 
+	expressions are used instead of ordinary directory paths.
+      </p>
+<p>
+	To mimic the filesystem navigation as closely as
+	possible, XSH2 contains several commands named by analogy of
+	UNIX filesystem commands, such as <a class="ulink" href="s_chxpath_command.html" target="_self">cd</a>, <a class="ulink" href="s_list_command.html" target="_self">ls</a> and
+	<a class="ulink" href="s_pwd_command.html" target="_self">pwd</a>.	
+      </p>
+<p>The current position in the document tree
+	is called the <span class="emphasis"><em>current node</em></span>. Current node's XPath
+	may be queried with <a class="ulink" href="s_pwd_command.html" target="_self">pwd</a> command.  In the interactive shell, current
+	node is also displayed in the command line prompt. 
+	(Since there may be
+	multiple document trees open at the same time, XSH2 tries to locate a
+	variable holding the current document and use it to fully qualify
+	current node's XPath in the XSH2 prompt.) Remember, that beside <a class="ulink" href="s_chxpath_command.html" target="_self">cd</a> command, current node (and document) is
+	also silently changed by <a class="ulink" href="s_open_command.html" target="_self">open</a> command, <a class="ulink" href="s_create_command.html" target="_self">create</a> command and temporarily also by the
+	node-list variant of the <a class="ulink" href="s_foreach.html" target="_self">foreach</a> loop without
+	a loop variable.
+      </p>
+<p>XPath expressions are always evaluated in context
+	of the current node. Different documents can be accessed
+	through variables: <code class="literal">$doc/foo[1]/bar</code>.</p>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;XSH2 shell</b></p>
+<div class="example-contents"><pre class="programlisting">$scratch:/&gt; <strong class="userinput"><code>$docA := open "testA.xml"</code></strong>
+$docA/&gt; <strong class="userinput"><code>$docB := open "testB.xml"</code></strong>
+$docB/&gt; <strong class="userinput"><code>pwd</code></strong>
+/
+$docB/&gt; <strong class="userinput"><code>cd $docA/article/chapter[title='Conclusion']</code></strong>
+$docA/article/chapter[5]&gt; <strong class="userinput"><code>pwd</code></strong>
+/article/chapter[5]
+$docA/article/chapter[5]&gt; <strong class="userinput"><code>cd previous-sibling::chapter</code></strong>
+$docA/article/chapter[4]&gt; <strong class="userinput"><code>cd ..</code></strong>
+$docA/article&gt; <strong class="userinput"><code>cd $docB</code></strong>
+$docB:/&gt; <strong class="userinput"><code>ls</code></strong>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;article&gt;...&lt;/article&gt;
+</pre></div>
+</div>
+<br class="example-break"><div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Related Topics</h3></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><a class="ulink" href="s_c14n_command.html" target="_self">canonical</a></span></dt>
+<dd>serialize nodes as to canonical XML</dd>
+<dt><span class="term"><a class="ulink" href="s_chxpath_command.html" target="_self">cd</a></span></dt>
+<dd>change current context node</dd>
+<dt><span class="term"><a class="ulink" href="s_fold_command.html" target="_self">fold</a></span></dt>
+<dd>mark elements to be folded by list
+	command</dd>
+<dt><span class="term"><a class="ulink" href="s_list_command.html" target="_self">ls</a></span></dt>
+<dd>list a given part of a document as XML</dd>
+<dt><span class="term"><a class="ulink" href="s_locate_command.html" target="_self">locate</a></span></dt>
+<dd>show a given node location (as a canonical XPath)</dd>
+<dt><span class="term"><a class="ulink" href="s_pwd_command.html" target="_self">pwd</a></span></dt>
+<dd>show current context node location (as a canonical XPath)</dd>
+<dt><span class="term"><a class="ulink" href="s_registerfunc_command.html" target="_self">register-function</a></span></dt>
+<dd>define XPath extension function (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_unfold_command.html" target="_self">unfold</a></span></dt>
+<dd>unfold elements folded with fold command</dd>
+<dt><span class="term"><a class="ulink" href="s_unregisterfunc_command.html" target="_self">unregister-function</a></span></dt>
+<dd>undefine extension function (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_xpath.html" target="_self">xpath</a></span></dt>
+<dd>XPath expression</dd>
+</dl></div>
+</div>
+</div></body>
+</html>

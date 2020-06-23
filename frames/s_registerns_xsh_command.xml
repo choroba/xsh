@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="registerns_xsh_command">
+  <title>register-xsh-namespace command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>register-xsh-namespace <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> regns-xsh</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Registers a new prefix for the XSH2 namespace <literal>http://xsh.sourceforge.net/xsh/</literal>.  The prefix
+	    can later be used in XPath expressions.  Note, that XSH2
+	    namespace is by default registered with the prefix
+	    <literal>xsh</literal>. This command is thus, in
+	    general, useful only when some document uses
+	    <literal>xsh</literal> prefix for a different namespace
+	    or if you want a shorter prefix.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Namespaces.html">Namespaces in XML and XPath</ulink>, <ulink url="s_Configuration.html">Global settings</ulink></para>
+  </simplesect>
+</section>

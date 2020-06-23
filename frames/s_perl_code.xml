@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="perl_code">
+  <title>perl-code argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>
+	    A block of Perl code enclosed in braces. 
+	    All XSH2 variables are transparently accessible from
+	    the Perl code as well.
+	  </para>
+	  <para>
+	    For more information about embedded Perl code in XSH2, predefined
+	    functions etc., see <ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink>.
+	  </para>
+	  <example id="gen-001">
+	    <programlisting>xsh&gt; <userinput>$i={ "foo" };</userinput>
+xsh&gt; <userinput>perl { echo "$i-bar\n"; }</userinput># prints foo-bar
+xsh&gt; <userinput>echo { "$i-bar" }</userinput># very much the same as above
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink></para>
+  </simplesect>
+</section>

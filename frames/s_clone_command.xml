@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="clone_command">
+  <title>clone command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>$doc := clone <ulink url="s_document.html">document</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> dup</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Create and return a copy of a given <ulink url="s_document.html">document</ulink>.
+	    Unless <ulink url="s_cdonopen.html">switch-to-new-documents</ulink>
+	    configuration flag is turned off,
+	    the root node of the new document
+	    becomes the current node.
+	  </para>
+	  <para>Calling this command only makes sense if
+	    either
+	    <ulink url="s_cdonopen.html">switch-to-new-documents</ulink> is set, or
+	    if the result is assigned to a variable or
+	    passed to another XSH2 command using the <literal>&amp;{...}</literal>
+	    syntax, since otherwise the newly 
+	    created copy of the document is automatically garbage-collected and
+	    destroyed.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_open_command.html">open</ulink>, <ulink url="s_close_command.html">close</ulink>, <ulink url="s_print_enc_command.html">enc</ulink>, <ulink url="s_files_command.html">documents</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para><ulink url="s_Manipulation.html">Tree modification</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>xsh:evaluate function</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="evaluate_function" target="_self"></a>xsh:evaluate function</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">node-set xsh:evaluate(string XPATH)</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This function is very similar to EXSLT
+	    <code class="literal">dynamic:evaluate</code> function.  The description
+	    below is almost literally taken from the <a class="ulink" href="http://www.exslt.org/dyn/functions/map/index.html" target="_self">EXSLT
+	    specification</a>.
+	  </p>
+<p>
+	    The <code class="literal">xsh:evaluate</code> function evaluates a string as an XPath expression
+	    and returns the resulting value, which might be a boolean, number,
+	    string, node set, result tree fragment or external object. The sole
+	    argument is the string to be evaluated. 
+	  </p>
+<p>
+	    The string is always evaluated exactly as if it had been literally
+	    included in place of the call to the <code class="literal">xsh:evaluate</code> function.
+	  </p>
+<p>
+	    In other words, the context information used when evaluating the
+	    XPath expression passed as the argument to the <code class="literal">xsh:evaluate</code>
+	    function is exactly the same as the context information used when
+	    evaluating the <code class="literal">xsh:evaluate</code> function. This context information
+	    includes: 
+	  </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem"><p>
+		the context node, such that paths are evaluated relative to the
+		context node at the point where the <code class="literal">xsh:evaluate</code> function is
+		called
+	      </p></li>
+<li class="listitem"><p>
+		the context position, such that the expression can contain
+		calls to the position function
+	      </p></li>
+<li class="listitem"><p>
+		the context size, such that the expression can contain calls to
+		the last function
+	      </p></li>
+<li class="listitem"><p>
+		variable bindings, such that the expression can contain
+		variable references
+	      </p></li>
+<li class="listitem"><p>
+		function library, such that the expression can contain calls to
+		extension functions
+	      </p></li>
+<li class="listitem"><p>
+		namespace declarations, such that paths can contain prefixes
+		the current node, such that the expression can contain calls to
+		the current function
+	      </p></li>
+</ol></div>
+<p>
+	    If the expression string passed as the second argument is an
+	    invalid XPath expression (including an empty string), this function
+	    returns an empty node set. 
+	  </p>
+<p>
+	    You should only use this function if the expression must be
+	    constructed dynamically - otherwise it is much more efficient to
+	    use the expression literally. For expressions that simply give an
+	    element or attribute's name (to select a child element or
+	    attribute), it is more efficient to use an expression 
+	    in the style: 
+	  </p>
+<pre class="programlisting">*[name() = $expression]</pre>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_map_function.html" target="_self">xsh:map</a></p>
+</div>
+</div></body>
+</html>

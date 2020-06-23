@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>wrap-span command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="wrap_span_command" target="_self"></a>wrap-span command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">wrap-span [--namespace <a class="ulink" href="s_exp.html" target="_self">expression</a>] <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> wrap_span</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This command is very similar to <a class="ulink" href="s_wrap_command.html" target="_self">wrap</a>
+	    command, except that it works on spans of nodes.
+	    It wraps spans (i.e. sequence of adjacent nodes between (and including)
+	    a start node and an end node) with a new element
+	    whose name is specified as the first argument. 
+	    Nodes within each span must have the same parent node.
+	    The spans to be wrapped are defined
+	    by a pair of node-lists in the second and third argument.
+	    The first node-list specifies the
+	    start node of one or more spans, while
+	    the second node-list should contain the corresponding 
+	    end nodes.
+	    The two node-lists must evaluate to the exactly same number of
+	    nodes, otherwise a runtime error is reported.
+	    The N'th span is then defined as a span
+	    starting on the N'th node in the start node-list
+	    and ending at the N'th node in the end node-list.
+	  </p>
+<p>
+	    All nodes within the spans are removed from
+	    the document and placed into the newly generated elements.
+	    The wrapping elements are put back into the document tree
+	    at the positions previously occupied by the node-spans.</p>
+<p>
+	    The command returns a node-list containing the newly created
+	    wrapping elements.
+	  </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">xsh $scratch/&gt; $foo := create { "&lt;root&gt;\n&lt;a/&gt;&lt;b/&gt;\n&lt;a/&gt;&lt;b/&gt;\n&lt;a/&gt;&lt;b/&gt;\n&lt;/root&gt;" };
+xsh $foo/&gt; wrap-span 'span' //a //b;
+xsh $foo/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;span&gt;&lt;a/&gt;&lt;b/&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a/&gt;&lt;b/&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a/&gt;&lt;b/&gt;&lt;/span&gt;
+&lt;/root&gt;
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_xinsert_command.html" target="_self">xinsert</a>, <a class="ulink" href="s_insert_command.html" target="_self">insert</a>, <a class="ulink" href="s_move_command.html" target="_self">move</a>, <a class="ulink" href="s_xmove_command.html" target="_self">xmove</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

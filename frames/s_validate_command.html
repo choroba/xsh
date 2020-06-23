@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>validate command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="validate_command" target="_self"></a>validate command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">validate [--yesno|:q] [<a class="ulink" href="s_document.html" target="_self">document</a>]</code></p>
+<p><code class="literal">validate [--yesno|:q] [--dtd|:D | --relaxng|:R | --schema|:S] --file|:f <a class="ulink" href="s_filename.html" target="_self">filename</a>] [<a class="ulink" href="s_document.html" target="_self">document</a>]</code></p>
+<p><code class="literal">validate [--yesno|:q] [--dtd|:D | --relaxng|:R | --schema|:S] --string|:s <a class="ulink" href="s_exp.html" target="_self">expression</a>] [<a class="ulink" href="s_document.html" target="_self">document</a>]</code></p>
+<p><code class="literal">validate [--yesno|:q] [--dtd|:D | --relaxng|:R | --schema|:S] --doc|:d <a class="ulink" href="s_document.html" target="_self">document</a>] [<a class="ulink" href="s_document.html" target="_self">document</a>]</code></p>
+<p><code class="literal">validate [--yesno|:q] [--dtd|:d] --public|:p <a class="ulink" href="s_exp.html" target="_self">expression</a> [--file|:f <a class="ulink" href="s_exp.html" target="_self">expression</a>] [<a class="ulink" href="s_document.html" target="_self">document</a>]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This command validates the current document or
+	    a document specified in the argument against a DTD,
+	    RelaxNG or XSD schema.
+	    If <code class="literal">--yesno</code> or <code class="literal">:q</code> is specified, only prints
+	    <code class="literal">yes</code> and returns 1 if the document validates or
+	    <code class="literal">no</code> and returns 0 if it does
+	    not. Without <code class="literal">--yesno</code>, it throws an
+	    exception with a complete validation error message if
+	    the document doesn't validate.
+	  </p>
+<p><code class="literal">--dtd</code> or <code class="literal">:D</code> forces DTD validation
+	  (default).</p>
+<p><code class="literal">--relaxng</code> or <code class="literal">:R</code> forces RelaxNG
+	  validation. Only XML RelaxNG grammars are supported.</p>
+<p><code class="literal">--schema</code> or <code class="literal">:S</code> forces W3C XML Schema 
+	    validation (XSD). Support for schema validation may still
+	    be incomplete (see <a class="ulink" href="http://xmlsoft.org" target="_self">libxml2 home page</a>
+	    for more details).</p>
+<p>
+	    A DTD subset can be specified by its PUBLIC identifier (with
+	    <code class="literal">--public</code>), by its SYSTEM identifier
+	    (with <code class="literal">--file</code>), or as a string (with
+	    <code class="literal">--string</code>).  If none of these options is
+	    used, validation is performed against the internal or
+	    external DTD subset of the document being validated.
+	  </p>
+<p>
+	    RelaxNG grammars and XML Schemas can either be
+	    specified either as a filename or url (with
+	    <code class="literal">--file</code>), 
+	    as a string containing (with <code class="literal">--string</code>), 
+	    or as a document currently open in XSH2 (with
+	    <code class="literal">--doc</code>).  
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents">
+<pre class="programlisting">$mydoc := open "test.xml"</pre>
+<pre class="programlisting"># in all examples below, mydoc can be omitted</pre>
+<pre class="programlisting">validate --yesno $mydoc; # validate against the document's DOCTYPE</pre>
+<pre class="programlisting">validate --public "-//OASIS//DTD DocBook XML V4.1.2//EN" $mydoc</pre>
+<pre class="programlisting">validate --file "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" $mydoc</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;</b></p>
+<div class="example-contents">
+<pre class="programlisting">validate --relaxng --file "test.rng" $mydoc</pre>
+<pre class="programlisting">validate --relaxng --string $relaxschema $mydoc</pre>
+<pre class="programlisting">$rng := open "test.rng"</pre>
+<pre class="programlisting">validate --relaxng --doc $rng $mydoc</pre>
+</div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;</b></p>
+<div class="example-contents">
+<pre class="programlisting">validate --schema --file "test.xsd" $mydoc</pre>
+<pre class="programlisting">validate --schema --string $xsdschema $mydoc</pre>
+<pre class="programlisting">$xsd := open "test.xsd"</pre>
+<pre class="programlisting">validate --schema --doc $xsd $mydoc</pre>
+</div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_list_dtd_command.html" target="_self">dtd</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-006" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Information.html" target="_self">Retrieving more information</a></p>
+</div>
+</div></body>
+</html>

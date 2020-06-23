@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="while">
+  <title>while command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>while <ulink url="s_exp.html">expression</ulink> <ulink url="s_block.html">block</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para> Execute the <ulink url="s_command.html">command</ulink> or <ulink url="s_block.html">block</ulink> as long as
+	    the given <ulink url="s_exp.html">expression</ulink> evaluates to a non-emtpty
+	    node-list, true boolean-value, non-zero number or
+	    non-empty literal.
+	  </para>
+	  <example id="gen-002">
+	    <title>The commands in this example do the same thing</title>
+	    <programlisting>xsh&gt; <userinput>while /table/row remove /table/row[1];</userinput>
+xsh&gt; <userinput>remove /table/row;</userinput>
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

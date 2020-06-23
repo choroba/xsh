@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="xpath">
+  <title>XPath argument type</title>
+  <simplesect role="description" id="gen-000"><title>Description</title>
+	  <para>
+	    XSH2 can evaluate XPath expressions as defined in W3C
+	    recommendation at <ulink url="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</ulink>
+	    with only a little limitation on use of syntactically
+	    ignorable whitespace. 
+	    (Nice interactive XPath tutorials and references
+	    can be found at <ulink url="http://www.zvon.org">http://www.zvon.org</ulink>.)
+	  </para>
+	  <para>
+	    In order to allow XSH2 to use white-space as a command
+	    argument delimiter (which is far more convenient to type
+	    than, say, commas), the use of white-space in XPath is
+	    slightly restricted. Thus, in XSH2, white-space can only occur in
+	    those parts of an XPath expression, that are surrounded by
+	    either brackets, square brackets, single or double quotes.
+	    So, for example, otherwise valid XPath expression like
+	  </para>
+	  <programlisting>/ foo / bar [ @baz = "bar" ]</programlisting> 
+	  <para>
+	    should in XSH2 be written as either of
+	  </para>
+	  <programlisting>/foo/bar[ @baz = "bar" ]</programlisting> 
+	  <para>
+	    avoiding any white-space outside the square brackets,
+	    or completely enclosed in brackets as in
+	  </para>
+	  <programlisting>( / foo / bar [ @baz = "bar" ] ).</programlisting>
+	  <para>
+	    XSH2 provides a number of powerful XPath extension
+	    functions, listed below and described in separate
+	    sections. XPath extension
+	    functions by default belong to XSH2 namespace
+	    <literal>http://xsh.sourceforge.net/xsh/</literal> with
+	    a namespace prefix set to <literal>xsh</literal>. A
+	    program may however call the <ulink url="s_xpath_extensions_command.html">xpath-extensions</ulink> command to map XSH2
+	    XPath extension functions into the default namespace, so
+	    that they may be used directly without any prefix.
+	  </para>
+	  <para>
+	    XPath extension functions defined in XSH2:
+	    <simplelist type="inline"><member><ulink url="s_doc_function.html">xsh:doc</ulink></member><member><ulink url="s_document_uri_function.html">xsh:document-uri</ulink></member><member><ulink url="s_filename_function.html">xsh:filename</ulink></member><member><ulink url="s_base_uri_function.html">xsh:base-uri</ulink></member><member><ulink url="s_resolve_uri_function.html">xsh:resolve-uri</ulink></member><member><ulink url="s_lineno_function.html">xsh:lineno</ulink></member><member><ulink url="s_var_function.html">xsh:var</ulink></member><member><ulink url="s_matches_function.html">xsh:matches</ulink></member><member><ulink url="s_match_function.html">xsh:match</ulink></member><member><ulink url="s_grep_function.html">xsh:grep</ulink></member><member><ulink url="s_substr_function.html">xsh:substr</ulink></member><member><ulink url="s_reverse_function.html">xsh:reverse</ulink></member><member><ulink url="s_lc_function.html">xsh:lc</ulink></member><member><ulink url="s_uc_function.html">xsh:uc</ulink></member><member><ulink url="s_lcfirst_function.html">xsh:lcfirst</ulink></member><member><ulink url="s_ucfirst_function.html">xsh:ucfirst</ulink></member><member><ulink url="s_same_function.html">xsh:same</ulink></member><member><ulink url="s_max_function.html">xsh:max</ulink></member><member><ulink url="s_min_function.html">xsh:min</ulink></member><member><ulink url="s_strmax_function.html">xsh:strmax</ulink></member><member><ulink url="s_strmin_function.html">xsh:strmin</ulink></member><member><ulink url="s_sum_function.html">xsh:sum</ulink></member><member><ulink url="s_join_function.html">xsh:join</ulink></member><member><ulink url="s_subst_function.html">xsh:subst</ulink></member><member><ulink url="s_sprintf_function.html">xsh:sprintf</ulink></member><member><ulink url="s_serialize_function.html">xsh:serialize</ulink></member><member><ulink url="s_parse_function.html">xsh:parse</ulink></member><member><ulink url="s_current_function.html">xsh:current</ulink></member><member><ulink url="s_path_function.html">xsh:path</ulink></member><member><ulink url="s_if_function.html">xsh:if</ulink></member><member><ulink url="s_new_attribute_function.html">xsh:new-attribute</ulink></member><member><ulink url="s_new_element_function.html">xsh:new-element</ulink></member><member><ulink url="s_new_element_ns_function.html">xsh:new-element-ns</ulink></member><member><ulink url="s_new_text_function.html">xsh:new-text</ulink></member><member><ulink url="s_new_comment_function.html">xsh:new-comment</ulink></member><member><ulink url="s_new_pi_function.html">xsh:new-pi</ulink></member><member><ulink url="s_new_cdata_function.html">xsh:new-cdata</ulink></member><member><ulink url="s_new_chunk_function.html">xsh:new-chunk</ulink></member><member><ulink url="s_map_function.html">xsh:map</ulink></member><member><ulink url="s_evaluate_function.html">xsh:evaluate</ulink></member><member><ulink url="s_split_function.html">xsh:split</ulink></member><member><ulink url="s_times_function.html">xsh:times</ulink></member><member><ulink url="s_id2_function.html">xsh:id2</ulink></member><member><ulink url="s_lookup_function.html">xsh:lookup</ulink></member><member><ulink url="s_document_function.html">xsh:document</ulink></member><member><ulink url="s_documents_function.html">xsh:documents</ulink></member><member><ulink url="s_span_function.html">xsh:span</ulink></member><member><ulink url="s_context_function.html">xsh:context</ulink></member></simplelist></para>
+	  <example id="gen-001">
+	    <title>Open a document and count all sections containing a
+	      subsection
+	    </title>
+	    <programlisting>xsh $scratch/&gt; <userinput>$v := open mydocument1.xml;</userinput>
+xsh $v/&gt; <userinput>$k := open mydocument2.xml;</userinput>
+xsh $k/&gt; <userinput>count //section[subsection];</userinput># searches k
+xsh $k/&gt; <userinput>count $v//section[subsection];</userinput># searches v
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para><ulink url="s_Argtypes.html">Argument Types</ulink>, <ulink url="s_Navigation.html">Tree navigation</ulink>, <ulink url="s_Manipulation.html">Tree modification</ulink>, <ulink url="s_Variables.html">Variables</ulink></para>
+  </simplesect>
+</section>

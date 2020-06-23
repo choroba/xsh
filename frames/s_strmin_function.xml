@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="strmin_function">
+  <title>xsh:strmin function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:strmin(object EXPRESSION, ...)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a string value computed as the minimum
+	    (in lexicographical order)
+	    of all string values computed from given 
+	    <literal>EXPRESSION</literal>(s).
+	    If <literal>EXPRESSION</literal> evaluates to a node-set,
+	    string values of individual nodes are used.
+	  </para>
+	</simplesect>
+</section>

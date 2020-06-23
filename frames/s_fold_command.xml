@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="fold_command">
+  <title>fold command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>fold [--depth|:d <ulink url="s_exp.html">expression</ulink>] [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This feature is still EXPERIMENTAL and
+	    may change in the future! 
+	    Fold command may be used to
+	    mark elements with a
+	    <literal>xsh:fold</literal> attribute from the
+	    <literal>http://xsh.sourceforge.net/xsh/</literal> namespace. 
+	    When
+	    listing the DOM tree using 
+	    <literal><ulink url="s_list_command.html">ls</ulink> --fold <ulink url="s_xpath.html">xpath</ulink></literal>, 
+	    elements marked in this
+	    way are folded to a given depth (default is 0 = fold immediately).
+	  </para>
+	  <para>
+	    The option <literal>--depth</literal> (<literal>:d</literal>)
+	    may be used to specify the depth at which
+	    subtrees of given elements are to be folded.
+	  </para>
+	  <para>
+	    If called without arguments,
+	    the command applies to the current element,
+	    otherwise the <ulink url="s_exp.html">expression</ulink> is evaluated to the node-list
+	    and folding is applied to all elements within this node-list.
+	  </para>
+	  <example id="gen-002">
+	    <programlisting>xsh&gt; <userinput>fold --depth 1 //chapter</userinput>
+xsh&gt; <userinput>ls --fold  //chapter[1]</userinput>
+&lt;chapter id="intro" xsh:fold="1"&gt;
+  &lt;title&gt;...&lt;/title&gt;
+  &lt;para&gt;...&lt;/para&gt;
+  &lt;para&gt;...&lt;/para&gt;
+&lt;/chapter&gt;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_unfold_command.html">unfold</ulink>, <ulink url="s_list_command.html">ls</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Navigation.html">Tree navigation</ulink>
+    </para>
+  </simplesect>
+</section>

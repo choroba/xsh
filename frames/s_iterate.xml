@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="iterate">
+  <title>iterate command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>iterate <ulink url="s_xpath.html">xpath</ulink> <ulink url="s_block.html">block</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Iterate works very much like a <ulink url="s_foreach.html">foreach</ulink> loop with the
+	    same <ulink url="s_xpath.html">xpath</ulink> expression, except that it
+	    evaluates the <ulink url="s_block.html">block</ulink> as soon as a new node
+	    matching a given <ulink url="s_xpath.html">xpath</ulink> is found. As a
+	    limitation, an <ulink url="s_xpath.html">xpath</ulink> expression
+	    used with <literal>iterate</literal> may consist of one XPath
+	    step only, i.e. it may not contain an XPath step separator
+	    <literal>/</literal>.
+	  </para>
+	  <para>
+	    A possible benefit of using <literal>iterate</literal> instead of
+	    <ulink url="s_foreach.html">foreach</ulink> is some efficiency when
+	    iterating over huge node-sets. Since
+	    <literal>iterate</literal> doesn't compute
+	    the resulting node-set in advance, it
+	    doesn't have to 1) allocate extra memory for it
+	    and 2) (more importantly) doesn't have to sort
+	    the node-list in the document order (which
+	    tends to be slow on large node-sets, unless
+	    <ulink url="s_index_command.html">index</ulink> is used). On the other
+	    hand, <literal>iterate</literal> suffers from a considerable
+	    speed penalty since it isn't implemented in C (unlike
+	    libxml2's XPath engine).
+	  </para>
+	  <para>
+	    Author's experience shows that, unless <ulink url="s_index_command.html">index</ulink>
+	    is used, <literal>iterate</literal> beats
+	    <ulink url="s_foreach.html">foreach</ulink> in speed on large
+	    node-lists (&gt;=1500 nodes, but your milage may vary) while
+	    <ulink url="s_foreach.html">foreach</ulink> wins on smaller node-lists.
+	  </para>
+	  <para>The following two examples give equivalent results.
+	    However, the one using <literal>iterate</literal> 
+	    may be faster if the number of nodes being counted 
+	    is huge and document order isn't indexed.</para>
+	  <example id="gen-002">
+	    <title>Count inhabitants of the kingdom of Rohan in productive age</title>
+	    <programlisting>cd rohan/inhabitants;</programlisting>
+	    <programlisting>iterate child::*[@age&gt;=18 and @age&lt;60] { perl $productive++ };</programlisting>
+	    <programlisting>echo "$productive inhabitants in productive age";</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Using XPath</title>
+	    <programlisting>$productive=count(rohan/inhabitants/*[@age&gt;=18 and @age&lt;60]);</programlisting>
+	    <programlisting>echo "$productive inhabitants in productive age";</programlisting>
+	  </example>
+	  <para>
+	    Hint: use e.g. <literal>| time cut</literal> pipe-line
+	    redirection to benchmark a XSH2 command on a UNIX system.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_foreach.html">foreach</ulink>, <ulink url="s_index_command.html">index</ulink>, <ulink url="s_next_command.html">next</ulink>, <ulink url="s_prev_command.html">prev</ulink>, <ulink url="s_last_command.html">last</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

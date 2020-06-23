@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="validate_command">
+  <title>validate command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>validate [--yesno|:q] [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+    <para>
+      <literal>validate [--yesno|:q] [--dtd|:D | --relaxng|:R | --schema|:S] --file|:f <ulink url="s_filename.html">filename</ulink>] [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+    <para>
+      <literal>validate [--yesno|:q] [--dtd|:D | --relaxng|:R | --schema|:S] --string|:s <ulink url="s_exp.html">expression</ulink>] [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+    <para>
+      <literal>validate [--yesno|:q] [--dtd|:D | --relaxng|:R | --schema|:S] --doc|:d <ulink url="s_document.html">document</ulink>] [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+    <para>
+      <literal>validate [--yesno|:q] [--dtd|:d] --public|:p <ulink url="s_exp.html">expression</ulink> [--file|:f <ulink url="s_exp.html">expression</ulink>] [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command validates the current document or
+	    a document specified in the argument against a DTD,
+	    RelaxNG or XSD schema.
+	    If <literal>--yesno</literal> or <literal>:q</literal> is specified, only prints
+	    <literal>yes</literal> and returns 1 if the document validates or
+	    <literal>no</literal> and returns 0 if it does
+	    not. Without <literal>--yesno</literal>, it throws an
+	    exception with a complete validation error message if
+	    the document doesn't validate.
+	  </para>
+	  <para><literal>--dtd</literal> or <literal>:D</literal> forces DTD validation
+	  (default).</para>
+	  <para><literal>--relaxng</literal> or <literal>:R</literal> forces RelaxNG
+	  validation. Only XML RelaxNG grammars are supported.</para>
+	  <para><literal>--schema</literal> or <literal>:S</literal> forces W3C XML Schema 
+	    validation (XSD). Support for schema validation may still
+	    be incomplete (see <ulink url="http://xmlsoft.org">libxml2 home page</ulink>
+	    for more details).</para>
+	  <para>
+	    A DTD subset can be specified by its PUBLIC identifier (with
+	    <literal>--public</literal>), by its SYSTEM identifier
+	    (with <literal>--file</literal>), or as a string (with
+	    <literal>--string</literal>).  If none of these options is
+	    used, validation is performed against the internal or
+	    external DTD subset of the document being validated.
+	  </para>
+	  <para>
+	    RelaxNG grammars and XML Schemas can either be
+	    specified either as a filename or url (with
+	    <literal>--file</literal>), 
+	    as a string containing (with <literal>--string</literal>), 
+	    or as a document currently open in XSH2 (with
+	    <literal>--doc</literal>).  
+	  </para>
+	  <example id="gen-002">
+	    <programlisting>$mydoc := open "test.xml"</programlisting>
+	    <programlisting># in all examples below, mydoc can be omitted</programlisting>
+	    <programlisting>validate --yesno $mydoc; # validate against the document's DOCTYPE</programlisting>
+	    <programlisting>validate --public "-//OASIS//DTD DocBook XML V4.1.2//EN" $mydoc</programlisting>
+	    <programlisting>validate --file "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" $mydoc</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <programlisting>validate --relaxng --file "test.rng" $mydoc</programlisting>
+	    <programlisting>validate --relaxng --string $relaxschema $mydoc</programlisting>
+	    <programlisting>$rng := open "test.rng"</programlisting>
+	    <programlisting>validate --relaxng --doc $rng $mydoc</programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <programlisting>validate --schema --file "test.xsd" $mydoc</programlisting>
+	    <programlisting>validate --schema --string $xsdschema $mydoc</programlisting>
+	    <programlisting>$xsd := open "test.xsd"</programlisting>
+	    <programlisting>validate --schema --doc $xsd $mydoc</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-005">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_list_dtd_command.html">dtd</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-006">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

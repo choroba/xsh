@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>def command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="def" target="_self"></a>def command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">def <a class="ulink" href="s_subname.html" target="_self">subroutine</a> [<a class="ulink" href="s_varname.html" target="_self">$variable</a> ...] <a class="ulink" href="s_block.html" target="_self">block</a>
+	</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> define</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Define a new XSH2 sub-routine named <a class="ulink" href="s_subname.html" target="_self">subroutine</a>.
+	    The subroutine may require zero or more parameters. 
+	    These are declared as a
+	    whitespace-separated list of <span class="emphasis"><em>parametric
+	    variables</em></span>. The body of the
+	    subroutine is specified as a <a class="ulink" href="s_block.html" target="_self">block</a>.
+	  </p>
+<p>A sub-routine can be invoked directly by its name
+	    followed by its arguments
+	    just as any XSH2 command, or indirectly
+	    using the <a class="ulink" href="s_call_command.html" target="_self">call</a>
+	    command followed by an expression evaluating
+	    to the routine name and sub-routine arguments. 
+	    Sub-routine arguments can be arbitrary 
+	    expressions. These expressions are evaluated
+	    <span class="emphasis"><em>prior</em></span> the sub-routine's code
+	    execution and are assigned to the sub-routine's 
+	    parametric variables in the respective order.
+	    The number of parameter variables in a sub-routine
+	    definition and the number of arguments in a call to it
+	    must match.
+	    Calling a sub-routine with less or more arguments
+	    than declared is a run-time error.
+	  </p>
+<p>	    
+	    Parametric variables are lexical 
+	    variables within the sub-routine body as if they
+	    were declared with <a class="ulink" href="s_my_command.html" target="_self">my</a>.
+	  </p>
+<p>
+	    Note that a subroutine has to be defined before it is
+	    first called (in terms of execution -- depending on the structure
+	    of the program, the actual definition of the sub-routine
+	    must not necessarily precede all references to it).
+	  </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">def l3 $nodes {
+  ls --depth 3 $nodes; # list given nodes upto depth 3
+}
+l3 //chapter;           # direct call
+$subref = 'l3';
+call $subref //chapter; # in-direct call
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Commenting and un-commenting pieces of document</b></p>
+<div class="example-contents"><pre class="programlisting">def comment
+    $n      # nodes to move to comments
+    $mark   # maybe some handy mark to recognize such comments
+{
+  foreach $n {
+    if ( . = ../@* ) {
+      echo "Warning: attribute nodes are not supported!";
+    } else {
+      echo "Commenting out:";
+      ls --depth 0 .;
+      add comment concat($mark,xsh:serialize(.)) replace .;
+    }
+  }
+}
+
+def uncomment $n $mark {
+  foreach $n {
+    if (. = ../comment()) { # is this node a comment node
+      local $string = substring-after(.,"$mark");
+      add chunk $string replace .;
+    } else {
+      echo "Warning: Ignoring non-comment node:";
+      ls --depth 0 .;
+    }
+  }
+}
+
+# comment out all chapters with no paragraphs
+comment //chapter[not(para)] "COMMENT-NOPARA";
+
+# uncomment all comments stamped with COMMENT-NOPARA
+$mark="COMMENT-NOPARA";
+uncomment //comment()[starts-with(.,"$mark")] $mark;
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_call_command.html" target="_self">call</a>, <a class="ulink" href="s_return_command.html" target="_self">return</a>, <a class="ulink" href="s_my_command.html" target="_self">my</a>, <a class="ulink" href="s_local_command.html" target="_self">local</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-006" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

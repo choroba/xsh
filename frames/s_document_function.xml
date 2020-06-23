@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="document_function">
+  <title>xsh:document function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:document(string URL)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Looks up among the currently open document the one whose
+	    filename is same as the given URL and returns the
+	    corresponding document node.  If no document's filename
+	    matches exactly the given URL, then several heuristic
+	    matches are tried: if the URI is a relative filename, it
+	    is tilde-expanded and resolved (using the current working
+	    directory as a base) and the lookup is restarted with the
+	    absolute filename; finally, a lookup identifying filenames
+	    with URLs of the file:// protocol is attempted.  If the
+	    lookup fails completely, an empty node set is returned.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_hash_command.html">hash</ulink>
+    </para>
+  </simplesect>
+</section>

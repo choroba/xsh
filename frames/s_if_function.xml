@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="if_function">
+  <title>xsh:if function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>object xsh:if(object CONDITION, object YES, object NO)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function returns the <literal>YES</literal> object
+	    if <literal>CONDITION</literal> is an non-empty
+	    node-set or a string, boolean or integer 
+	    evaluating to non-zero boolean. Otherwise the
+	    <literal>NO</literal> object is returned.
+	  </para>
+	</simplesect>
+</section>

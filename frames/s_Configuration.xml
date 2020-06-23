@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Configuration">
+      <title>Global settings</title> <para>The commands listed below
+      can be used to modify the default behavior of the XML parser or
+      XSH2 itself.  Some of the commands switch between two different
+      modes according to a given expression (which is expected to
+      result either in zero or non-zero value). Other commands also
+      working as a flip-flop have their own explicit counterparts
+      (e.g.  <ulink url="s_verbose.html">verbose</ulink> and <ulink url="s_quiet.html">quiet</ulink> or
+      <ulink url="s_debug.html">debug</ulink> and <ulink url="s_nodebug.html">nodebug</ulink>).  This
+      inconsistency is due to historical reasons.
+      </para>
+      <para>
+	The <ulink url="s_encoding.html">encoding</ulink> and <ulink url="s_query_encoding.html">query-encoding</ulink>
+	settings 
+	allow to specify character
+	encodings of user's input and XSH2's own output. This is particularly
+	useful when you work with UTF-8 encoded documents on a console
+	which only supports 8-bit characters.
+      </para>
+      <para>
+	The <ulink url="s_options_command.html">settings</ulink> command
+	displays current settings by means of XSH2 commands.
+	Thus it can not only be used to review current values, but
+	also to store them for future use, e.g. in ~/.xsh2rc file.
+      </para>
+      <example id="gen-000">
+	<programlisting>xsh&gt; <userinput>settings | cat &gt; ~/.xsh2rc</userinput></programlisting>
+      </example>
+    <simplesect role="related" id="gen-001">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_backups.html">backups</ulink></term>
+      <listitem>turn on backup file creation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_cdonopen.html">switch-to-new-documents</ulink></term>
+      <listitem>set on/off changing current document to newly
+	  open/created files</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_complete_attributes.html">parser-completes-attributes</ulink></term>
+      <listitem>turn on/off parser's ability to fill default attribute values</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_debug.html">debug</ulink></term>
+      <listitem>display many annoying debugging messages</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_empty_tags.html">empty-tags</ulink></term>
+      <listitem>turn on/off serialization of empty tags</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_enc_string.html">encoding</ulink></term>
+      <listitem>character encoding (codepage) identifier</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_encoding.html">encoding</ulink></term>
+      <listitem>choose output charset</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_indent.html">indent</ulink></term>
+      <listitem>turn on/off pretty-printing</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_keep_blanks.html">keep-blanks</ulink></term>
+      <listitem>turn on/off ignorable whitespace preservation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_load_ext_dtd.html">load-ext-dtd</ulink></term>
+      <listitem>turn on/off external DTD fetching</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nobackups.html">nobackups</ulink></term>
+      <listitem>turn off backup file creation</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nodebug.html">nodebug</ulink></term>
+      <listitem>turn off debugging messages</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_options_command.html">settings</ulink></term>
+      <listitem>list current settings using XSH2 syntax</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_parser_expands_entities.html">parser-expands-entities</ulink></term>
+      <listitem>turn on/off parser's tendency to expand entities</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_parser_expands_xinclude.html">parser-expands-xinclude</ulink></term>
+      <listitem>turn on/off transparent XInclude insertion by parser</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_pedantic_parser.html">pedantic-parser</ulink></term>
+      <listitem>make the parser more pedantic</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_query_encoding.html">query-encoding</ulink></term>
+      <listitem>declare the charset of XSH2 source files and terminal input</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_quiet.html">quiet</ulink></term>
+      <listitem>turn off many XSH2 messages</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_recovering.html">recovering</ulink></term>
+      <listitem>turn on/off parser's ability to fix broken XML</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_registerfunc_command.html">register-function</ulink></term>
+      <listitem>define XPath extension function (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_registerns_command.html">register-namespace</ulink></term>
+      <listitem>register namespace prefix to use XPath expressions</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_registerns_xhtml_command.html">register-xhtml-namespace</ulink></term>
+      <listitem>register a prefix for the XHTML namespace</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_registerns_xsh_command.html">register-xsh-namespace</ulink></term>
+      <listitem>register a prefix for the XSH2 namespace</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_run_mode.html">run-mode</ulink></term>
+      <listitem>switch into normal execution mode (quit <ulink url="s_test_mode.html">test-mode</ulink>)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_skip_dtd.html">skip-dtd</ulink></term>
+      <listitem>turn on/off serialization of DTD DOCTYPE declaration</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_test_mode.html">test-mode</ulink></term>
+      <listitem>do not execute any command, only check the syntax</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_unregisterfunc_command.html">unregister-function</ulink></term>
+      <listitem>undefine extension function (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_unregisterns_command.html">unregister-namespace</ulink></term>
+      <listitem>unregister namespace prefix</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_validation.html">validation</ulink></term>
+      <listitem>turn on/off validation in XML parser</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_verbose.html">verbose</ulink></term>
+      <listitem>make XSH2 print many messages</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xpath_axis_completion_command.html">xpath-axis-completion</ulink></term>
+      <listitem>sets TAB completion for axes in xpath expressions in
+	the interactive mode</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xpath_completion_command.html">xpath-completion</ulink></term>
+      <listitem>turn on/off TAB completion for xpath expressions in
+	the interactive mode</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xpath_extensions_command.html">xpath-extensions</ulink></term>
+      <listitem>map predefined XSH2 XPath extension functions to
+	  no or other namespace
+	</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

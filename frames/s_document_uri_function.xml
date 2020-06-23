@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="document_uri_function">
+  <title>xsh:document-uri function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:document-uri(node-set?)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Returns URI of the document containing
+	    the first node in the given node-set.
+	    If called without arguments, or if the node-set is 
+	    empty, returns filename of the document containing the current node.
+	  </para>
+	</simplesect>
+</section>

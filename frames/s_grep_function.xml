@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="grep_function">
+  <title>xsh:grep function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:grep(node-set NODES, string PATTERN)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a node set consisting of those nodes of
+	    <literal>NODES</literal> whose content 
+	    (as returned by the built-in XPath 
+	    function <literal>string()</literal>)
+	    matches the regular expression <literal>PATTERN</literal>.
+	  </para>
+	</simplesect>
+</section>

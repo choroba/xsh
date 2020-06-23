@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="intro"><title>Getting Started</title>
+      <para>
+	XSH2 acts as a command interpreter. Individual commands must
+	be separated with a semicolon. 
+	In the interactive shell, backslash may be used at the end of a line to
+	indicate that a command continues on the next line.
+	Output redirection can be used to pipe output of some XSH <ulink url="s_command.html">command</ulink> to some external program, or to capture the output
+	to a variable. See <ulink url="s_Redirection.html">Command output redirection</ulink> for more info.
+      </para>
+      <para>
+	XSH2 command <ulink url="s_help_command.html">help</ulink> provides a complete
+	reference, instantly from the command-line:
+      </para>
+      <para>
+	<literal>help command</literal>
+	gives a list of all XSH2 <ulink url="s_command.html">commands</ulink>.
+      </para>
+      <para>
+	<literal>help type</literal> gives a
+	list of all argument types.
+      </para>
+      <para>
+	<literal>help topic</literal> followed by
+	documentation chapter gives more information on a given topic.
+      </para>
+      <para>
+	<literal>help toc</literal> displays the table of contents.
+      </para>
+    </section>

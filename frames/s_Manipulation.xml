@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Manipulation">
+      <title>Tree modification</title>
+      <para>
+	XSH2 not only provides ways to browse and inspect the DOM tree but also
+	many commands to modify its content by various operations,
+	such as copying,
+	moving, and deleting its nodes as well as creating completely new nodes
+	or XML fragments and attaching them to it. It is quite easy to learn
+	these commands since their names or aliases mimic their well-known
+	filesystem analogies.  On the other hand, many of these commands have
+	two versions one of which is prefixed with a letter "x". This
+	"x" stands for "cross", thus e.g. <ulink url="s_xcopy_command.html">xcopy</ulink> should be read as "cross copy".
+	Let's explain the difference on the example of <ulink url="s_xcopy_command.html">xcopy</ulink>.</para>
+      <para>
+	In a copy operation, you have to specify what nodes are to be
+	copied and where to, in other words, you have to specify the
+	<emphasis>source</emphasis> and the
+	<emphasis>target</emphasis>.  XSH2 is very much XPath-based so,
+	XPath is used here to specify both of them. However, there
+	might be more than one node that satisfies an XPath expression. So,
+	the rule of thumb is that the "cross" variant of a
+	command places <emphasis>one and every</emphasis> of the source nodes
+	to the location of <emphasis>one and every</emphasis> destination
+	node, while the plain variant works one-by-one, placing the
+	first source node to the first destination, the second source
+	node to the second destination, and so on (as long as there
+	are both source nodes and destinations left).
+      </para>
+      <example id="gen-000">
+	<programlisting>$scratch/&gt; <userinput>$a := create "&lt;X&gt;&lt;A/&gt;&lt;Y/&gt;&lt;A/&gt;&lt;/X&gt;";</userinput>
+$a/&gt; <userinput>$b := create "&lt;X&gt;&lt;B/&gt;&lt;C/&gt;&lt;B/&gt;&lt;C/&gt;&lt;B/&gt;&lt;/X&gt;";</userinput>
+$b/&gt; <userinput>xcopy $a//A replace $b//B;</userinput>
+$b/&gt; <userinput>copy $b//C before $a//A;</userinput>
+$b/&gt; <userinput>ls $a;</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;X&gt;&lt;C/&gt;&lt;A/&gt;&lt;Y/&gt;&lt;C/&gt;&lt;A/&gt;&lt;/X&gt;
+
+$b/&gt; <userinput>ls $b;</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;X&gt;&lt;A/&gt;&lt;A/&gt;&lt;C/&gt;&lt;A/&gt;&lt;A/&gt;&lt;C/&gt;&lt;A/&gt;&lt;A/&gt;&lt;/X&gt;
+</programlisting>
+      </example>
+      <para>
+	As already indicated by the example, another issue of tree modification
+	is the way in which the destination node determines the target
+	location. Should the source node be placed before, after, or somewhere
+	among the children of the resulting node? Or maybe, should it replace
+	it completely? This information has to be given in the
+	<ulink url="s_loc.html">location</ulink> argument that usually precedes the destination
+	XPath.
+      </para>
+      <para>
+	Now, what happens if source and destination nodes are of
+	incompatible types? XSH2 tries to avoid this by implicitly
+	converting between node types when necessary.  For example, if
+	a text, comment, and attribute node is copied into, before or
+	after an attribute node, the original value of the
+	attribute is replaced, prepended or appended respectively with
+	the textual content of the source node. Note however, that
+	<emphasis>element nodes are never converted</emphasis> into
+	text, attribute or any other textual node.  There
+	are many combinations here, so try yourself and see the
+	results.
+      </para>
+      <para>You may even use some more sophisticated way to convert
+	between node types, as shown in the following example, where
+	an element is first commented out and than again uncommented.
+	Note, that the particular approach used for resurrecting the
+	commented XML material works only for well-balanced chunks of
+	XML.
+      </para>
+      <example id="gen-001">
+	<title>Using string variables to convert between different
+	  types of nodes</title>
+	<programlisting><userinput>$doc := create &lt;&lt;EOF;
+&lt;?xml version='1.0'?&gt;
+&lt;book&gt;
+  &lt;chapter&gt;
+    &lt;title&gt;Intro&lt;/title&gt;
+  &lt;/chapter&gt;
+  &lt;chapter&gt;
+    &lt;title&gt;Rest&lt;/title&gt;
+  &lt;/chapter&gt;
+&lt;/book&gt;
+EOF
+</userinput>
+
+# comment out the first chapter
+<userinput>ls //chapter[1] |&gt; $chapter_xml;</userinput>
+<userinput>insert comment $chapter_xml replace //chapter[1];</userinput>
+<userinput>ls / 0;</userinput>
+# OUTPUT:
+&lt;?xml version="1.0"?&gt;
+&lt;book&gt;
+&lt;!--  &lt;chapter&gt;
+    &lt;title&gt;Intro&lt;/title&gt;
+  &lt;/chapter&gt;
+--&gt;
+  &lt;chapter&gt;
+    &lt;title&gt;Rest&lt;/title&gt;
+  &lt;/chapter&gt;
+&lt;/book&gt;
+
+
+# un-comment the chapter
+<userinput>$comment = string(//comment()[1]);</userinput>
+<userinput>insert chunk $comment replace //comment()[1];</userinput>
+<userinput>ls / 0;</userinput>
+# OUTPUT:
+&lt;?xml version="1.0"?&gt;
+&lt;book&gt;
+  &lt;chapter&gt;
+    &lt;title&gt;Intro&lt;/title&gt;
+  &lt;/chapter&gt;
+
+  &lt;chapter&gt;
+    &lt;title&gt;Rest&lt;/title&gt;
+  &lt;/chapter&gt;
+&lt;/book&gt;
+</programlisting>
+      </example>
+    <simplesect role="related" id="gen-002">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_change_namespace_prefix_command.html">change-ns-prefix</ulink></term>
+      <listitem>change namespace prefix (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_change_namespace_uri_command.html">change-ns-uri</ulink></term>
+      <listitem>change namespace URI (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_clone_command.html">clone</ulink></term>
+      <listitem>clone a given document</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_copy_command.html">copy</ulink></term>
+      <listitem>copy nodes (in the one-to-one mode)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_declare_namespace_command.html">declare-ns</ulink></term>
+      <listitem>create a special attribute declaring an XML namespace (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_edit_command.html">edit</ulink></term>
+      <listitem>Edit parts of a XML document in a text editor.</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_edit_string_command.html">edit-string</ulink></term>
+      <listitem>Edit a string or variable in a text editor.</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_exp.html">expression</ulink></term>
+      <listitem>expression argument type</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_hash_command.html">hash</ulink></term>
+      <listitem>index selected nodes by some key value</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_insert_command.html">insert</ulink></term>
+      <listitem>create a node in on a given target location</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_loc.html">location</ulink></term>
+      <listitem>relative destination specification (such as after, before, etc.)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_map_command.html">map</ulink></term>
+      <listitem>transform node value/data using Perl or XPath expression</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_move_command.html">move</ulink></term>
+      <listitem>move nodes (in the one-to-one mode)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nodetype.html">node-type</ulink></term>
+      <listitem>node type specification (such as element, attribute, etc.)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_normalize_command.html">normalize</ulink></term>
+      <listitem>normalizes adjacent textnodes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_process_xinclude_command.html">process-xinclude</ulink></term>
+      <listitem>load and insert XInclude sections</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_prune_command.html">remove</ulink></term>
+      <listitem>remove given nodes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_rename_command.html">rename</ulink></term>
+      <listitem>quickly rename nodes with in-line Perl code</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_set_command.html">set</ulink></term>
+      <listitem>create or modify document content (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_set_dtd_command.html">set-dtd</ulink></term>
+      <listitem>set document's DTD declaration</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_set_enc_command.html">set-enc</ulink></term>
+      <listitem>set document's charset (encoding)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_set_namespace_command.html">set-ns</ulink></term>
+      <listitem>set namespace of the current node (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_set_standalone_command.html">set-standalone</ulink></term>
+      <listitem>set document's standalone flag</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_sort_command.html">sort</ulink></term>
+      <listitem>sort a given node-list by given criteria</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_strip_ws_command.html">strip-whitespace</ulink></term>
+      <listitem>strip leading and trailing whitespace</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_wrap_command.html">wrap</ulink></term>
+      <listitem>wrap given nodes into elements</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_wrap_span_command.html">wrap-span</ulink></term>
+      <listitem>wrap spans of nodes into elements</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xcopy_command.html">xcopy</ulink></term>
+      <listitem>copy nodes (in the all-to-every mode)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xinsert_command.html">xinsert</ulink></term>
+      <listitem>create nodes on all target locations</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xmove_command.html">xmove</ulink></term>
+      <listitem>move nodes (in the all-to-every mode)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xpath.html">xpath</ulink></term>
+      <listitem>XPath expression</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xslt_command.html">xslt</ulink></term>
+      <listitem>compile a XSLT stylesheet and/or transform a document with XSLT</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xupdate_command.html">xupdate</ulink></term>
+      <listitem>apply XUpdate commands on a document</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

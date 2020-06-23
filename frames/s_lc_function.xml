@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="lc_function">
+  <title>xsh:lc function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:lc(string STR)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a lowercased version of <literal>STR</literal>.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="locate_command">
+  <title>locate command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>locate [--id|:i] <ulink url="s_xpath.html">xpath</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Print canonical XPaths leading to nodes matched by
+	    a given <ulink url="s_xpath.html">xpath</ulink>.</para>
+	  <para>
+	    If flag <literal>--id</literal> (<literal>:i</literal>) is
+	    used then ID-based shortcuts are allowed in the resulting
+	    location paths. That means that if the node or some of its
+	    ancestors has an ID attribute (either
+	    <literal>xml:id</literal> or one specified in a DTD) then
+	    the corresponding segment of the canonical location path
+	    is replaced by the <literal>id()</literal> function
+	    which jumps directly to an element based on its ID.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_pwd_command.html">pwd</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Navigation.html">Tree navigation</ulink>, <ulink url="s_Information.html">Retrieving more information</ulink></para>
+  </simplesect>
+</section>

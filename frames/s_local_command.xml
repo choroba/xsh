@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="local_command">
+  <title>local command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>local <ulink url="s_varname.html">$variable</ulink> = <ulink url="s_xpath.html">xpath</ulink></literal>
+    </para>
+    <para>
+      <literal>local <ulink url="s_varname.html">$variable</ulink> [ <ulink url="s_varname.html">$variable</ulink> ... ] </literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para> 
+	    This command acts in a very similar way as
+	    <ulink url="s_assign_command.html">assign</ulink> does, except
+	    that the variable assignment is done temporarily
+	    and lasts only for the rest of its enclosing
+	    <ulink url="s_block.html">block</ulink> or subroutine. At the end of the
+	    enclosing block or subroutine, the original value
+	    is restored. This also reverts any later usual assignments to the
+	    variable done occurring before the end of the block.
+	    This command may also be used without the assignment part.
+	  </para>
+	  <para>Note, that the variable itself remains
+	    global in the sense that it is still visible to any
+	    subroutine called subsequently from the same block.
+	    Unlike <ulink url="s_my_command.html">my</ulink>
+	    declaration, it does not <emphasis>create</emphasis> a
+	    new lexically scoped variable.
+	  </para>
+	  <para>
+	    Hint for Perl programmers: <literal>local</literal>
+	    in XSH2 works exactly as <literal>local</literal>
+	    in Perl.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_assign_command.html">assign</ulink>, <ulink url="s_my_command.html">my</ulink>, <ulink url="s_def.html">def</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Variables.html">Variables</ulink>
+    </para>
+  </simplesect>
+</section>

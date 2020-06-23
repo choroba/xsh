@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="registerns_command">
+  <title>register-namespace command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>register-namespace <ulink url="s_exp.html">expression</ulink> <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> regns</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+             Registers the first argument
+             as a prefix for the namespace given in the second argument.
+             The prefix can later be used in XPath expressions.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Namespaces.html">Namespaces in XML and XPath</ulink>, <ulink url="s_Configuration.html">Global settings</ulink></para>
+  </simplesect>
+</section>

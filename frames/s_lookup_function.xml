@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="lookup_function">
+  <title>xsh:lookup function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:lookup(string VARNAME, string KEY)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function is similar to XSLT <literal>key()</literal>
+	    function. It returns a node-set
+	    stored in a hash VARNAME under the key KEY.
+	    The VARNAME must be a name of a lexical or global
+	    XSH variable containing a Perl hash reference.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_hash_command.html">hash</ulink>
+    </para>
+  </simplesect>
+</section>

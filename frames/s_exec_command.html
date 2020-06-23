@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>exec command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="exec_command" target="_self"></a>exec command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">exec <a class="ulink" href="s_exp.html" target="_self">expression</a> [<a class="ulink" href="s_exp.html" target="_self">expression</a> ...]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Aliases</h3></div></div></div>
+<p><code class="literal"> system</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Description</h3></div></div></div>
+<p>This command executes given <a class="ulink" href="s_exp.html" target="_self">expression</a>(s)
+	    as a system command and returns the exit code.
+	  </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Count words in "hallo wold" string, then print name
+	      of your machine's operating system.</b></p>
+<div class="example-contents"><pre class="programlisting">exec echo hallo world;             # prints hallo world
+exec "echo hallo word" | wc;       # counts words in hallo world
+exec uname;                        # prints operating system name
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Perl_shell.html" target="_self">Interacting with Perl and Shell</a></p>
+</div>
+</div></body>
+</html>

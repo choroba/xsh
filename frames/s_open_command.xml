@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="open_command">
+  <title>open command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>$doc := open [--format|:F html|xml|docbook]
+          [--file|:f | --pipe|:p | --string|:s]
+	  [--switch-to|:w | --no-switch-to|:W]
+	  [--validate|:v | --no-validate|:V]
+	  [--recover|:r | --no-recover|:R]
+	  [--expand-entities|:e | --no-expand-entities|:E]
+	  [--xinclude|:x | --no-xinclude|:X]
+	  [--keep-blanks|:b  | --no-keep-blanks|:B]
+	  [--pedantic|:n | --no-pedantic|:N]
+	  [--load-ext-dtd|:d | --no-load-ext-dtd|:D]
+	  [--complete-attributes|:a | --no-complete-attributes|:A]
+	  <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Parse a XML, HTML or SGML DOCBOOK document from a file or URL,
+	    command output or string and return a node-set consisting
+	    of the root of the resulting DOM tree.
+	  </para>
+	  <para><literal>--format</literal> (<literal>:F</literal>)
+	    option may be used
+	    to specify file format. Possible values are
+	    <literal>xml</literal> (default), 
+	    <literal>html</literal>, and 
+	    <literal>docbook</literal>. Note, however,
+	    that the support for parsing <literal>DocBook</literal> SGML
+	    files has been deprecated in recent <literal>libxml2</literal>
+	    versions.
+	  </para>
+	  <para><literal>--file</literal> (<literal>:f</literal>)
+	    instructs the parser to consider a given <ulink url="s_exp.html">expression</ulink>
+	    as a file name or URL.
+	  </para>
+	  <para>
+	    <literal>--pipe</literal> (<literal>:p</literal>)
+	    instructs the parser to consider a given <ulink url="s_exp.html">expression</ulink>
+	    as a system command and parse its output.
+	  </para>
+	  <para>
+	    <literal>--string</literal> (<literal>:s</literal>)
+	    instructs the parser to consider a given <ulink url="s_exp.html">expression</ulink>
+	    as a string of XML or HTML to parse.
+	  </para>
+	  <para>
+	  <literal>--switch-to</literal> (<literal>:w</literal>)
+	    and <literal>--no-switch-to</literal> (<literal>:W</literal>)
+	    control whether the new document's root should
+	    become current node. These option override
+	    current global setting of
+	    <ulink url="s_cdonopen.html">switch-to-new-documents</ulink>.
+	  </para>
+          <para>
+	  <literal>--validate</literal> (<literal>:v</literal>)
+	    and <literal>--no-validate</literal> (<literal>:V</literal>)
+	    turn on/off DTD-validation of the parsed document.
+	    These option override
+	    current global setting of
+	    <ulink url="s_validation.html">validation</ulink>.
+	  </para>
+          <para>
+	  <literal>--recover</literal> (<literal>:r</literal>)
+	    and <literal>--no-recover</literal> (<literal>:R</literal>)
+	    turn on/off parser's ability to recover from
+	    non-fatal errors.
+	    These option override
+	    current global setting of
+	    <ulink url="s_recovering.html">recovering</ulink>.	    
+	  </para>
+          <para>
+	  <literal>--expand-entities</literal> (<literal>:e</literal>)
+	    and <literal>--no-expand-entities</literal> (<literal>:E</literal>)
+	    turn on/off entity expansion, overriding current global
+	    setting of <ulink url="s_parser_expands_entities.html">parser-expands-entities</ulink>.
+	  </para>
+          <para>
+	  <literal>--xinclude</literal> (<literal>:x</literal>) and
+	    <literal>--no-xinclude</literal> (<literal>:X</literal>) turn
+	    on/off XInclude processing, overriding current global settings of
+	    <ulink url="s_parser_expands_xinclude.html">parser-expands-xinclude</ulink>.
+	  </para>
+          <para>
+	  <literal>--keep-blanks</literal> (<literal>:b</literal>) 
+	    and <literal>--no-keep-blanks</literal> (<literal>:B</literal>)
+	    control whether the parser should preserve so called ignorable
+	    whitespace. These option override
+	    current global setting of <ulink url="s_keep_blanks.html">keep-blanks</ulink>.
+	  </para>
+          <para>
+	  <literal>--pedantic</literal> (<literal>:n</literal>)
+	    and <literal>--no-pedantic</literal> (<literal>:N</literal>)
+	    turn on/off pedantic parser flag.
+	  </para>
+          <para>
+	  <literal>--load-ext-dtd</literal> (<literal>:d</literal>)
+	    and <literal>--no-load-ext-dtd</literal> (<literal>:D</literal>)
+	    control whether the external DTD subset should be loaded
+	    with the document. 
+	    These option override
+	    current global setting of <ulink url="s_load_ext_dtd.html">load-ext-dtd</ulink>.
+	  </para>
+          <para>
+	  <literal>--complete-attributes</literal> (<literal>:a</literal>)
+	    and <literal>--no-complete-attributes</literal>
+	    (<literal>:A</literal>)
+	    turn on/off parse-time default attribute completion
+	    based on default values specified in the DTD.
+	    These option override
+	    current global setting of <ulink url="s_complete_attributes.html">parser-completes-attributes</ulink>.	    
+	  </para>
+	  <example id="gen-002">
+	    <programlisting>$scratch/&gt; <userinput>$x := open mydoc.xml # open an XML document</userinput>
+
+# open a HTML document from the Internet
+<userinput>$h:=open --format html "http://www.google.com/?q=xsh"</userinput>
+# quote file name if it contains whitespace
+<userinput>$y := open "document with a long name with spaces.xml"</userinput>
+
+# use --format html or --format docbook to load these types
+$z := open --format html <userinput>index.htm</userinput>
+
+# use --pipe flag to read output of a command
+$z := open --format html --pipe <userinput>'wget -O - xsh.sourceforge.net/index.html'</userinput>
+
+# use document variable to restrict XPath search to a
+# given document
+<userinput>ls $z//chapter/title</userinput>
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

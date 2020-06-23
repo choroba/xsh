@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="foreach">
+  <title>foreach command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>foreach <ulink url="s_exp.html">expression</ulink> 
+	  <ulink url="s_command.html">command</ulink>|<ulink url="s_block.html">block</ulink>
+	</literal>
+    </para>
+    <para>
+      <literal>foreach [my|local] <ulink url="s_varname.html">$variable</ulink> in <ulink url="s_exp.html">expression</ulink>
+	  <ulink url="s_command.html">command</ulink>|<ulink url="s_block.html">block</ulink>
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> for</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Evaluate given <ulink url="s_exp.html">expression</ulink> to a node-list and for each
+	    resulting node execute given <ulink url="s_command.html">command</ulink> or 
+	    <ulink url="s_block.html">block</ulink>. If used without a loop <ulink url="s_varname.html">$variable</ulink>, the loop temporarily sets current node to
+	    the node being processed. Otherwise, the processed node is assigned
+	    to the loop variable.
+	  </para>
+	  <para>
+	    The <ulink url="s_exp.html">expression</ulink> may be <ulink url="s_xpath.html">xpath</ulink> as well as
+	    a <ulink url="s_perl_code.html">perl-code</ulink>.
+	    In the latter case, if used without a loop variable, 
+	    the loop automatically converts Perl objects to
+	    nodes. No conversion is performed when
+	    a loop variable is used.
+	  </para>
+	  <example id="gen-003">
+	    <title>Move all employee sub-elements in a company element
+	      into the first staff subelement of the same company</title>
+	    <programlisting>xsh&gt; <userinput>foreach //company xmove employee into staff[1];</userinput></programlisting>
+	  </example>
+	  <example id="gen-004">
+	    <title>List content of all XML files in current directory</title>
+	    <programlisting>xsh&gt; <userinput>foreach my $filename in { glob('*.xml') } {
+  $f := open $filename;
+  do_something $f; 
+}</userinput>
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

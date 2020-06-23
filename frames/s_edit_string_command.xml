@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="edit_string_command">
+  <title>edit-string command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>edit-string [--editor|:E <ulink url="s_filename.html">filename</ulink>] 
+	  [--encoding|:e <ulink url="s_enc_string.html">encoding</ulink>]
+	  [--allow-empty|:0] <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Evaluating given <ulink url="s_exp.html">expression</ulink> to a string,
+	    save it in a temporary file,
+	    open the file an external editor as a plain text,
+	    and when the editor exits,
+	    read and return the result. The <literal>--editor</literal>
+	    (<literal>:E</literal>) parameter can be used
+	    to provide an editor command, whereas
+	    <literal>--encoding</literal> (<literal>:e</literal>)
+	    can be used to specify character encoding used for
+	    communication with the editor. If the result
+	    is empty, the interactive XSH2 shell asks user for
+	    confirmation before returning the result in order
+	    to prevent data loss due to some unexpected error.
+	    To suppress this feature, use <literal>--allow-empty</literal>
+	    or <literal>:0</literal> flag.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

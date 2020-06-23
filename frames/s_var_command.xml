@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="var_command">
+  <title>variables command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>variables</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> vars, var</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>List all global variables and their current values.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_files_command.html">documents</ulink>, <ulink url="s_list_defs_command.html">defs</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

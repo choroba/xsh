@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="lineno_function">
+  <title>xsh:lineno function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:lineno(node-set)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Returns line number of the occurrence of
+	    the first node in the given node-set in its original XML
+	    document (if available).
+	  </para>
+	</simplesect>
+</section>

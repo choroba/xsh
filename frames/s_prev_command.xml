@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="prev_command">
+  <title>prev command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>prev [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command is only allowed inside an
+	    <literal>iterate</literal> loop. It returns the iteration
+	    one step back, to the previous node on the iterated axis.
+	    The optional <ulink url="s_exp.html">expression</ulink> argument may be
+	    used to indicate to which level of nested loops the
+	    command applies to (default is 1).
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_iterate.html">iterate</ulink>, <ulink url="s_redo_command.html">redo</ulink>, <ulink url="s_last_command.html">last</ulink>, <ulink url="s_next_command.html">next</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

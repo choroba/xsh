@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="list_command">
+  <title>ls command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>ls [--fold|:f] [--fold-attrs|:A] [--indent|:i | --no-indent|:I]
+	  [--depth|:d <ulink url="s_exp.html">expression</ulink>] [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> list</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Print XML representation of a given
+	    <ulink url="s_exp.html">expression</ulink>, in particular,
+	    if used with an <ulink url="s_xpath.html">xpath</ulink>,
+	    list parts of the document matching given expression.
+	  </para>
+	  <para>
+	    If used without an argument,
+	    current node is listed to the depth 1 (see below).
+	  </para>
+	  <para>
+	    <literal>--depth</literal> or <literal>:d</literal>
+	    argument may be used to specify depth of the XML listing.
+	    If negative, the listing depth is unlimited.
+	    All content below the specified depth is replaced with
+	    an ellipsis (<literal>...</literal>).
+	  </para>
+	  <para>
+	    <literal>--fold</literal> or <literal>:f</literal>
+	    option makes the listing fold elements marked using the
+	    <ulink url="s_fold_command.html">fold</ulink> command are folded, i.e. listed
+	    only to the depth specified in the folding mark.
+	  </para>
+	  <para>
+	    <literal>--fold-attrs</literal> or <literal>:A</literal>
+	    option avoids listing of attributes of the folded
+	    elements (i.e. elements on the lowest level of listing).
+	    Folded attributes are replaced with
+	    ellipsis (<literal>...</literal>).
+	  </para>
+	  <para>
+	    <literal>--indent</literal> (<literal>:i</literal>)
+	    and 
+	    <literal>--no-indent</literal> (<literal>:I</literal>)
+	    may be used to enforce/suppress
+	    indentation, overriding current setting
+	    (see command <ulink url="s_indent.html">indent</ulink>).
+	  </para>
+	  <para>
+	    Unless in <ulink url="s_quiet.html">quiet</ulink> mode, 
+	    this command also prints the number of
+	    (top-level) nodes listed.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_count_command.html">count</ulink>, <ulink url="s_fold_command.html">fold</ulink>, <ulink url="s_unfold_command.html">unfold</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para><ulink url="s_Navigation.html">Tree navigation</ulink>, <ulink url="s_Information.html">Retrieving more information</ulink></para>
+  </simplesect>
+</section>

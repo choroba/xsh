@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="c14n_command">
+  <title>canonical command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>canonical [--comments|:c] [--filter|:f <ulink url="s_xpath.html">xpath</ulink>] [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This commands prints a canonical XML representing nodes specified
+	    by its argument (or current node, if no argument is given).</para>
+	  <para><literal>--comments</literal> or
+	    <literal>:c</literal> removes comments
+	    from the resulting XML.</para>
+	  <para>
+	    <literal>--filter</literal> or <literal>:f</literal>
+	    can be used to filter
+	    the resulting XML so that it only contains
+	    nodes explicitly included in the given node-set.</para>
+	  <para>
+	    For
+	    details see <ulink url="http://www.w3.org/TR/xml-c14n">"Canonical
+	      XML"</ulink> or <ulink url="http://www.w3.org/TR/xml-exc-c14n">"Exclusive XML Canonicalization"</ulink> W3C recommendations.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_list_command.html">ls</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Navigation.html">Tree navigation</ulink>, <ulink url="s_Information.html">Retrieving more information</ulink></para>
+  </simplesect>
+</section>

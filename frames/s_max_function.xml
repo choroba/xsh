@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="max_function">
+  <title>xsh:max function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>float xsh:max(object EXPRESSION, ...)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns the maximum of numeric values
+	    computed from given <literal>EXPRESSION</literal>(s).
+	    If <literal>EXPRESSION</literal> evaluates to a node-set,
+	    string values of individual nodes are used.
+	  </para>
+	</simplesect>
+</section>

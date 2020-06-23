@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="index_command">
+  <title>index command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>index [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This command makes <literal>libxml2</literal> library to remember
+	    document-order position of every element node in the <ulink url="s_document.html">document</ulink>. Such indexation makes XPath queries
+	    considerably faster on large documents (with thousands of nodes).
+	    The command should only be used on documents which don't change;
+	    modifying an indexed document might possibly lead to non-conformant
+	    behavior of later XPath queries on the document.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

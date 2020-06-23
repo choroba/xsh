@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="exec_command">
+  <title>exec command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>exec <ulink url="s_exp.html">expression</ulink> [<ulink url="s_exp.html">expression</ulink> ...]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> system</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>This command executes given <ulink url="s_exp.html">expression</ulink>(s)
+	    as a system command and returns the exit code.
+	  </para>
+	  <example id="gen-003">
+	    <title>Count words in "hallo wold" string, then print name
+	      of your machine's operating system.</title>
+	    <programlisting>exec echo hallo world;             # prints hallo world
+exec "echo hallo word" | wc;       # counts words in hallo world
+exec uname;                        # prints operating system name
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Perl_shell.html">Interacting with Perl and Shell</ulink>
+    </para>
+  </simplesect>
+</section>

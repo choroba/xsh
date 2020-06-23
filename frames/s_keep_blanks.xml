@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="keep_blanks">
+  <title>keep-blanks command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>keep-blanks <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> keep_blanks</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Allows you to turn on/off preserving the parser's default
+	    behavior of preserving all whitespace in the document.
+	    Setting this option to 0, instructs the XML parser
+	    to ignore whitespace occurring between adjacent element
+	    nodes, so that no extra text nodes are created for it.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$KEEP_BLANKS</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

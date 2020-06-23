@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>save command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="save_command" target="_self"></a>save command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">save [--format|:F html|xml] [--xinclude|:x] 
+	  [--file|:f <a class="ulink" href="s_filename.html" target="_self">filename</a> | 
+           --pipe|:p <a class="ulink" href="s_filename.html" target="_self">filename</a> | 
+           --string|:s |
+           --print|:r ]
+          [--subtree|:S]
+          [--indent|:i | --no-indent|:I]
+	  [--skip-dtd|:d | --no-skip-dtd|:D]
+	  [--skip-empty-tags|:t | --no-skip-empty-tags|:T]
+	  [--skip-xmldecl|:x]
+          [--encoding|:e <a class="ulink" href="s_enc_string.html" target="_self">encoding</a>] 
+	  <a class="ulink" href="s_document.html" target="_self">document</a>
+	</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This takes a given <a class="ulink" href="s_document.html" target="_self">document</a>,
+	    serializes it to XML or HTML and
+	    either saves the result
+	    to its original file or another file (default),
+	    pipes it to an external command,
+	    prints it on standard output, or
+	    simply returns it. Without arguments
+	    it simply saves current document
+	    to its original file.
+	  </p>
+<p>
+	    <code class="literal">--file|:f</code> option
+	    may be used to specify an output file-name.
+	    By default, the original document's file-name
+	    is used.
+	  </p>
+<p>
+	    <code class="literal">--pipe|:p</code> option
+	    specifies, that the output should be
+	    piped to an external command
+	    specified as the option's argument.
+	  </p>
+<p>
+	    <code class="literal">--print|:r</code> option
+	    specifies, that the output should 
+	    be printed on standard output.</p>
+<p>
+	    <code class="literal">--string|:s</code>
+	    option specifies, that the output
+	    should be returned by the command
+	    as a string. In this case, the result is
+	    always in UTF8, regardless on which
+	    encoding is specified in the document
+	    or using <code class="literal">--encoding</code> option.
+	  </p>
+<p>The above four options are mutually exclusive.</p>
+<p>
+	    <code class="literal">--format</code> option may be used
+	    to specify the output format. It's argument
+	    should be either <code class="literal">xml</code>,
+	    <code class="literal">html</code> or an expression
+	    evaluating to one of these. If not specified,
+	    XML output is assumed.
+	    Note, that a document should be saved as HTML only if it
+	    actually is a HTML document, otherwise the result would be 
+	    an invalid XML instance. Note also, that the optional
+	    encoding parameter only forces character conversion; it is
+	    up to the user to declare the document encoding in the
+	    appropriate HTML &lt;META&gt; tag, if needed.
+	  </p>
+<p>
+	    <code class="literal">--xinclude</code>
+	    automatically implies XML format and
+	    can be used to force XSH2 to save all already expanded
+	    XInclude sections back to their original files while
+	    replacing them with &lt;xi:include&gt; tags in the main
+	    XML file. Moreover, all material included within
+	    &lt;include&gt; elements from the
+	    <a class="ulink" href="http://www.w3.org/2001/XInclude" target="_self">http://www.w3.org/2001/XInclude</a>
+	    namespace is saved to separate files too according to the
+	    <code class="literal">href</code> attribute, leaving only empty
+	    &lt;include&gt; element in the root file. This feature may
+	    be used to split the document to a new set of XInclude fragments.
+	  </p>
+<p>
+	    If the <code class="literal">--subtree</code> (<code class="literal">:S</code>)
+	    flag is used, only the subtree of the
+	    specified node is saved instead of the complete document
+	    (this flag cannot be used
+	    with <code class="literal">--html</code> format).
+          </p>
+<p>
+	    <code class="literal">--indent</code> (<code class="literal">:i</code>)
+	    and 
+	    <code class="literal">--no-indent</code> (<code class="literal">:I</code>)
+	    may be used to enforce/suppress
+	    indentation, overriding current global setting
+	    of <a class="ulink" href="s_indent.html" target="_self">indent</a>.
+	  </p>
+<p>
+	    <code class="literal">--skip-dtd</code> (<code class="literal">:d</code>)
+	    and 
+	    <code class="literal">--no-skip-dtd</code> (<code class="literal">:D</code>)
+	    may be used to enforce/suppress
+	    skipping DTD declaration and internal subset
+	    on output, overriding current global setting
+	    of <a class="ulink" href="s_skip_dtd.html" target="_self">skip-dtd</a>.
+	  </p>
+<p>
+	    <code class="literal">--empty-tags</code> (<code class="literal">:t</code>)
+	    and 
+	    <code class="literal">--no-empty-tags</code> (<code class="literal">:T</code>)
+	    may be used to override current global setting
+	    of <a class="ulink" href="s_empty_tags.html" target="_self">empty-tags</a>.
+	    <code class="literal">--no-empty-tags</code> instructs XSH2
+	    to serialize elements with no child nodes
+	    as start-tag/end-tag pair
+	    <code class="literal">&lt;element&gt;&lt;/element&gt;</code>
+	    instead of using a short empty-tag form
+	    <code class="literal">&lt;element/&gt;</code>.
+	  </p>
+<p>
+	    <code class="literal">--skip-xmldecl</code> (<code class="literal">:x</code>)
+	    instructs XSH2 to omit the XML declaration
+	    from the saved document. Note however, that XML declaration
+	    is obligatory for XML documents. It usually looks like
+	    <code class="literal">&lt;?xml version="1.0" ...?&gt;</code>.
+	  </p>
+<p>
+	    <code class="literal">--backup</code> (<code class="literal">:b</code>)
+	    and 
+	    <code class="literal">--no-backup</code> (<code class="literal">:B</code>)
+	    can be used to enforce/suppress
+	    creation of a backup file if target file
+	    already exists. Using these options
+	    overrides current global setting of <a class="ulink" href="s_backups.html" target="_self">backups</a>.
+	  </p>
+<p>
+	    <code class="literal">--encoding</code>
+	     followed by a <a class="ulink" href="s_enc_string.html" target="_self">encoding</a>
+	    instructs XSH2 to save the document in the specified
+	    encoding.  In case of XML output, the &lt;?xml?&gt;
+	    declaration is automatically changed accordingly.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Use save to preview current HTML document in Lynx</b></p>
+<div class="example-contents"><pre class="programlisting">save --format html --pipe 'lynx -stdin'</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_open_command.html" target="_self">open</a>, <a class="ulink" href="s_close_command.html" target="_self">close</a>, <a class="ulink" href="s_print_enc_command.html" target="_self">enc</a>, <a class="ulink" href="s_files_command.html" target="_self">documents</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Documents.html" target="_self">Files/Documents</a></p>
+</div>
+</div></body>
+</html>

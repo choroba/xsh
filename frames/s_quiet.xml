@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="quiet">
+  <title>quiet command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>quiet</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>Turn off verbose messages.</para>
+	  <para>This command is equivalent to setting the
+	    <literal>$QUIET</literal> variable.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_verbose.html">verbose</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

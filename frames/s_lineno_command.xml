@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="lineno_command">
+  <title>lineno command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>lineno [<ulink url="s_exp.html">expression</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    <literal>lineno</literal>
+	    command prints line numbers of
+	    all nodes in a given node-list. Note however, that
+	    <literal>libxml2</literal>
+	    only stores line number information for element nodes.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_locate_command.html">locate</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

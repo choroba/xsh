@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>pwd command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="pwd_command" target="_self"></a>pwd command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">pwd [--id|:i]</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>Print XPath leading to the current context node 
+	    (equivalent to <code class="literal">locate .</code>).
+	  </p>
+<p>
+	    If flag <code class="literal">--id</code> (<code class="literal">:i</code>) is
+	    used then ID-based shortcut is allowed in the resulting
+	    location path. That means that if the current node or some of its
+	    ancestors has an ID attribute (either
+	    <code class="literal">xml:id</code> or one specified in a DTD) then
+	    the corresponding segment of the canonical location path
+	    is replaced by the <code class="literal">id()</code> function
+	    which jumps directly to an element based on its ID.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_locate_command.html" target="_self">locate</a>, <a class="ulink" href="s_path_function.html" target="_self">xsh:path</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Navigation.html" target="_self">Tree navigation</a>, <a class="ulink" href="s_Information.html" target="_self">Retrieving more information</a></p>
+</div>
+</div></body>
+</html>

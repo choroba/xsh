@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>location argument type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="loc" target="_self"></a>location argument type</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Description</h3></div></div></div>
+<p>One of: 
+	    <code class="literal">after</code>, 
+	    <code class="literal">before</code>, 
+	    <code class="literal">into</code>,
+	    <code class="literal">append</code>,
+	    <code class="literal">prepend</code>,
+	    <code class="literal">replace</code>.
+	  </p>
+<p>
+	    This argument is required by all commands that insert
+	    nodes to a document in some way to a destination described
+	    by an XPath expression. The meaning of the values listed
+	    above is supposed be obvious in most cases, however the
+	    exact semantics for location argument values depends on
+	    types of both the source node and the target node.
+	  </p>
+<p>
+	    <code class="literal">after/before</code> place the node right
+	    after/before the destination node, except for when the
+	    destination node is a document node or one of the source
+	    nodes is an attribute: If the destination node is a
+	    document node, the source node is attached to the
+	    end/beginning of the document (remember: there is no
+	    "after/before a document").  If both the source and
+	    destination nodes are attributes, then the source node is
+	    simply attached to the element containing the destination
+	    node (remember: there is no order on attribute nodes). If
+	    the destination node is an attribute but the source node
+	    is of a different type, then the textual content of the
+	    source node is appended to the value of the destination
+	    attribute (i.e. in this case after/before act just as
+	    append/prepend).
+	  </p>
+<p>
+	    <code class="literal">append/prepend</code> appends/prepends the
+	    source node to the destination node. If the destination
+	    node can contain other nodes (i.e. it is an element or a
+	    document node) then the entire source node is attached to
+	    it. In case of other destination node types, the textual
+	    content of the source node is appended/prepended to the
+	    content of the destination node.
+	  </p>
+<p>
+	    <code class="literal">into</code> can also be used to place
+	    the source node to the end of an element (in the same way
+	    as <code class="literal">append</code>), to attach an attribute
+	    to an element, or, if the destination node is a text node,
+	    cdata section, processing-instruction, attribute or comment,
+	    to replace its textual content with the textual content of 
+	    the source node.
+	  </p>
+<p>
+	    <code class="literal">replace</code> replaces the entire destination
+	    node with the source node except for the case when the
+	    destination node is an attribute and the source node is
+	    not. In such a case only the value of the destination
+	    attribute is replaced with the textual content of the
+	    source node. Note also that document node can never be
+	    replaced.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Argtypes.html" target="_self">Argument Types</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

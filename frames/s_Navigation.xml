@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Navigation">
+      <title>Tree navigation</title>
+      <para>
+	With XSH2, it is possible to browse a <ulink url="s_Documents.html">document tree</ulink> 
+	(XML data represented as a DOM-tree) as if it was a local
+        filesystem, except that <ulink url="s_xpath.html">XPath</ulink> 
+	expressions are used instead of ordinary directory paths.
+      </para> 
+      <para>
+	To mimic the filesystem navigation as closely as
+	possible, XSH2 contains several commands named by analogy of
+	UNIX filesystem commands, such as <ulink url="s_chxpath_command.html">cd</ulink>, <ulink url="s_list_command.html">ls</ulink> and
+	<ulink url="s_pwd_command.html">pwd</ulink>.	
+      </para>
+      <para>The current position in the document tree
+	is called the <emphasis>current node</emphasis>. Current node's XPath
+	may be queried with <ulink url="s_pwd_command.html">pwd</ulink> command.  In the interactive shell, current
+	node is also displayed in the command line prompt. 
+	(Since there may be
+	multiple document trees open at the same time, XSH2 tries to locate a
+	variable holding the current document and use it to fully qualify
+	current node's XPath in the XSH2 prompt.) Remember, that beside <ulink url="s_chxpath_command.html">cd</ulink> command, current node (and document) is
+	also silently changed by <ulink url="s_open_command.html">open</ulink> command, <ulink url="s_create_command.html">create</ulink> command and temporarily also by the
+	node-list variant of the <ulink url="s_foreach.html">foreach</ulink> loop without
+	a loop variable.
+      </para>
+      <para>XPath expressions are always evaluated in context
+	of the current node. Different documents can be accessed
+	through variables: <literal>$doc/foo[1]/bar</literal>.</para>
+      <example id="gen-000">
+	<title>XSH2 shell</title>
+	<programlisting>$scratch:/&gt; <userinput>$docA := open "testA.xml"</userinput>
+$docA/&gt; <userinput>$docB := open "testB.xml"</userinput>
+$docB/&gt; <userinput>pwd</userinput>
+/
+$docB/&gt; <userinput>cd $docA/article/chapter[title='Conclusion']</userinput>
+$docA/article/chapter[5]&gt; <userinput>pwd</userinput>
+/article/chapter[5]
+$docA/article/chapter[5]&gt; <userinput>cd previous-sibling::chapter</userinput>
+$docA/article/chapter[4]&gt; <userinput>cd ..</userinput>
+$docA/article&gt; <userinput>cd $docB</userinput>
+$docB:/&gt; <userinput>ls</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;article&gt;...&lt;/article&gt;
+</programlisting>
+      </example>
+    <simplesect role="related" id="gen-001">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_c14n_command.html">canonical</ulink></term>
+      <listitem>serialize nodes as to canonical XML</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_chxpath_command.html">cd</ulink></term>
+      <listitem>change current context node</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_fold_command.html">fold</ulink></term>
+      <listitem>mark elements to be folded by list
+	command</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_list_command.html">ls</ulink></term>
+      <listitem>list a given part of a document as XML</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_locate_command.html">locate</ulink></term>
+      <listitem>show a given node location (as a canonical XPath)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_pwd_command.html">pwd</ulink></term>
+      <listitem>show current context node location (as a canonical XPath)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_registerfunc_command.html">register-function</ulink></term>
+      <listitem>define XPath extension function (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_unfold_command.html">unfold</ulink></term>
+      <listitem>unfold elements folded with fold command</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_unregisterfunc_command.html">unregister-function</ulink></term>
+      <listitem>undefine extension function (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xpath.html">xpath</ulink></term>
+      <listitem>XPath expression</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

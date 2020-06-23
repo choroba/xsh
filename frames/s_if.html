@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>if command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="if" target="_self"></a>if command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">if <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_command.html" target="_self">command</a>
+	</code></p>
+<p><code class="literal">
+          if <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	  <a class="ulink" href="s_block.html" target="_self">block</a> [ elsif <a class="ulink" href="s_block.html" target="_self">block</a> ]* [ else <a class="ulink" href="s_block.html" target="_self">block</a> ]
+	</code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    Executes <a class="ulink" href="s_command.html" target="_self">command</a> or <a class="ulink" href="s_block.html" target="_self">block</a> if a given <a class="ulink" href="s_exp.html" target="_self">expression</a>
+	    expression evaluates to a non-emtpty node-list, true
+	    boolean-value, non-zero number or non-empty literal. If
+	    the first expression fails, then 
+	    <code class="literal">elsif</code> conditions are tested (if any) and the
+	    <a class="ulink" href="s_block.html" target="_self">block</a> corresponding to the first one of
+	    them which is true is executed. If none of the conditions is satisfied, an
+	    optional <code class="literal">else</code> <a class="ulink" href="s_block.html" target="_self">block</a> is executed.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Display node type</b></p>
+<div class="example-contents"><pre class="programlisting">def node_type %n {
+  foreach (%n) {
+    if ( . = self::* ) { # XPath trick to check if . is an element
+      echo 'element';
+    } elsif ( . = ../@* ) { # XPath trick to check if . is an attribute
+      echo 'attribute';
+    } elsif ( . = ../processing-instruction() ) {
+      echo 'pi';
+    } elsif ( . = ../text() ) {
+      echo 'text';
+    } elsif ( . = ../comment() ) {
+      echo 'comment'
+    } else { # well, this should not happen, but anyway, ...
+      echo 'unknown-type';
+    }
+  }
+}
+</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Check a environment variable</b></p>
+<div class="example-contents"><pre class="programlisting">if { defined($ENV{HOME}) } lcd { $ENV{HOME} }</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Flow.html" target="_self">Flow control</a></p>
+</div>
+</div></body>
+</html>

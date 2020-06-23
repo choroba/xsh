@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>declare-ns command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="declare_namespace_command" target="_self"></a>declare-ns command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">declare-ns <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This command takes one or two arguments: prefix and URI,
+	    both evaluated as names.
+	    It creates a namespace declaration
+	    of the form <code class="literal">xmlns:prefix="URI"</code>
+	    on the current node.
+	    The command produces an error if
+	    the prefix is already declared in the scope of the current node
+	    with a different namespace URI.
+	  </p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_set_namespace_command.html" target="_self">set-ns</a>, <a class="ulink" href="s_change_namespace_uri_command.html" target="_self">change-ns-uri</a>, <a class="ulink" href="s_change_namespace_prefix_command.html" target="_self">change-ns-prefix</a>, <a class="ulink" href="s_namespaces_command.html" target="_self">namespaces</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-003" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Namespaces.html" target="_self">Namespaces in XML and XPath</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

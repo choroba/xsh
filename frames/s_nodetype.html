@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>node-type argument type</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="nodetype" target="_self"></a>node-type argument type</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    One of: element, attribute, text, cdata, comment, chunk
+	    and (EXPERIMENTALLY!) entity_reference.  A
+	    chunk is a character string which forms a well-balanced
+	    piece of XML.
+	  </p>
+<div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">add element hobbit into //middle-earth/creatures;
+add attribute 'name="Bilbo"' into //middle-earth/creatures/hobbit[last()];
+add chunk '&lt;hobbit name="Frodo"&gt;A small guy from &lt;place&gt;Shire&lt;/place&gt;.&lt;/hobbit&gt;' 
+  into //middle-earth/creatures;
+</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-002" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Argtypes.html" target="_self">Argument Types</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="move_command">
+  <title>move command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>move <ulink url="s_xpath.html">xpath</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_xpath.html">xpath</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> mv</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para><literal>move</literal> command acts exactly like
+	      <ulink url="s_copy_command.html">copy</ulink>, except that it
+	      <emphasis>removes</emphasis> the source nodes after a
+	      successful copy. Remember that the moved nodes are
+	      actually <emphasis>different nodes</emphasis> from the
+	      original ones (which may not be obvious when moving
+	      nodes within a single document into locations that do
+	      not require type conversion). So, after the move, the
+	      original nodes don't belong to any document
+	      and are automatically destroyed unless some
+	      variable still contains to them.
+	  </para>
+	  <para>
+	    This command returns a node-list consisting of nodes
+	    it created on the target locations.
+	  </para>
+	  <para>
+	    See <ulink url="s_copy_command.html">copy</ulink> for more details on how
+	    the copies of the moved nodes are created.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_xmove_command.html">xmove</ulink>, <ulink url="s_copy_command.html">copy</ulink>, <ulink url="s_xcopy_command.html">xcopy</ulink>, <ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_xinsert_command.html">xinsert</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

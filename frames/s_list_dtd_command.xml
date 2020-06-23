@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="list_dtd_command">
+  <title>dtd command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>dtd [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Print external or internal DTD for a given document. 
+	    If used without arguments prints DTD of the current document.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_set_dtd_command.html">set-dtd</ulink>, <ulink url="s_validate_command.html">validate</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

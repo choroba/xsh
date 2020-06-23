@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="call_command">
+  <title>call command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>call <ulink url="s_exp.html">expression</ulink> [<ulink url="s_exp.html">expression</ulink> ...]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Call a subroutine whose name is computed by evaluating
+	    the first argument <ulink url="s_exp.html">expression</ulink>. All other
+	    expressions are evaluated too and the results are passed
+	    to the subroutine as arguments.
+	  </para>
+	  <para>
+	    This command should only be used if the name of the subroutine
+	    isn't known at the compile time. Otherwise it is recommended
+	    to use a direct subroutine call of the form:
+	  </para>
+	  <programlisting>subroutine-name [argument1 argument2 ...]</programlisting>
+	  <example id="gen-002">
+	    <programlisting>def a $arg { echo "A says" $arg }
+def b $arg { echo "B says" $arg }
+a "hallo!";  # call subroutine a
+b "hallo!";  # call subroutine b
+call { chr(ord("a")+rand(2)) } "surprise!"; # call a or b randomly 
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_def.html">def</ulink>, <ulink url="s_return_command.html">return</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

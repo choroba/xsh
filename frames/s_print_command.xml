@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="print_command">
+  <title>print command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>print [--nonl|:n] [--nospace|:s] [--stderr|:e] <ulink url="s_exp.html">expression</ulink> [<ulink url="s_exp.html">expression</ulink> ...]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> echo</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>Evaluate given expression(s) and print the results
+	    (separated by a single space character).
+	    Expressions not containing any special characters, such as
+	    brackets, quotes, $, or @ are considered as bare words
+	    and evaluate to themselves.
+	  </para>
+	  <para>
+	    <literal>--nonl</literal> or <literal>:n</literal>
+	    can be used to avoid printing a trailing new-line.
+	  </para>
+	  <para>
+	    <literal>--nospace</literal> or <literal>:s</literal>
+	    suppresses printing additional spaces between individual arguments.
+	  </para>
+	  <para>
+	    <literal>--stderr</literal> or <literal>:e</literal>
+	    causes the command to print on standard error output.
+	  </para>
+	  <example id="gen-003">
+	    <programlisting>print foo   bar;  # prints "foo bar"</programlisting>
+	    <programlisting>print "foo   bar";  # prints "foo   bar"</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="registerfunc_command">
+  <title>register-function command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>register-function <ulink url="s_exp.html">expression</ulink> <ulink url="s_perl_code.html">perl-code</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> function, regfunc</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    EXPERIMENTAL! 
+	  </para>
+	  <para>Registers a given perl code as a new XPath
+	    extension function under a name provided in the first
+	    argument. XML::LibXML DOM
+	    API as well as all Perl functions
+	    pre-defined in the XML::XSH2::Map namespace
+	    may be used in the perl code for object processing. If
+	    the name contains a colon, then the first part before the
+	    colon must be a registered namespace prefix 
+	    (see <ulink url="s_registerns_command.html">register-namespace</ulink>) and the function is
+	    registered within the corresponding namespace.
+	  </para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para><ulink url="s_Navigation.html">Tree navigation</ulink>, <ulink url="s_Configuration.html">Global settings</ulink></para>
+  </simplesect>
+</section>

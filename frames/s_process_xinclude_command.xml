@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="process_xinclude_command">
+  <title>process-xinclude command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>process-xinclude [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> process_xinclude, process-xincludes, process_xincludes, xinclude, xincludes, load_xincludes, load-xincludes, load_xinclude, load-xinclude</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Replace any xinclude tags in a given <ulink url="s_document.html">document</ulink>
+	    with the corresponding content. See
+	    <ulink url="http://www.w3.org/TR/xinclude/">http://www.w3.org/TR/xinclude/</ulink>
+	    to find out more about XInclude technology.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_parser_expands_xinclude.html">parser-expands-xinclude</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para><ulink url="s_Manipulation.html">Tree modification</ulink>, <ulink url="s_Documents.html">Files/Documents</ulink></para>
+  </simplesect>
+</section>

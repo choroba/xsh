@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="edit_command">
+  <title>edit command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>edit [--editor|:E <ulink url="s_filename.html">filename</ulink>]
+	  [--all|:A] [--noindent|:n] [--recover|:r] [--keep-blanks|:k]
+	  [--allow-empty|:0] [--no-coment|:q] [--encoding|:e <ulink url="s_enc_string.html">encoding</ulink>] <ulink url="s_exp.html">expression</ulink>
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>This command may be used to interactively edit parts of a XML
+	    document directly in your favorite editor.
+	  </para>
+	  <para>
+	    A given <ulink url="s_exp.html">expression</ulink> is evaluated to a node-list and the
+	    first the first resulting node is opened
+	    in an external editor as a XML fragment. 
+	    When the editor exits, the (possibly modified) fragment
+	    is parsed and returned to the original document. Unless
+	    <literal>--no-comment</literal> (<literal>:q</literal>) flag is
+	    used, the XML fragment is preceded with a XML comment specifying
+	    canonical XPath of the node being edited.
+	  </para>
+	  <para>
+	    The command returns a node-list consisting of nodes
+	    that resulted from parsing the individual edits.
+	  </para>
+	  <para>
+	    <literal>--editor</literal> or <literal>:E</literal>
+	    option may be used to specify external editor command.
+	    If not specified, environment variables
+	    <literal>EDITOR</literal> and <literal>VISUAL</literal>
+	    are tried first, then <literal>vi</literal> editor
+	    is used as a fallback.
+	  </para>
+	  <para>
+	    If <literal>--all</literal> or <literal>:A</literal>
+	    flag is present, all nodes from the node-list
+	    are opened in the editor, one at a time.
+	  </para>
+	  <para>
+	    If <literal>--recover</literal> or <literal>:r</literal>
+	    is specified, the parser tries to recover from possible 
+	    syntax errors when parsing the resulting XML.
+	  </para>
+	  <para>
+	    <literal>--keep-blanks</literal> or <literal>:b</literal>
+	    option may be used to force the parser to
+	    include ignorable white space.
+	  </para>
+	  <para>If the result saved
+	    by the editor is empty, the interactive
+	    XSH2 shell asks user to confirm this was correct.
+	    This confirmation can be suppressed using
+	    <literal>--allow-empty</literal> or
+	    <literal>:0</literal> (zero) options.
+	  </para>
+	  <para>
+	    The <literal>--encoding</literal> or <literal>:e</literal>
+	    parameter can be used to specify character encoding to
+	    use when communicating with the external editor.
+	  </para>
+	  <example id="gen-002">
+	    <title>Edit all chapter elements (one by one) with emacs</title>
+	    <programlisting>edit --editor 'emacs -nw' --encoding iso-8859-1 --all //chapter</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

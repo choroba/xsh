@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="span_function">
+  <title>xsh:span function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:span(node-set START,node-set END)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a node-set which forms a span of sibling nodes
+	    starting at START node and ending at END node (only the first node
+	    of each of the nodesets is used). It is an error if the START
+	    node and END node are not siblings.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Flow">
+      <title>Flow control</title>
+      <para>
+	As almost every scripting language, XSH2 supports subroutines,
+	various conditional statements, loops and even exceptions.
+      </para>
+    <simplesect role="related" id="gen-000">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_block.html">block</ulink></term>
+      <listitem>a block of XSH2 commands</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_call_command.html">call</ulink></term>
+      <listitem>indirect call to a user-defined routine (macro)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_def.html">def</ulink></term>
+      <listitem>sub-routine declaration</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_do_command.html">do</ulink></term>
+      <listitem>execute a given block of commands</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_eval_command.html">eval</ulink></term>
+      <listitem>evaluate given expression as XSH commands</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_exit_command.html">exit</ulink></term>
+      <listitem>exit XSH2 shell</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_foreach.html">foreach</ulink></term>
+      <listitem>loop iterating over a node-list or a perl array</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_if.html">if</ulink></term>
+      <listitem>if statement</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_ifinclude_command.html">ifinclude</ulink></term>
+      <listitem>conditionally include another XSH2 source in current position</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_include_command.html">include</ulink></term>
+      <listitem>include another XSH2 source in current position</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_iterate.html">iterate</ulink></term>
+      <listitem>iterate a block over current subtree</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_last_command.html">last</ulink></term>
+      <listitem>immediately exit an enclosing loop</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_next_command.html">next</ulink></term>
+      <listitem>start the next iteration of an enclosing
+	loop</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_prev_command.html">prev</ulink></term>
+      <listitem>restart an iteration on a previous node</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_redo_command.html">redo</ulink></term>
+      <listitem>restart the innermost enclosing loop block</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_return_command.html">return</ulink></term>
+      <listitem>return from a subroutine</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_run_mode.html">run-mode</ulink></term>
+      <listitem>switch into normal execution mode (quit <ulink url="s_test_mode.html">test-mode</ulink>)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_stream_process_command.html">stream</ulink></term>
+      <listitem>process selected elements from an XML stream (EXPERIMENTAL)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_test_mode.html">test-mode</ulink></term>
+      <listitem>do not execute any command, only check the syntax</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_throw_command.html">throw</ulink></term>
+      <listitem>throw an exception</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_try_catch.html">try</ulink></term>
+      <listitem>try/catch statement</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_undef.html">undef</ulink></term>
+      <listitem>undefine sub-routine or variable</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_unless.html">unless</ulink></term>
+      <listitem>negated if statement</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_while.html">while</ulink></term>
+      <listitem>simple while loop</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

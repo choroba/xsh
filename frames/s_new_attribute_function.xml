@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="new_attribute_function">
+  <title>xsh:new-attribute function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:new-attribute(string NAME1,string
+	VALUE1,[string NAME2, string VALUE2, ...])</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Return a node-set consisting
+	    of newly created attribute nodes
+	    with given names and respective values.
+	  </para>
+	</simplesect>
+</section>

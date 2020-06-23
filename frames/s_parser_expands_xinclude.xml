@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="parser_expands_xinclude">
+  <title>parser-expands-xinclude command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>parser-expands-xinclude <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> parser_expands_xinclude</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    If the <ulink url="s_exp.html">expression</ulink> is non-zero, the parser is
+	    allowed to expand XInclude tags immediately while parsing the
+	    document.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$PARSER_EXPANDS_XINCLUDE</literal> variable.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_process_xinclude_command.html">process-xinclude</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

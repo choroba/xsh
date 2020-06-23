@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="set_dtd_command">
+  <title>set-dtd command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>set-dtd [--internal] [--name|:n <ulink url="s_exp.html">expression</ulink>] 
+	  [--public|:p <ulink url="s_exp.html">expression</ulink>] 
+	  [--system|:s <ulink url="s_exp.html">expression</ulink>] 
+	  [<ulink url="s_document.html">document</ulink>]</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> set_dtd</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Set external (default) or internal DTD for a given document.  If
+	    no <ulink url="s_document.html">document</ulink> is given, the current
+	    document is used. At least one of <literal>--public</literal>
+	    and <literal>--system</literal> options should be used
+	    to specify the PUBLIC and SYSTEM identifiers of the DTD.
+	    If <literal>--name</literal> parameter is not provided, 
+	    name of the document root element is used as DTD name.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_list_dtd_command.html">dtd</ulink>, <ulink url="s_validate_command.html">validate</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

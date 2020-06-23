@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Files/Documents</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="Documents" target="_self"></a>Files/Documents</h2></div></div>
+<hr>
+</div>
+<p>
+	XSH2 is designed as an environment for querying and manipulating XML and
+	HTML documents. Use <a class="ulink" href="s_open_command.html" target="_self">open</a> or <a class="ulink" href="s_create_command.html" target="_self">create</a> commands to load an XML or HTML
+	document from a local file, external URL (such as http:// or ftp://),
+	string or pipe. XSH2 can optionally validate the document during parse
+	process (see <a class="ulink" href="s_validation.html" target="_self">validation</a> and
+	<a class="ulink" href="s_load_ext_dtd.html" target="_self">load-ext-dtd</a>). Parsed documents are stored in memory
+	as <a class="ulink" href="http://www.w3.org/DOM/" target="_self">DOM</a> trees, that can be
+	<a class="ulink" href="s_Navigation.html" target="_self">navigated</a> and <a class="ulink" href="s_Manipulation.html" target="_self">manipulated</a> with XSH2 commands and XPath
+	language, whose names and syntax make working with
+	the DOM tree a flavor of working in a UNIX filesystem.
+      </p>
+<p>
+	A parsed document is usually stored in a variable. 
+	XSH2 shares variables
+	with the XPath engine, so if e.g. <code class="literal">$doc</code> is a XSH2
+	variable holding a document (or, more generally any node-set), then
+	<code class="literal">$doc//section/title</code> is an
+	XPath expression selecting all <code class="literal">title</code> 
+	subelements of all
+	<code class="literal">section</code> elements within the (sub)tree of $doc.
+      </p>
+<p>
+	Although XSH2 is able to parse remote documents via
+	<code class="literal">http://</code> or <code class="literal">ftp://</code>, it is only
+	able to save them locally.  To upload a document to a remote server
+	(e.g. using FTP) or to store it into a database, use <a class="ulink" href="s_save_command.html" target="_self">save</a> command with a <code class="literal">--pipe</code>
+	parameter, in connection with an external program able to store
+	its standard input (XML) to the desired location. 
+	You can also use similar
+	parameter with <a class="ulink" href="s_open_command.html" target="_self">open</a> in order to parse
+	documents from standard output of some external program.
+      </p>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Store a XSH2 document 
+	  on a remote machine using the Secure Shell</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>save --pipe "ssh my.remote.org 'cat &gt; test.xml'" $doc</code></strong></pre></div>
+</div>
+<br class="example-break"><div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Related Topics</h3></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><a class="ulink" href="s_backups.html" target="_self">backups</a></span></dt>
+<dd>turn on backup file creation</dd>
+<dt><span class="term"><a class="ulink" href="s_catalog_command.html" target="_self">catalog</a></span></dt>
+<dd>use a catalog file during all parsing processes</dd>
+<dt><span class="term"><a class="ulink" href="s_cdonopen.html" target="_self">switch-to-new-documents</a></span></dt>
+<dd>set on/off changing current document to newly
+	  open/created files</dd>
+<dt><span class="term"><a class="ulink" href="s_clone_command.html" target="_self">clone</a></span></dt>
+<dd>clone a given document</dd>
+<dt><span class="term"><a class="ulink" href="s_close_command.html" target="_self">close</a></span></dt>
+<dd>close document (without saving)</dd>
+<dt><span class="term"><a class="ulink" href="s_create_command.html" target="_self">create</a></span></dt>
+<dd>make a new document from a given XML fragment</dd>
+<dt><span class="term"><a class="ulink" href="s_document.html" target="_self">document</a></span></dt>
+<dd>specifying documents</dd>
+<dt><span class="term"><a class="ulink" href="s_filename.html" target="_self">filename</a></span></dt>
+<dd>specifying filenames</dd>
+<dt><span class="term"><a class="ulink" href="s_files_command.html" target="_self">documents</a></span></dt>
+<dd>display a list of open documents</dd>
+<dt><span class="term"><a class="ulink" href="s_index_command.html" target="_self">index</a></span></dt>
+<dd>index a static document for faster XPath lookup</dd>
+<dt><span class="term"><a class="ulink" href="s_nobackups.html" target="_self">nobackups</a></span></dt>
+<dd>turn off backup file creation</dd>
+<dt><span class="term"><a class="ulink" href="s_nodename.html" target="_self">nodename</a></span></dt>
+<dd>specifying names of DOM nodes</dd>
+<dt><span class="term"><a class="ulink" href="s_open_command.html" target="_self">open</a></span></dt>
+<dd>load an XML, HTML, or Docbook SGML document from a
+	file, pipe or URI</dd>
+<dt><span class="term"><a class="ulink" href="s_process_xinclude_command.html" target="_self">process-xinclude</a></span></dt>
+<dd>load and insert XInclude sections</dd>
+<dt><span class="term"><a class="ulink" href="s_save_command.html" target="_self">save</a></span></dt>
+<dd>save a document as XML or HTML</dd>
+<dt><span class="term"><a class="ulink" href="s_set_filename_command.html" target="_self">set_filename</a></span></dt>
+<dd>change filename or URL associated with a document</dd>
+<dt><span class="term"><a class="ulink" href="s_stream_process_command.html" target="_self">stream</a></span></dt>
+<dd>process selected elements from an XML stream (EXPERIMENTAL)</dd>
+<dt><span class="term"><a class="ulink" href="s_subname.html" target="_self">subroutine</a></span></dt>
+<dd>name of a sub-routine</dd>
+<dt><span class="term"><a class="ulink" href="s_varname.html" target="_self">$variable</a></span></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></body>
+</html>

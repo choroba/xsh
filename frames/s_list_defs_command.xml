@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="list_defs_command">
+  <title>defs command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>defs</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>List names and parametric variables for all user-defined XSH2 subroutines.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-002">
+    <title>See Also</title>
+    <para><ulink url="s_def.html">def</ulink>, <ulink url="s_var_command.html">variables</ulink></para>
+  </simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Information.html">Retrieving more information</ulink>
+    </para>
+  </simplesect>
+</section>

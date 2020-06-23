@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="validation">
+  <title>validation command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>validation <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Turn on validation during the parse process if the
+	    <ulink url="s_exp.html">expression</ulink> is non-zero or off otherwise.
+	    Defaults to off.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$VALIDATION</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

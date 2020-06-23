@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="substr_function">
+  <title>xsh:substr function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:substr(string STR,float OFFSET,[float LENGTH])</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Extracts a substring out of <literal>STR</literal> 
+	    and returns it. First character is at offset 0.</para>
+	  <para>
+	    If <literal>OFFSET</literal> is negative, starts
+	    that far from the end of the string. </para>
+	  <para>
+	    If <literal>LENGTH</literal> is
+	    omitted, returns everything to the end of the
+	    string.  If <literal>LENGTH</literal> is negative,
+	    leaves that many characters off the end of the string.</para>
+	  <para>
+	    If <literal>OFFSET</literal> and
+	    <literal>LENGTH</literal> specify a substring that is
+	    partly outside the string, only the part within
+	    the string is returned.  If the substring is
+	    beyond either end of the string, substr() returns
+	    empty string and produces a warning.
+	  </para>
+	</simplesect>
+</section>

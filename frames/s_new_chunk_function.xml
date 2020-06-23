@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="new_chunk_function">
+  <title>xsh:new-chunk function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:new-chunk(string XML)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This is just an alias for <ulink url="s_parse_function.html">xsh:parse</ulink>.  It parses given piece of XML
+	    and returns a node-set consisting of the top-level element
+	    within the parsed tree.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="var_function">
+  <title>xsh:var function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:var(string NAME)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns a node-set consisting of nodes stored in a XSH2 node-list
+	    variable named <literal>NAME</literal>.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="save_command">
+  <title>save command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>save [--format|:F html|xml] [--xinclude|:x] 
+	  [--file|:f <ulink url="s_filename.html">filename</ulink> | 
+           --pipe|:p <ulink url="s_filename.html">filename</ulink> | 
+           --string|:s |
+           --print|:r ]
+          [--subtree|:S]
+          [--indent|:i | --no-indent|:I]
+	  [--skip-dtd|:d | --no-skip-dtd|:D]
+	  [--skip-empty-tags|:t | --no-skip-empty-tags|:T]
+	  [--skip-xmldecl|:x]
+          [--encoding|:e <ulink url="s_enc_string.html">encoding</ulink>] 
+	  <ulink url="s_document.html">document</ulink>
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This takes a given <ulink url="s_document.html">document</ulink>,
+	    serializes it to XML or HTML and
+	    either saves the result
+	    to its original file or another file (default),
+	    pipes it to an external command,
+	    prints it on standard output, or
+	    simply returns it. Without arguments
+	    it simply saves current document
+	    to its original file.
+	  </para>
+	  <para>
+	    <literal>--file|:f</literal> option
+	    may be used to specify an output file-name.
+	    By default, the original document's file-name
+	    is used.
+	  </para>
+	  <para>
+	    <literal>--pipe|:p</literal> option
+	    specifies, that the output should be
+	    piped to an external command
+	    specified as the option's argument.
+	  </para>
+	  <para>
+	    <literal>--print|:r</literal> option
+	    specifies, that the output should 
+	    be printed on standard output.</para>
+	  <para>
+	    <literal>--string|:s</literal>
+	    option specifies, that the output
+	    should be returned by the command
+	    as a string. In this case, the result is
+	    always in UTF8, regardless on which
+	    encoding is specified in the document
+	    or using <literal>--encoding</literal> option.
+	  </para>
+	  <para>The above four options are mutually exclusive.</para>
+	  <para>
+	    <literal>--format</literal> option may be used
+	    to specify the output format. It's argument
+	    should be either <literal>xml</literal>,
+	    <literal>html</literal> or an expression
+	    evaluating to one of these. If not specified,
+	    XML output is assumed.
+	    Note, that a document should be saved as HTML only if it
+	    actually is a HTML document, otherwise the result would be 
+	    an invalid XML instance. Note also, that the optional
+	    encoding parameter only forces character conversion; it is
+	    up to the user to declare the document encoding in the
+	    appropriate HTML &lt;META&gt; tag, if needed.
+	  </para>
+	  <para>
+	    <literal>--xinclude</literal>
+	    automatically implies XML format and
+	    can be used to force XSH2 to save all already expanded
+	    XInclude sections back to their original files while
+	    replacing them with &lt;xi:include&gt; tags in the main
+	    XML file. Moreover, all material included within
+	    &lt;include&gt; elements from the
+	    <ulink url="http://www.w3.org/2001/XInclude">http://www.w3.org/2001/XInclude</ulink>
+	    namespace is saved to separate files too according to the
+	    <literal>href</literal> attribute, leaving only empty
+	    &lt;include&gt; element in the root file. This feature may
+	    be used to split the document to a new set of XInclude fragments.
+	  </para>
+	  <para>
+	    If the <literal>--subtree</literal> (<literal>:S</literal>)
+	    flag is used, only the subtree of the
+	    specified node is saved instead of the complete document
+	    (this flag cannot be used
+	    with <literal>--html</literal> format).
+          </para>
+	  <para>
+	    <literal>--indent</literal> (<literal>:i</literal>)
+	    and 
+	    <literal>--no-indent</literal> (<literal>:I</literal>)
+	    may be used to enforce/suppress
+	    indentation, overriding current global setting
+	    of <ulink url="s_indent.html">indent</ulink>.
+	  </para>
+	  <para>
+	    <literal>--skip-dtd</literal> (<literal>:d</literal>)
+	    and 
+	    <literal>--no-skip-dtd</literal> (<literal>:D</literal>)
+	    may be used to enforce/suppress
+	    skipping DTD declaration and internal subset
+	    on output, overriding current global setting
+	    of <ulink url="s_skip_dtd.html">skip-dtd</ulink>.
+	  </para>
+	  <para>
+	    <literal>--empty-tags</literal> (<literal>:t</literal>)
+	    and 
+	    <literal>--no-empty-tags</literal> (<literal>:T</literal>)
+	    may be used to override current global setting
+	    of <ulink url="s_empty_tags.html">empty-tags</ulink>.
+	    <literal>--no-empty-tags</literal> instructs XSH2
+	    to serialize elements with no child nodes
+	    as start-tag/end-tag pair
+	    <literal>&lt;element&gt;&lt;/element&gt;</literal>
+	    instead of using a short empty-tag form
+	    <literal>&lt;element/&gt;</literal>.
+	  </para>
+	  <para>
+	    <literal>--skip-xmldecl</literal> (<literal>:x</literal>)
+	    instructs XSH2 to omit the XML declaration
+	    from the saved document. Note however, that XML declaration
+	    is obligatory for XML documents. It usually looks like
+	    <literal>&lt;?xml version="1.0" ...?&gt;</literal>.
+	  </para>
+	  <para>
+	    <literal>--backup</literal> (<literal>:b</literal>)
+	    and 
+	    <literal>--no-backup</literal> (<literal>:B</literal>)
+	    can be used to enforce/suppress
+	    creation of a backup file if target file
+	    already exists. Using these options
+	    overrides current global setting of <ulink url="s_backups.html">backups</ulink>.
+	  </para>	  
+	  <para>
+	    <literal>--encoding</literal>
+	     followed by a <ulink url="s_enc_string.html">encoding</ulink>
+	    instructs XSH2 to save the document in the specified
+	    encoding.  In case of XML output, the &lt;?xml?&gt;
+	    declaration is automatically changed accordingly.
+	  </para>
+	  <example id="gen-002">
+	    <title>Use save to preview current HTML document in Lynx</title>
+	    <programlisting>save --format html --pipe 'lynx -stdin'</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_open_command.html">open</ulink>, <ulink url="s_close_command.html">close</ulink>, <ulink url="s_print_enc_command.html">enc</ulink>, <ulink url="s_files_command.html">documents</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

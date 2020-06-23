@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>hash command</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="hash_command" target="_self"></a>hash command</h2></div></div>
+<hr>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-000" target="_self"></a>Usage</h3></div></div></div>
+<p><code class="literal">$hash := hash <a class="ulink" href="s_exp.html" target="_self">expression</a> <a class="ulink" href="s_exp.html" target="_self">expression</a></code></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-001" target="_self"></a>Description</h3></div></div></div>
+<p>
+	    This command takes two arguments: an expression computing
+	    a key from a given node (1st argument) and a node-set (2nd
+	    argument). For each node in the node-set, the key value is
+	    computed and the node is stored under the given key in
+	    the resulting hash. For a given key, the value stored
+	    in the hash table is a node-list consisting of all nodes
+	    for which the 1st expression evaluated to an object
+	    string-wise equal to the key. It is therefore possible to
+	    index more than one node under the same key.
+	  </p>
+<p>
+	    The XPath function
+	    <code class="literal">xsh:lookup(varname,key)</code> can
+            be used to retrieve values from hashes in XPath expressions.
+	  </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Index books by author</b></p>
+<div class="example-contents"><pre class="programlisting">my $books_by_author := hash concat(author/firstname," ",author/surname) //book;</pre></div>
+</div>
+<br class="example-break"><div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Lookup books by Jack London.</b></p>
+<div class="example-contents"><pre class="programlisting">ls { $books_by_author-&gt;{'Jack London'} };
+ls xsh:lookup('books_by_author','Jack London');</pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-004" target="_self"></a>See Also</h3></div></div></div>
+<p><a class="ulink" href="s_lookup_function.html" target="_self">xsh:lookup</a></p>
+</div>
+<div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Sections</h3></div></div></div>
+<p><a class="ulink" href="s_Perl_shell.html" target="_self">Interacting with Perl and Shell</a>, <a class="ulink" href="s_Manipulation.html" target="_self">Tree modification</a></p>
+</div>
+</div></body>
+</html>

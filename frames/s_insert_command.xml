@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="insert_command">
+  <title>insert command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>insert [--namespace|:n <ulink url="s_exp.html">expression</ulink>] <ulink url="s_nodetype.html">node-type</ulink> <ulink url="s_exp.html">expression</ulink> <ulink url="s_loc.html">location</ulink> <ulink url="s_xpath.html">xpath</ulink>
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> add</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Works just like <ulink url="s_xinsert_command.html">xinsert</ulink>, 
+	    except that the new node is attached
+	    only the first node matched.
+	  </para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para><ulink url="s_xinsert_command.html">xinsert</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_xmove_command.html">xmove</ulink></para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

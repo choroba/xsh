@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Command output redirection</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="Redirection" target="_self"></a>Command output redirection</h2></div></div>
+<hr>
+</div>
+<p>WARNING: XSH2 redirection syntax is not
+	yet finished. It is currently the same as in XSH1
+	but this may be changed in the future releases.
+      </p>
+<p>
+	Output redirection can be used to pipe output of some XSH <a class="ulink" href="s_command.html" target="_self">command</a> to some external program, or to capture it
+	to a variable. Redirection of output of more than one XSH
+	command can be achieved using the <a class="ulink" href="s_do_command.html" target="_self">do</a> command.
+      </p>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Redirection_pipe" target="_self"></a>Redirect output to an external program</h3></div></div></div>
+<p>The syntax for redirecting the output of a XSH command to
+	  an external program, is <code class="literal">xsh-command | shell-command
+	    ;</code>, where <code class="literal">xsh-command</code> is any XSH2
+	  command and <code class="literal">shell-command</code> is any command
+	  (or code) recognized by the default shell interpreter of the
+	  operating system (i.e. on UNIX systems by
+	  <code class="literal">/bin/sh</code> or <code class="literal">/bin/csh</code>, on
+	  Windows systems by <code class="literal">cmd</code>).  The shell command
+	  may contain further redirections (as supported by the system
+	  shell interpreter), but should not contain semicolons, except when
+	  the whole shell command is enclosed in brackets.
+	</p>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;Use well-known UNIX commands to filter XPath-based XML
+	    listing from a document and count the results</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>ls //something/* | grep foo | wc</code></strong></pre></div>
+</div>
+<br class="example-break">
+</div>
+<div class="section">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="Redirection_variable" target="_self"></a>Capture output to a variable</h3></div></div></div>
+<p>
+	  The syntax for capturing the output of an XSH command to a variable is
+	  <code class="literal">xsh-command |&gt; $variable</code>, 
+	  where <code class="literal">xsh-command</code> is
+	  any XSH <a class="ulink" href="s_command.html" target="_self">command</a> and 
+	  <code class="literal">$variable</code> is any valid
+	  name for a <a class="ulink" href="s_Variables.html" target="_self">variable</a>.
+	</p>
+<div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;Store the number of all words in a variable named count.</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>count //words |&gt; $count</code></strong></pre></div>
+</div>
+<br class="example-break">
+</div>
+</div></body>
+</html>

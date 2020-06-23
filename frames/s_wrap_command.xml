@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="wrap_command">
+  <title>wrap command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>wrap [--namespace <ulink url="s_exp.html">expression</ulink>] 
+	  [ [--inner] | [--while|:W <ulink url="s_exp.html">expression</ulink>] [--until|:U <ulink url="s_exp.html">expression</ulink>]
+	    [--skip-whitespace|:w] [--skip-comments|:c] [--skip-pi|:p] ]
+	  <ulink url="s_exp.html">expression</ulink> <ulink url="s_xpath.html">xpath</ulink>
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    For each node matching the <ulink url="s_xpath.html">xpath</ulink> argument,
+	    this command creates a new element node according to a
+	    given <ulink url="s_exp.html">expression</ulink> (in the same
+	    way as <ulink url="s_xinsert_command.html">xinsert</ulink> does)
+	    which replaces the matching node, and
+	    moves the matching node into this newly created element.
+	    If namespace <ulink url="s_exp.html">expression</ulink> is given,
+	    the namespace is applied on the created element.
+	    The command returns a node-list consisting
+	    of the elements created.
+	  </para>
+	  <para>
+	    With <literal>--inner</literal> (or <literal>:i</literal>)
+	    flag the command 
+	    wraps children nodes of the matching node
+	    rather than the node it self
+	    the following sense:
+	    for each matching node
+	    a new element node is created,
+	    but this time it is placed into 
+	    the matching node and 
+	    all previous children of the matching node
+	    are moved into the newly created node.
+	    In this mode, all non-element matching
+	    nodes are ignored. This flag cannot be used together
+	    with <literal>--while</literal>
+	    and <literal>--until</literal>, which we describe next.
+	  </para>
+	  <para>
+	    <literal>--while</literal> (<literal>:W</literal>)
+	    and/or <literal>--until</literal> (<literal>:U</literal>) 
+	    arguments can be provided in order to move a sequence
+	    of adjacent siblings following the matching node into
+	    the newly created element. In this way the newly created element wraps
+	    not just the matching node itself but a range of nodes starting
+	    at the matching node and ending either before a first following node matching
+	    the expression of <literal>--until</literal>, or
+	    before a first following node not matching the expression
+	    of <literal>--while</literal>, or at the last sibling if
+	    neither of the prior apply. Both these expressions are
+	    evaluated in the context of the currently tested sibling and prior to
+	    the creation of the wrapping element. The context
+	    position for these expressions is 1 at the first sibling
+	    following the matching node and increases with each tested
+	    sibling; the context size is the number of all
+	    siblings following the matching node.
+	    It is important to mention that siblings wrapped in this
+	    way are excluded from further processing by <ulink url="s_wrap_command.html">wrap</ulink> even if included in the node-list
+	    produced by the <ulink url="s_xpath.html">xpath</ulink> argument. This allows to easily wrap
+	    certain adjacent elements without worrying about some
+	    elements being wrapped multiple times
+	    (for example, <literal>wrap :W x y //x</literal> wraps
+	    each sequence of adjacent elements <literal>&lt;x&gt;</literal> in a <literal>&lt;y&gt;</literal>).
+	  </para>
+	  <para><literal>--skip-whitespace</literal> (<literal>:w</literal>),
+	    <literal>--skip-comments</literal> (<literal>:c</literal>), and 
+	    <literal>--skip-pi</literal> (<literal>:p</literal>) can be used
+	    in combination with <literal>--while</literal> (<literal>:W</literal>)
+	    and/or <literal>--until</literal> (<literal>:U</literal>)
+	    to skip testing the expressions on white-space text
+	    nodes, comments, and/or processing instruction, respectively.
+	    Such nodes are only included in the wrapped range if
+	    followed by a sibling that is to be wrapped.
+	  </para>
+	  <example id="gen-002">
+	    <programlisting>$scratch/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch/&gt;
+
+$scratch/&gt; wrap 'foo' *;
+$scratch/&gt; insert attribute 'bar=baz' into /foo;
+$scratch/&gt; insert text 'some text' into //scratch;
+$scratch/&gt; wrap --namespace 'http://foo/bar' 'a:A' //@*;
+$scratch/&gt; $wrapper := wrap 'text aaa="bbb"' //text();
+$scratch/&gt; wrap '&lt;elem ccc=ddd&gt;' //*;
+$scratch/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;elem ccc="ddd"&gt;
+  &lt;foo xmlns:a="http://foo/bar"&gt;
+    &lt;elem ccc="ddd"&gt;
+      &lt;scratch&gt;
+        &lt;elem ccc="ddd"&gt;
+          &lt;text aaa="bbb"&gt;some text&lt;/text&gt;
+        &lt;/elem&gt;
+      &lt;/scratch&gt;
+    &lt;/elem&gt;
+    &lt;elem ccc="ddd"&gt;
+      &lt;a:A xmlns:a="http://foo/bar" bar="baz"/&gt;
+    &lt;/elem&gt;
+  &lt;/foo&gt;
+&lt;/elem&gt;
+
+$scratch/&gt; ls $wrapper;
+&lt;text aaa="bbb"&gt;some text&lt;/text&gt;
+
+
+$scratch/&gt; wrap --inner bar //foo
+$scratch/&gt; ls /;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;elem ccc="ddd"&gt;
+  &lt;foo xmlns:a="http://foo/bar"&gt;
+    &lt;bar&gt;
+      &lt;elem ccc="ddd"&gt;
+        &lt;scratch&gt;
+          &lt;elem ccc="ddd"&gt;
+            &lt;text aaa="bbb"&gt;some text&lt;/text&gt;
+          &lt;/elem&gt;
+        &lt;/scratch&gt;
+      &lt;/elem&gt;
+      &lt;elem ccc="ddd"&gt;
+        &lt;a:A xmlns:a="http://foo/bar" bar="baz"/&gt;
+      &lt;/elem&gt;
+    &lt;/bar&gt;
+  &lt;/foo&gt;
+&lt;/elem&gt;
+</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Wrapping a range of adjacent nodes</title>
+	    <programlisting># prepare the test document
+$scratch/&gt; rm /scratch/node(); # cleanup the document
+$scratch/&gt; set /scratch/li[5]; # create 5 &lt;li&gt; elements
+$scratch/&gt; set /scratch/li[3]/following-sibling::li; # add &lt;br/&gt; after the 3rd &lt;li&gt;
+$scratch/&gt; for //li set . position(); # number the &lt;li&gt; elements 
+$scratch/&gt; ls /
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch&gt;
+  &lt;li&gt;1&lt;/li&gt;
+  &lt;li&gt;2&lt;/li&gt;
+  &lt;li&gt;3&lt;/li&gt;
+  &lt;br/&gt;
+  &lt;li&gt;4&lt;/li&gt;
+  &lt;li&gt;5&lt;/li&gt;
+&lt;/scratch&gt;
+# wrap adjacent elements &lt;li&gt; into an &lt;ol&gt;
+$scratch/&gt; wrap --skip-whitespace --while self::li ol //li;
+$scratch/&gt; ls /
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;scratch&gt;
+  &lt;ol&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;br/&gt;
+  &lt;ol&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/scratch&gt;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_xinsert_command.html">xinsert</ulink>, <ulink url="s_insert_command.html">insert</ulink>, <ulink url="s_move_command.html">move</ulink>, <ulink url="s_xmove_command.html">xmove</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Manipulation.html">Tree modification</ulink>
+    </para>
+  </simplesect>
+</section>

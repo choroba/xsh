@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="resolve_uri_function">
+  <title>xsh:resolve-uri function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>string xsh:resolve-uri(string, string?)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    This function takes one or two arguments: a relative URI and an optional base URI.
+	    If the first argument is a relative URI reference, 
+	    this function resolves it against either the 
+	    given base URI, if given (which is assumed to be an absolute URI)
+	    or, if base URI not given, against the URI of the current working directory.
+	    If the first argument is an absolute URI reference, it is returned unchanged. 
+	  </para>
+	  <para>
+	    If the first argument is the zero-length string, returns 
+	    the base URI if given and the URI of the current working directory otherwise.
+	  </para>
+	  <para>
+	    Note: Resolving a URI does not dereference it (download
+	    the referenced content); it is merely a syntactic
+	    operation on two character strings.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="create_command">
+  <title>create command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>$doc := create <ulink url="s_nodename.html">nodename</ulink>|<ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> new</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Returns a new document object. The
+	    argument must evaluate either to 
+	    a valid element name (possibly followed
+	    by some attribute declarations) to be used
+	    for the document element, or to 
+	    a well-formed XML string.
+	  </para>
+	  <para>
+	    Unless <ulink url="s_cdonopen.html">switch-to-new-documents</ulink> option is turned off,
+	    this command also changes current node
+	    to the new document.
+	  </para>
+	  <example id="gen-003">
+	    <programlisting>$scratch/&gt; <userinput>$t1 := create root</userinput>
+$t1&gt; <userinput>ls $t1</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root/&gt;
+
+$t1&gt; <userinput>$t2 := create "root id='r1'"</userinput>
+$t2&gt; <userinput>ls $t2</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root id="r1"/&gt;
+
+$t2&gt; <userinput>create "&lt;root id='r0'&gt;Just a &lt;b&gt;test&lt;/b&gt;&lt;/root&gt;"</userinput>
+/&gt; <userinput>ls /</userinput>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root id='r0'&gt;Just a &lt;b&gt;test&lt;/b&gt;&lt;/root&gt;
+</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect role="seealso" id="gen-004">
+    <title>See Also</title>
+    <para><ulink url="s_open_command.html">open</ulink>, <ulink url="s_clone_command.html">clone</ulink></para>
+  </simplesect>
+  <simplesect id="gen-005">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Documents.html">Files/Documents</ulink>
+    </para>
+  </simplesect>
+</section>

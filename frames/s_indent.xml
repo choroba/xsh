@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="indent">
+  <title>indent command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>indent <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>If the value of <ulink url="s_exp.html">expression</ulink> is 1,
+	    saved and listed XML will be formatted
+	    using some (hopefully) ignorable whitespace. 
+	    If the value is 2 (or
+	    higher), XSH2 will act as in case of 1, plus it will add a
+	    leading and a trailing linebreak to each text node.
+	  </para>
+	  <para>Note, that since the underlying C library
+	    (libxml2) uses a hard-coded indentation of 2 space
+	    characters per indentation level, the amount of
+	    whitespace used for indentation can not be
+	    altered at runtime.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$INDENT</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-002">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

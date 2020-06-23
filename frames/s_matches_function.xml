@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="matches_function">
+  <title>xsh:matches function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>boolean xsh:matches(string STR,string PATTERN)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Returns <literal>true</literal> if <literal>STR</literal>
+	    matches the regular expression <literal>PATTERN</literal>.
+	    Otherwise returns <literal>false</literal>.
+	  </para>
+	</simplesect>
+</section>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="Argtypes">
+      <title>Argument Types</title>
+      <para>
+	XSH2 commands accept arguments of various types,
+	usually expressed as Perl or XPath
+	<ulink url="s_exp.html">expression</ulink>s. Unlike in most languages,
+	individual XSH2 commands may evaluate the same expression differently, 
+	usually
+	to enforce a result
+	of a certain type (such as a node-list, a string, a number,
+	a filename, a node name, etc.).
+	See <ulink url="s_exp.html">expression</ulink> and
+	individual argument types for more information.
+      </para>
+    <simplesect role="related" id="gen-000">
+                 <title>Related Topics</title>
+                 <variablelist><varlistentry>
+      <term><ulink url="s_block.html">block</ulink></term>
+      <listitem>a block of XSH2 commands</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_command.html">command</ulink></term>
+      <listitem>List of XSH2 commands and their general syntax</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_document.html">document</ulink></term>
+      <listitem>specifying documents</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_enc_string.html">encoding</ulink></term>
+      <listitem>character encoding (codepage) identifier</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_exp.html">expression</ulink></term>
+      <listitem>expression argument type</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_filename.html">filename</ulink></term>
+      <listitem>specifying filenames</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_loc.html">location</ulink></term>
+      <listitem>relative destination specification (such as after, before, etc.)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nodename.html">nodename</ulink></term>
+      <listitem>specifying names of DOM nodes</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_nodetype.html">node-type</ulink></term>
+      <listitem>node type specification (such as element, attribute, etc.)</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_perl_code.html">perl-code</ulink></term>
+      <listitem>in-line code in Perl programming language</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_subname.html">subroutine</ulink></term>
+      <listitem>name of a sub-routine</listitem>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_varname.html">$variable</ulink></term>
+      <listitem/>
+    </varlistentry><varlistentry>
+      <term><ulink url="s_xpath.html">xpath</ulink></term>
+      <listitem>XPath expression</listitem>
+    </varlistentry></variablelist>
+               </simplesect></section>

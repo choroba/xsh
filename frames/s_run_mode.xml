@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="run_mode">
+  <title>run-mode command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>run-mode</literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> run_mode</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>
+	    Switch from the <ulink url="s_test_mode.html">test-mode</ulink> back
+	    to the normal execution mode.
+	  </para>
+	  <para>This is equivalent to setting
+	    <literal>$TEST_MODE</literal> variable to 0.</para>
+	</simplesect>
+  <simplesect role="seealso" id="gen-003">
+    <title>See Also</title>
+    <para>
+      <ulink url="s_test_mode.html">test-mode</ulink>
+    </para>
+  </simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para><ulink url="s_Flow.html">Flow control</ulink>, <ulink url="s_Configuration.html">Global settings</ulink></para>
+  </simplesect>
+</section>

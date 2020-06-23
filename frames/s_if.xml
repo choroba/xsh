@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="if">
+  <title>if command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>if <ulink url="s_exp.html">expression</ulink> <ulink url="s_command.html">command</ulink>
+	</literal>
+    </para>
+    <para>
+      <literal>
+          if <ulink url="s_exp.html">expression</ulink>
+	  <ulink url="s_block.html">block</ulink> [ elsif <ulink url="s_block.html">block</ulink> ]* [ else <ulink url="s_block.html">block</ulink> ]
+	</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Executes <ulink url="s_command.html">command</ulink> or <ulink url="s_block.html">block</ulink> if a given <ulink url="s_exp.html">expression</ulink>
+	    expression evaluates to a non-emtpty node-list, true
+	    boolean-value, non-zero number or non-empty literal. If
+	    the first expression fails, then 
+	    <literal>elsif</literal> conditions are tested (if any) and the
+	    <ulink url="s_block.html">block</ulink> corresponding to the first one of
+	    them which is true is executed. If none of the conditions is satisfied, an
+	    optional <literal>else</literal> <ulink url="s_block.html">block</ulink> is executed.
+	  </para>
+	  <example id="gen-002">
+	    <title>Display node type</title>
+	    <programlisting>def node_type %n {
+  foreach (%n) {
+    if ( . = self::* ) { # XPath trick to check if . is an element
+      echo 'element';
+    } elsif ( . = ../@* ) { # XPath trick to check if . is an attribute
+      echo 'attribute';
+    } elsif ( . = ../processing-instruction() ) {
+      echo 'pi';
+    } elsif ( . = ../text() ) {
+      echo 'text';
+    } elsif ( . = ../comment() ) {
+      echo 'comment'
+    } else { # well, this should not happen, but anyway, ...
+      echo 'unknown-type';
+    }
+  }
+}
+</programlisting>
+	  </example>
+	  <example id="gen-003">
+	    <title>Check a environment variable</title>
+	    <programlisting>if { defined($ENV{HOME}) } lcd { $ENV{HOME} }</programlisting>
+	  </example>
+	</simplesect>
+  <simplesect id="gen-004">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Flow.html">Flow control</ulink>
+    </para>
+  </simplesect>
+</section>

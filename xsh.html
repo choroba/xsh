@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" ?><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>xsh - XML Editing Shell</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rev="made" href="mailto:none">
+</head>
+
+<body>
+
+
+
+<h1 id="xsh">xsh</h1>
+
+<p>xsh - XML Editing Shell</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<pre><code>  xsh [options] script_or_command
+  xsh [options] -al script [arguments ...]
+  xsh [options] -aC command [arguments ...]
+  xsh [options] -p commands &lt; input.xml &gt; output.xml
+  xsh [options] -I input.xml -O output.xml commands
+  xsh [options] -P file.xml commands
+  xsh [options] -cD compiled_script.pl ...
+
+  xsh -u          for usage
+  xsh -h          for help
+  xsh --man       for the manual page</code></pre>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>XSH is an shell-like language for XPath-oriented editing, querying and manipulation of XML and HTML files (with read-only support for DocBook SGML). <code>xsh</code> can work as an interactive shell (with full command-line support such as history, TAB-completion, etc.) or as an off-line interpreter for batch processing of XML files.</p>
+
+<h1 id="XSH-COMMANDS">XSH COMMANDS</h1>
+
+<p>See <a href="https://metacpan.org/pod/distribution/XML-XSH2/XSH2.pod">XSH2 manual page</a> or <a href="http://xsh.sourceforge.net/documentation.html">http://xsh.sourceforge.net/documentation.html</a> for a complete XSH language reference.</p>
+
+<p>For a quick help, type <code>xsh help</code> (just <code>help</code> on xsh prompt).</p>
+
+<p>Type <code>xsh help commands</code> to get list of available XSH commands and <code>xsh help <b>command</b></code> with <b>command</b> replaced by a XSH command name to get help on a particular command.</p>
+
+<h1 id="SHELL-PROMPT">SHELL PROMPT</h1>
+
+<p>Run <code>xsh help Prompt</code> to get information on how to setup the XSH2 shell prompt.</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="load--l-script-file">
+<b>--load|-l</b> script-file</dt>
+<dd>
+
+<p>Load and execute given XSH script (the script is executed before all other commands provided on the command-line, but after executed ~/.xsh2rc).</p>
+
+</dd>
+<dt id="commands--C"><b>--commands|-C</b></dt>
+<dd>
+
+<p>Indicate, that the command-line arguments are XSH commands.</p>
+
+</dd>
+<dt id="arguments--a"><b>--arguments|-a</b></dt>
+<dd>
+
+<p>Indicate, that the command-line arguments are should be passed to the script via <code>@ARGV</code> (in <code>XML::XSH2::Map</code> namespace). If used with <code>--commands</code> or without <code>--load</code>, the first argument should contain XSH commands and the rest are the passed to via <code>@ARGV</code>.</p>
+
+</dd>
+<dt id="files--F"><b>--files|-F</b></dt>
+<dd>
+
+<p>Indicate, that the command-line arguments should be treated as input filenames. If used with <code>--commands</code> or without <code>--load</code>, the first argument should contain XSH commands. A XSH script specified with <code>--load</code> or XSH commands specified with <code>--commands</code> (or both in this order) are evaluated repeatedly on each input file. For example, running</p>
+
+<pre><code>  $ xsh -l script.xsh -FC command file1.xml file2.xml ...</code></pre>
+
+<p>is equivalent to</p>
+
+<pre><code>  $ xsh --stdin -aC command file1.xml file2.xml ...
+   for $INPUT_FILENAME in { @ARGV } {
+     $INPUT := open $INPUT_FILENAME;
+     . "script.xsh";
+     command
+   }
+   ^D</code></pre>
+
+</dd>
+<dt id="stdin--t"><b>--stdin|-t</b></dt>
+<dd>
+
+<p>Don't display command-prompt even if run from a terminal, expecting XSH commands in the standard input.</p>
+
+</dd>
+<dt id="compile--c"><b>--compile|-c</b></dt>
+<dd>
+
+<p>Compile the XSH source and report errors, only. No commands are actually executed.</p>
+
+</dd>
+<dt id="dump--D-output_filename.pl">
+<b>--dump|-D</b> output_filename.pl</dt>
+<dd>
+
+<p>Compiles XSH source(s) into a stand-alone Perl script which can be executed simply with</p>
+
+<pre><code>  perl output_filename.pl [script-arguments ... ]</code></pre>
+
+<p>The compiled Perl script still requires XML::XSH2 modules to be installed, but since it is already precompiled and also because loading of XSH grammar parser is not required, it starts almost instantly, compared to its XSH source.</p>
+
+<p>Note that the compiled script includes init file (unless <code>-f</code> flag was used), and it also preserves run-time flag settings used during the compilation.</p>
+
+<p>Use <code>-c</code> to suppress execution of the compiled script.</p>
+
+</dd>
+<dt id="quiet--q"><b>--quiet|-q</b></dt>
+<dd>
+
+<p>Quiet mode: suppress all unnecessary informatory ouptut.</p>
+
+</dd>
+<dt id="format"><b>--format</b></dt>
+<dd>
+
+<p>Start with indent 1 (on) and keep_blanks 0 (off) to allow nice indenting of the XML output.</p>
+
+</dd>
+<dt id="validation--v"><b>--validation|-v</b></dt>
+<dd>
+
+<p>Start with validation, load_ext_dtd, parser_expands_entities and parser_completes_attributes 1 (on).</p>
+
+</dd>
+<dt id="no-validation--w"><b>--no-validation|-w</b></dt>
+<dd>
+
+<p>Start with validation, load_ext_dtd, parser_expands_entities and parser_completes_attributes 0 (off).</p>
+
+</dd>
+<dt id="debug--d"><b>--debug|-d</b></dt>
+<dd>
+
+<p>Print some debug messages.</p>
+
+</dd>
+<dt id="no-init--f"><b>--no-init|-f</b></dt>
+<dd>
+
+<p>Ignore ~/.xsh2rc</p>
+
+</dd>
+<dt id="version--V"><b>--version|-V</b></dt>
+<dd>
+
+<p>Print XSH version info and exit.</p>
+
+</dd>
+<dt id="interactive--i"><b>--interactive|-i</b></dt>
+<dd>
+
+<p>Start interactive mode with xsh command prompt. By default, the interactive mode is only started if <code>xsh</code> is running from a terminal and neither XSH commands nor a script are given on the command-line.</p>
+
+</dd>
+<dt id="non-interactive--n"><b>--non-interactive|-n</b></dt>
+<dd>
+
+<p>Force non-interactive mode.</p>
+
+</dd>
+<dt id="pipe--p"><b>--pipe|-p</b></dt>
+<dd>
+
+<p>This is a special mode in which xsh acts as a pipe-line processing tool. In this mode, first the standard input is read and opened as a document _ (underscore), then all XSH commands given in ~/.xsh2rc, command-line and given XSH scripts are applied and finally the (possibly modified) document _ is dumped back on the standard output. It is equivallent to <code>-I - -O -</code> and <code>-P -</code>.</p>
+
+</dd>
+<dt id="input--I-filename">
+<b>--input|-I</b> filename</dt>
+<dd>
+
+<p>Preload given file as a document with ID _ upon startup.</p>
+
+</dd>
+<dt id="output--O-filename">
+<b>--output|-O</b> filename</dt>
+<dd>
+
+<p>Try to saves document with ID _ into given file before XSH ends.</p>
+
+</dd>
+<dt id="process--P-filename">
+<b>--process|-P</b> filename</dt>
+<dd>
+
+<p>A convenient shortcut for <code>-I filename -O filename</code>.</p>
+
+</dd>
+<dt id="html--H"><b>--html|-H</b></dt>
+<dd>
+
+<p>Make XSH expect HTML documents by default in all open/save operations.</p>
+
+</dd>
+<dt id="xml--X"><b>--xml|-X</b></dt>
+<dd>
+
+<p>This option is included only for completeness sake. Make XSH expect XSH documents by default in all open/save operations (this is the default).</p>
+
+</dd>
+<dt id="trace-grammar--T"><b>--trace-grammar|-T</b></dt>
+<dd>
+
+<p>This option allows tracing the way XSH language parser processes your script.</p>
+
+</dd>
+<dt id="query-encoding--E-encoding">
+<b>--query-encoding|-E</b> encoding</dt>
+<dd>
+
+<p>Set the encoding that used in the XSH scripts (or keyboard input).</p>
+
+</dd>
+<dt id="encoding--e-encoding">
+<b>--encoding|-e</b> encoding</dt>
+<dd>
+
+<p>Set the encoding that should be used for XSH output.</p>
+
+</dd>
+<dt id="usage--u"><b>--usage|-u</b></dt>
+<dd>
+
+<p>Print a brief help message on usage and exits.</p>
+
+</dd>
+<dt id="help--h"><b>--help|-h</b></dt>
+<dd>
+
+<p>Prints the help page and exits.</p>
+
+</dd>
+<dt id="man"><b>--man</b></dt>
+<dd>
+
+<p>Displays the help as manual page.</p>
+
+</dd>
+</dl>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Petr Pajas &lt;pajas@matfyz.cz&gt;</p>
+
+<p>Copyright 2000-2011 Petr Pajas, 2012-2019 E. Choroba. All rights reserved.</p>
+
+<h1 id="SEE-ALSO">SEE ALSO</h1>
+
+<p><a href="https://p3rl.org/XSH2">XSH2</a>, <a href="https://p3rl.org/XML::XSH2">XML::XSH2</a>, <a href="https://p3rl.org/XML::XSH2::Compile">XML::XSH2::Compile</a>, <a href="https://p3rl.org/XML::LibXML">XML::LibXML</a>, <a href="https://p3rl.org/XML::XUpdate">XML::XUpdate</a>, <a href="http://xsh.sourceforge.net/doc">http://xsh.sourceforge.net/doc</a></p>
+
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Variables</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="section">
+<div class="titlepage">
+<div><div><h2 class="title" style="clear: both">
+<a name="Variables" target="_self"></a>Variables</h2></div></div>
+<hr>
+</div>
+<p>
+	In XSH2, like in Perl and XPath, 
+	<a class="ulink" href="s_varname.html" target="_self">variable names</a> are are prefixed
+        with a dollar sign ($). 
+        Variables can
+        contain arbitrary Perl Scalar (string, number, array
+        reference, hash reference or an object reference).  XPath
+        objects are transparently mapped to Perl objects via
+        XML::LibXML objects. 
+        Values can be assigned to variables
+        either by simple <a class="ulink" href="s_assign_command.html" target="_self">assignments</a> of the form
+	<code class="literal">$variable = <a class="ulink" href="s_exp.html" target="_self">expression</a></code>,
+        where the right hand side is an expression, or by command 
+        <a class="ulink" href="s_assign_command.html" target="_self">assignments</a> of the form
+	<code class="literal">$variable := <a class="ulink" href="s_command.html" target="_self">command</a></code>,
+        where the right hand side is a XSH2 command, or by
+	capturing the output of some command with a variable
+	redirection of the following form:</p>
+<pre class="programlisting">command |&gt; $variable;</pre>
+<p>
+	XSH2 expressions are evaluated either by XPath
+	engine or by Perl (the latter only happens if the entire
+	expression is enclosed with braces
+	<code class="literal">{...}</code>), and
+	both Perl and XPath can access all XSH2 variables
+	transparently (Perl expressions may even assign to them).
+      </p>
+<p>
+	A simple simple expression consisting of a variable name
+        (e.g. <code class="literal">$variable</code>) is always evaluated by the
+        XPath engine and the result is the content of the variable as
+        it appears to the XPath data model.  Since in XPath object
+        cannot be void (undefined), XPath engine complains, if the
+        value of the variable is undefined. On the other hand,
+        expressions like <code class="literal">{$variable}</code> are evaluated by
+        Perl, which results in the value of the variable as seen
+	by Perl.
+      </p>
+<p>
+	Variables can also be used as macros for complicated XPath
+	expressions. Any occurrence of a substring of the form
+	<code class="literal">${variable}</code> in an XPath expression is
+	interpolated to the value of <code class="literal">$variable</code> (if
+	<code class="literal">$variable</code> contains an object rather than a
+	string or number, then the object is cast to string first) before the
+	entire expression is evaluated.  So, for example, if
+	<code class="literal">${variable}</code> contains string
+	"<code class="literal">chapter[title]</code>" (without the quotes), then
+	the XPath expression
+	<code class="literal">//sect1/${variable}/para</code> interpolates to 
+	<code class="literal">//sect1/chapter[title]/para</code> prior
+	to evaluation. 
+      </p>
+<p>
+	To display the current value of a variable, use either
+	<a class="ulink" href="s_print_command.html" target="_self">print</a>
+	or (in case of a global variables - the distinction is discussed below)
+	the command <a class="ulink" href="s_var_command.html" target="_self">variables</a>:
+      </p>
+<div class="example">
+<a name="gen-000" target="_self"></a><p class="title"><b>Example&nbsp;1.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>$b="my_document";</code></strong>
+xsh&gt; <strong class="userinput"><code>$file="${b}s.xml";</code></strong>
+xsh&gt; <strong class="userinput"><code>$f := open $file;</code></strong>
+xsh&gt; <strong class="userinput"><code>ls //$b[count(descendant::para)&gt;10]</code></strong>
+xsh&gt; <strong class="userinput"><code>print $b</code></strong>
+my_document
+xsh&gt; <strong class="userinput"><code>variables</code></strong>
+...
+$b='my_document';
+...
+$file='my_documents.xml';
+...
+</pre></div>
+</div>
+<br class="example-break"><p>
+	Variables can also serve as containers for documents and can be used to
+	store lists of nodes that result from evaluating an XPath
+	expression (a.k.a. XPath node-sets). This is especially useful
+	when a sequence of commands is to be performed on some fixed
+        set of nodes and repetitive evaluation of the same XPath 
+	expression would be lengthy.  XPath
+	node-sets are represented by
+	<code class="literal">XML::LibXML::NodeList</code> Perl objects (which
+	is simply a array reference blessed to the above class, which
+	provides some simple operator overloading). In XPath, by a
+	node-set by definition can only contain a single copy of each
+	node and the nodes within a node-set are processed in the same
+	order as they appear in the XML document. Having XPath
+	node-sets represented by a list gives us the advantage of having
+	the possibility to process the list in a different order than
+	the one implied by the document (which is what happens
+	if a variable containing a node-list is evaluated by Perl 
+	rather than XPath), see an example below.
+      </p>
+<div class="example">
+<a name="gen-001" target="_self"></a><p class="title"><b>Example&nbsp;2.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>$creatures = //creature[@status='alive']</code></strong>
+# process creatures in the document order: 
+xsh&gt; <strong class="userinput"><code>foreach $creature print @name;</code></strong>
+# process creatures in the reverse document order: 
+xsh&gt; <strong class="userinput"><code>foreach { reverse @$creature } print @name;</code></strong>
+# append some more nodes to a node-list (using a variant of
+# a simple assignment)
+xsh&gt; <strong class="userinput"><code>$creatures += //creature[@status='dead'];</code></strong>
+# again, we can process creatures in order implied by the document:
+xsh&gt; <strong class="userinput"><code>foreach $creature print @name;</code></strong>
+# but we can also process first living and then dead creatures,
+# since this is how they are listed in $creature
+xsh&gt; <strong class="userinput"><code>foreach {$creature} print @name;</code></strong>
+# same as the above is
+xsh&gt; <strong class="userinput"><code>foreach {@$creature} print @name;</code></strong>
+</pre></div>
+</div>
+<br class="example-break"><p>
+	XSH2 variables are either globally or lexically scoped.
+	Global variables need not to be declared (they can be directly
+	assigned to), whereas lexical variables must be declared
+	using the command <a class="ulink" href="s_my_command.html" target="_self">my</a>. Global variable
+	assignment may also be made temporal for the enclosing block,
+	using <a class="ulink" href="s_local_command.html" target="_self">local</a>.
+      </p>
+<div class="example">
+<a name="gen-002" target="_self"></a><p class="title"><b>Example&nbsp;3.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">$var1 = "foo";           # a global variable requires no declaration
+local $var1 $var2 $var3; # localizes global variables
+$var1 = "bar";           # assignment to a localized variable is temporary
+local $var4 = "foo";     # localized assignment
+my $var1 $var $var3;     # declares lexical variables
+my $var1 = "foo";        # lexical variable declaration with assignment
+</pre></div>
+</div>
+<br class="example-break"><p>
+	Lexical variables are only defined in the scope of current
+	block or subroutine. There is no way to refer to a lexical
+	variable form outside of the block it was declared in, nor
+	from within a nested subroutine call. Of course, lexical
+	variables can be referred to from nested blocks or Perl
+	expressions (where they behave just like Perl's lexical
+	variables).
+      </p>
+<p>
+	On the other hand, global or localized XSH2 variables are just
+	Perl Scalar variables belonging to the
+	<code class="literal">XML::XSH2::Map</code> namespace, which is also the
+	default namespace for any Perl code evaluated from XSH2 (so
+	there's no need to use this prefix explicitly in Perl expressions,
+	unless of course there is a lexical variable in the current
+	scope with the same).
+      </p>
+<p>Localizing a variable using the <code class="literal">local</code>
+	keyword makes all assignments to it occurring in the enclosing block
+	temporary. The variable itself remains global, only its
+	original value is restored at the end of the block that localized it.
+      </p>
+<p> 
+	In all above cases, it is possible to arbitrarily
+	intermix XSH2 and Perl assignments:
+      </p>
+<div class="example">
+<a name="gen-003" target="_self"></a><p class="title"><b>Example&nbsp;4.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">xsh&gt; <strong class="userinput"><code>ls //chapter[1]/title</code></strong>
+&lt;title&gt;Introduction&lt;/title&gt;
+xsh&gt; <strong class="userinput"><code>$a=string(//chapter[1]/title)</code></strong>
+xsh&gt; <strong class="userinput"><code>perl { $b="CHAPTER 1: ".uc($a); }</code></strong>
+xsh&gt; <strong class="userinput"><code>print $b</code></strong>
+CHAPTER 1: INTRODUCTION
+</pre></div>
+</div>
+<br class="example-break"><p>
+	Although all XSH2 variables are in fact Perl Scalars, it is
+	still possible to store Perl Array or Hash value to a XSH2
+	variable via reference. The following example demonstrates
+	using Perl Hashes to collect and print some simple racial
+	statistics about the population of Middle-Earth:
+      </p>
+<div class="example">
+<a name="gen-004" target="_self"></a><p class="title"><b>Example&nbsp;5.&nbsp;</b></p>
+<div class="example-contents"><pre class="programlisting">my $races;
+foreach a:/middle-earth/creature { 
+  my $race=string(@race);
+  perl { $races-&gt;{$race}++ };
+}
+print "Middle-Earth Population (race/number of creatures)"
+print { map "$_/$races-&gt;{$_}\n" keys(%$races); };
+</pre></div>
+</div>
+<br class="example-break"><div class="simplesect">
+<div class="titlepage"><div><div><h3 class="title">
+<a name="gen-005" target="_self"></a>Related Topics</h3></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><a class="ulink" href="s_assign_command.html" target="_self">assign</a></span></dt>
+<dd>variable assignment</dd>
+<dt><span class="term"><a class="ulink" href="s_document.html" target="_self">document</a></span></dt>
+<dd>specifying documents</dd>
+<dt><span class="term"><a class="ulink" href="s_exp.html" target="_self">expression</a></span></dt>
+<dd>expression argument type</dd>
+<dt><span class="term"><a class="ulink" href="s_local_command.html" target="_self">local</a></span></dt>
+<dd>temporarily assign new value to a variable</dd>
+<dt><span class="term"><a class="ulink" href="s_subname.html" target="_self">subroutine</a></span></dt>
+<dd>name of a sub-routine</dd>
+<dt><span class="term"><a class="ulink" href="s_varname.html" target="_self">$variable</a></span></dt>
+<dd></dd>
+<dt><span class="term"><a class="ulink" href="s_xpath.html" target="_self">xpath</a></span></dt>
+<dd>XPath expression</dd>
+</dl></div>
+</div>
+</div></body>
+</html>

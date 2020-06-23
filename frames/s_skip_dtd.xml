@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="skip_dtd">
+  <title>skip-dtd command</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>skip-dtd <ulink url="s_exp.html">expression</ulink></literal>
+    </para>
+  </simplesect>
+  <simplesect role="aliases" id="gen-001">
+    <title>Aliases</title>
+    <para>
+      <literal> skip_dtd</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-002"><title>Description</title>
+	  <para>If the value of <ulink url="s_exp.html">expression</ulink> is 1 (non-zero),
+	    DTD DOCTYPE declaration is omitted from any further serializations
+	    of XML documents (including <ulink url="s_list_command.html">ls</ulink>
+	    and <ulink url="s_save_command.html">save</ulink>). Default value is
+	    <literal>0</literal>.
+	  </para>
+	  <para>This command is equivalent to setting the
+	    <literal>$SKIP_DTD</literal> variable.</para>
+	</simplesect>
+  <simplesect id="gen-003">
+    <title>Sections</title>
+    <para>
+      <ulink url="s_Configuration.html">Global settings</ulink>
+    </para>
+  </simplesect>
+</section>

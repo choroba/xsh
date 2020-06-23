@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section id="match_function">
+  <title>xsh:match function</title>
+  <simplesect role="usage" id="gen-000">
+    <title>Usage</title>
+    <para>
+      <literal>node-set xsh:match(string STR,string PATTERN,string OPTIONS)</literal>
+    </para>
+  </simplesect>
+  <simplesect role="description" id="gen-001"><title>Description</title>
+	  <para>
+	    Searches a given string for a pattern match
+	    specified by a regular expression <literal>PATTERN</literal>
+	    and returns a node-set consisting of
+	    <literal>&lt;xsh:string&gt;</literal>
+	    elements containing portions of the string matched
+	    by the pattern subexpressions enclosed in parentheses.
+	    The OPTIONS string may contain the following flags:
+	    <literal>c</literal> - do not reset search position on a failed match when /g is in effect;
+	    <literal>g</literal> - match globally, i.e. find all occurrences;
+	    <literal>i</literal> - do case insensitive search;
+	    <literal>m</literal> - treat string as multiple lines 
+	    (change "^" and "$" from matching the start or end of the string to matching the start or end
+	    of any line anywhere within the string)
+	    <literal>o</literal> - compile pattern only once;
+	    <literal>s</literal> - treat string as single line (change "." to match any character whatsoever, even a newline, which normally it would not match);
+	    <literal>x</literal> - extend your pattern's legibility by permitting whitespace and comments.
+	  </para>
+	</simplesect>
+</section>
