@@ -101,8 +101,8 @@ xml: lib/XML/XSH2/Parser.pm lib/XML/XSH2/Commands.pm lib/XML/XSH2/Help.pm XSH2.p
 
 docs: all
 	podselect xsh > xsh.pod
-	pod2html --noindex --title "XSH2" --podroot=. --podpath=. --libpods=xsh < XSH2.pod > doc/XSH2.html
-	pod2html --noindex --title "xsh - XML Editing Shell" --podroot=.  --podpath=. --libpods=XSH2 < xsh > doc/xsh.html
+	pod2html --noindex --title "XSH2" --podroot=. --podpath=. < XSH2.pod > doc/XSH2.html
+	pod2html --noindex --title "xsh - XML Editing Shell" --podroot=.  --podpath=. < xsh > doc/xsh.html
 	$(PERL) ./xsh -l tools/gen_reference.xsh
 	$(PERL) ./xsh -l tools/gen_doc.xsh
 
