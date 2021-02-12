@@ -41,7 +41,8 @@ WriteMakefile(
             map +( "lib/XML/XSH2/$_.pm" => '$(INST_LIB)/XML/XSH2/' . "$_.pm" ),
             qw( Help Functions Iterators Commands
                 Completion CompletionList LibXMLCompat XPathToXML
-                Grammar Parser )
+                Grammar Parser
+                Compile DummyXPathContext Inline )
     },
     depend => {
                 distdir => 'hide',
