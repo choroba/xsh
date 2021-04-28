@@ -1,6 +1,7 @@
 /MYMETA.json
 /MYMETA.yml
 /Makefile
+/Makefile.old
 /Parser.pm
 /XSH2.pod
 /blib/
@@ -10,3 +11,5 @@
 /lib/XML/XSH2/Help.pm
 /lib/XML/XSH2/Parser.pm
 /pm_to_blib
+/XML-XSH2-*/
+/XML-XSH2-*.tar.gz
