@@ -252,7 +252,7 @@ sub xsh_init {
   shift unless ref($_[0]);
   if (ref($_[0])) {
     $OUT=$_[0];
-  } else {
+  } elsif (! $OUT) {
     if (open $OUT, '>&', \*STDOUT) {
       binmode $OUT;
       binmode $OUT, ':bytes';
