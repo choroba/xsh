@@ -5640,7 +5640,7 @@ sub load_catalog {
 }
 
 sub stream_process_node {
-  my ($node,$command,$input)=@_;
+  my ($node,$command)=@_;
   my $old_context = _save_context();
   eval {
     foreach (1) {
@@ -5745,11 +5745,9 @@ sub stream_process {
                                               Writer => 'XML::SAX::Writer::XMLEnc'
                                              )),
 		 XPathContext => $_xpc,
-		 Process => [
-			     map {
-			       $_->[0] => [\&stream_process_node,$_->[1],
-					   $input] }
-			     @$process
+		 Process => [map {
+			       $_->[0] => [\&stream_process_node,$_->[1]]
+                             } @$process
 			    ]
 		)
 	 );
