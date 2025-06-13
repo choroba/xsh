@@ -21,14 +21,11 @@ create d <<EOF;
   <section id="intro">
     <title>XSH Language</title>
   </section>
-  <section id="cmd">
+  <section id="command">
     <title>Command Reference</title>
   </section>
   <section id="type">
     <title>Type Reference</title>
-  </section>
-  <section id="function">
-    <title>XPath Extension Function Reference</title>
   </section>
 </article>
 EOF
@@ -41,11 +38,15 @@ foreach d:/article/section[@id='intro']/section {
   local $id=string(@id);
   local %rules=x:/recdescent-xml/rules/rule[documentation[id(@sections)[@id='$id']]];
   echo section: $id, rules: ${{%rules}};
+  local $a $c $t;
+  if %rules[@type='command'] { $c='Commands' } else { $c='' }
+  if %rules[@type='argtype'] { $a='Argument Types' } else { $a='' }
+  if ('$c' != '' and '$a' != '') { $t='$a and $c' } else { $t='$a$c' }
 
-  if %rules[@type='command' or @type='argtype' or @type='function']
+  if ('$a$c' != '')
     add chunk <<"EOF" append .;
 <section>
-  <title>Related topics</title>
+  <title>Related $t</title>
   <para>
     <variablelist/>
   </para>
@@ -65,11 +66,10 @@ EOF
   }
 }
 
-foreach { qw(cmd type function) } {
+foreach { qw(command type) } {
   print "FILLING: ${__}"; print "";
   local %sec=d:/article/section[@id='${__}'];
   if ('$__'='type') $__='argtype';
-  if ('$__'='cmd') $__='command';
   local %type=x:(//rule[@type='$__']);
   sort (@name|documentation/title)[1] { $a cmp $b } %type;
   foreach %type {
@@ -91,47 +91,49 @@ foreach { qw(cmd type function) } {
 
     #USAGE
     if (./documentation/usage) {
-      local %us;
-      add chunk "<simplesect><title>Usage</title><para></para></simplesect>"
-	into %section result %us;
-      copy ./documentation/usage into %us/para;
-      rename { $_='literal' } %us/para/usage;
+      add chunk "<simplesect><title>Usage</title></simplesect>" into %section;
+      foreach (./documentation/usage) {
+	add element para into %section/simplesect[last()];
+      }
+      copy ./documentation/usage into %section/simplesect[last()]/para;
+      map { $_='literal' } %section/simplesect[last()]/para/usage;
     }
 
     #ALIASES
     if (./aliases/alias) {
-      local %us;
-      add chunk <<CHUNK into %section result %us;
+      add chunk <<CHUNK into %section;
  <simplesect>
    <title>Aliases</title>
    <para><literal> </literal></para>
  </simplesect>
 CHUNK
       foreach (./aliases/alias) {
-	copy ./@name append %us/para/literal/text()[last()];
+	copy ./@name 
+	  append %section/simplesect[last()]/para/literal/text()[last()];
 	if (following-sibling::alias) {
-	  add text ", " append %us/para/literal/text()[last()];
+	  add text ", "
+	    append %section/simplesect[last()]/para/literal/text()[last()];
 	}
       }
     }
 
     #DESCRIPTION
     if (./documentation/description) {
-      local %us;
-      add chunk "<simplesect><title>Description</title></simplesect>"
-	into %section result %us;
-      xcopy ./documentation/description/node() into %us;
+      add chunk "<simplesect><title>Description</title></simplesect>" 
+	into %section;
+      xcopy ./documentation/description/node() 
+	into %section/simplesect[last()];
     }
 
     #SEE ALSO
     if (./documentation/see-also/ruleref) {
-      local %us;
-      add chunk "<simplesect><title>See Also</title><para/></simplesect>"
-	into %section result %us;
+      add chunk "<simplesect><title>See Also</title><para/></simplesect>" into %section;
       foreach (./documentation/see-also/ruleref) {
 	add element "<xref linkend='${{string(@ref)}}'/>"
-	  into %us/para;
-	if (following-sibling::ruleref) add text ", " into %us/para;
+	  into %section/simplesect[last()]/para;
+	if (following-sibling::ruleref) {
+	  add text ", " into %section/simplesect[last()]/para;
+	}
       }
     }
   }
@@ -146,8 +148,9 @@ map { $_='programlisting' } d://code;
 foreach d://xref {
   map { $_='link' } .;
   local $linkend=string(@linkend);
-  insert text "${( x:(xsh:if(id('${linkend}')/@name,id('${linkend}')/@name,
-			    id('${linkend}')/@id)) )}" into .;
+  if x:id('$linkend')/@name { assign $content=x:string(id('$linkend')/@name) }
+    else { assign $content=x:string(id('$linkend')/@id) }
+  insert text $content into .;
 };
 
 foreach d://variablelist {

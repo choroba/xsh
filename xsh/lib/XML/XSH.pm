@@ -1,4 +1,4 @@
-# $Id: XSH.pm,v 1.12 2003-09-08 15:52:58 pajas Exp $
+# $Id: XSH.pm,v 1.12 2003/09/08 15:52:58 pajas Exp $
 
 package XML::XSH;
 
@@ -10,7 +10,7 @@ use XML::XSH::Functions qw(:default);
 use XML::XSH::Completion;
 
 BEGIN {
-  $VERSION   = '1.2';
+  $VERSION   = '1.8.7';
   @ISA       = qw(Exporter);
   @EXPORT = qw(&xsh);
   @EXPORT_OK = @XML::XSH::Functions::EXPORT_OK;
@@ -21,7 +21,11 @@ BEGIN {
 
 =head1 NAME
 
-XML::XSH - A powerfull scripting language/shell for XPath-based editing of XML
+XML::XSH (DEPRECATED) A powerfull scripting language/shell for XPath-based editing of XML
+
+=head1 DEPRECATED
+
+This module is deprecated, use XML::XSH2 instead.
 
 =head1 SYNOPSIS
 

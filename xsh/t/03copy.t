@@ -1,6 +1,13 @@
 # -*- cperl -*-
 use Test;
 
+BEGIN {
+    if ($ENV{AUTOMATED_TESTING}) {
+        print "1..0 # Skipped. Deprecated, use XML::XSH2 instead.\n";
+        exit
+    }
+}
+
 use IO::File;
 
 BEGIN {
@@ -8,7 +15,6 @@ BEGIN {
   autoflush STDERR 1;
 
   @xsh_test=split /\n\n/, <<'EOF';
-quiet;
 
 indent 1;
 
@@ -29,15 +35,15 @@ if { xml_list('t:/test') ne $expect } {
 }
 
 foreach (/test/x/@n|/test/x|/test/x/text()) {
-  unless (self::*|self::text()) insert attribute after_attribute=b after .;
+  insert attribute after_attribute=b after .;
   copy /test/z after .;
   insert text after_text after .;
   insert pi after_pi after .;
   insert comment after_comment after .;
-  unless (. = ../@*) insert chunk '<after_chunk>a</after_chunk><after_chunk>b</after_chunk>' after .;
+  insert chunk '<after_chunk>a</after_chunk><after_chunk>b</after_chunk>' after .;
 }
 
-ls /test 2 | cat
+ls /test 2 | cat 1>&2
 
 EOF
 
@@ -54,22 +60,20 @@ $::RD_ERRORS = 1; # Make sure the parser dies when it encounters an error
 $::RD_WARN   = 1; # Enable warnings. This will warn on unused rules &c.
 $::RD_HINT   = 1; # Give out hints to help fix problems.
 
-my $verbose=$ENV{HARNESS_VERBOSE};
-
 xsh_set_output(\*STDERR);
 set_quiet(0);
 xsh_init();
 
-print STDERR "\n" if $verbose;
+print STDERR "\n";
 ok(1);
 
-print STDERR "\n" if $verbose;
+print STDERR "\n";
 ok ( XML::XSH::Functions::create_doc("scratch","scratch") );
 
-print STDERR "\n" if $verbose;
+print STDERR "\n";
 ok ( XML::XSH::Functions::set_local_xpath(['scratch','/']) );
 
 foreach (@xsh_test) {
-  print STDERR "\n\n[[ $_ ]]\n" if $verbose;
+  print STDERR "\n\n[[ $_ ]]\n";
   ok( xsh($_) );
 }

@@ -1,4 +1,7 @@
-# $Id: Makefile.PL,v 1.21 2003-12-15 14:39:49 pajas Exp $
+# $Id: Makefile.PL,v 1.20 2003/08/25 12:16:34 pajas Exp $
+
+die "DEPRECATED. Use XML::XSH2 instead.\n"
+    unless $ENV{XML_XSH_TRY_ANYWAY};
 
 use strict;
 
@@ -11,12 +14,12 @@ WriteMakefile(
     'VERSION_FROM' => 'lib/XML/XSH/Functions.pm',
     'EXE_FILES' => ['xsh'],
     'PREREQ_PM' => {
-		    'XML::LibXML' => 1.56,
+		    'XML::LibXML' => 1.54,
 		    'XML::LibXSLT' => 1.53,
 		    'XML::LibXML::Iterator' => 0,
 		    'Parse::RecDescent' => 1.94,
 		    'XML::XUpdate::LibXML' => "0.4.0",
-		    'XML::LibXML::XPathContext' => 0.06,
+		    'XML::LibXML::XPathContext' => 0.04,
 		   },
      AUTHOR       => 'Petr Pajas (pajas@matfyz.cz)',
      ABSTRACT     => 'XML Editing Shell',
@@ -26,6 +29,9 @@ WriteMakefile(
          SUFFIX    => 'gz',
 	 CI        => 'cvs ci',
 	 RCS_LABEL => 'cvs admin -Nv$(VERSION_SYM):',
+    },
+    META_MERGE => {
+        x_deprecated => 1,
     },
 );
 

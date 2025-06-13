@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# $Id: gen_completions.pl,v 1.5 2003-08-07 15:15:41 pajas Exp $
+# $Id: gen_completions.pl,v 1.5 2003/08/07 15:15:41 pajas Exp $
 
 use strict;
 use XML::LibXML;

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# $Id: gen_help.pl,v 1.13 2003-11-03 07:11:18 pajas Exp $
+# $Id: gen_help.pl,v 1.12 2003/09/10 13:47:24 pajas Exp $
 
 use strict;
 use XML::LibXML;
@@ -75,13 +75,6 @@ print wrap("    ","    ",
 	   grep {defined($_)} 
 	   $dom->findnodes("//rules/rule[\@type='argtype']")),
   "\n\n";
-
-print "  XPath Extension Functions:\n\n";
-print wrap("    ","    ",
-	   join ", ", sort map { get_name($_) } 
-	   grep {defined($_)} 
-	   $dom->findnodes("//rules/rule[\@type='function']")),
-  "\n\n";
 print "END\n\n";
 
 
@@ -147,7 +140,7 @@ foreach my $sec ($dom->findnodes('/recdescent-xml/doc/section')) {
   my @commands=$dom->findnodes("//rules/rule[\@type='command' and ".
 			       "documentation[contains(\@sections,'$name')]]");
   if (@commands) {
-    print "\nRelated help items:\n";
+    print "\nRelated commands:\n";
     print wrap("  ","  ",
 	       join ", ", sort map { get_name($_) }
 	       @commands),

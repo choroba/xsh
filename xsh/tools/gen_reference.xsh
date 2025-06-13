@@ -1,8 +1,6 @@
 #!xsh
 # -*- cperl -*-
 
-$db_stylesheet = "/usr/share/xml/docbook/stylesheet/nwalsh/1.64.1/html/docbook.xsl";
-
 if ("$xsh_grammar_file" = "") $xsh_grammar_file="src/xsh_grammar.xml";
 if ("$db_stylesheet" = "") {
   # weired things happen in XML::LibXML/LibXSLT with new stylesheets!
@@ -21,73 +19,55 @@ quiet;
 load-ext-dtd 1;
 validation 1;
 parser-completes-attributes 1;
-xpath-extensions;
 
 open X = $xsh_grammar_file;
 
 validation 0;
 indent 1;
 
-def transform_section %s {
-  map { s/^[ \t]+//; s/\n[ \t]+/\n/g; } %s//code/descendant::text();
-  foreach %s//code/descendant::tab {
-    insert text ${(times(@count,'  '))} replace .;
+def transform_section {
+  map { s/^[ \t]+//; s/\n[ \t]+/\n/g; } %section//code/descendant::text();
+  foreach %section//code/descendant::tab {
+    perl { $ws='  ' x count('string(@count)'); };
+    insert text $ws instead of .;
   }
-  rename { $_='programlisting' } %s//code;
-  local %sl;
-  foreach %s/descendant::typeref {
-    insert element "simplelist type='inline'" before . result %sl;
-    foreach split("\\s",@types) {
-      foreach X:(/recdescent-xml/rules/rule[@type=current()]) {
-	local $c;
-	if (@id) {
-	  $c=concat("<member><xref linkend='",@id,"'/></member>");
+  map { $_='programlisting' } %section//code;
+  foreach %section//xref {
+    $linkend=string(@linkend);
+    foreach X:(id("$linkend")) {
+      if (name()='section') {
+	$content=string(title);
+      } else {
+	if (@name) {
+	  $content=string(@name);
 	} else {
-	  $c=concat("<member>",@name,"</member>");
+	  $content="$linkend";
 	}
-	insert chunk $c into %sl;
       }
     }
-    rm .;
-  }
-  foreach %s//xref {
-    local $c;
-    local $l=string(@linkend);
-    foreach X:(id("${l}")) {
-      $c=string(if(name()="section",title,if(@name,@name,@id)));
-    }
-    add chunk "<ulink url='s_${l}.html'>${c}</ulink>" replace .;
+    add chunk "<ulink url='s_$linkend.html'>$content</ulink>" replace .;
   };
-  foreach %s//link {
+  foreach %section//link {
     map { $_='ulink' } .;
     add attribute url=${{string(@linkend)}} replace @linkend;
     map { $_="s_".$_.".html" } @url;
   }
-#  clone SS=S;
-#  xslt SS $db_stylesheet H params html.stylesheet="'$html_stylesheet'";
   xslt S $db_stylesheet H params html.stylesheet="'$html_stylesheet'";
-#  close SS;
-#  clone H=H;
+  clone H=H;
   xadd attribute target=_self into H://*[name()='a'];
   # move content of <a name="">..</a> out, so that it does not behave
   # as a link in browsers
   foreach H://*[name()='a' and not(@href)] {
     xmove ./node() after .;
   }
-  echo "saving";
-  for %s/@id {
-    echo "saving doc/frames/s_${{string(.)}}.html";
+  for %section/@id {
     save_HTML H "doc/frames/s_${{string(.)}}.html";
-    echo "saving doc/frames/s_${{string(.)}}.xml";
     saveas S "doc/frames/s_${{string(.)}}.xml";
   }
   close H;
 }
 
-echo 'index';
-perl {
-$toc_template=<<"EOF";
-<html>
+$toc_template="<html>
   <head>
     <title>Table of contents</title>
     <link href='$html_stylesheet' rel='stylesheet'/>
@@ -97,17 +77,14 @@ $toc_template=<<"EOF";
     <font color='#000090' size='-2'>
       <a href='t_syntax.html' target='mainIndex'>Syntax</a><br/>
       <a href='t_command.html' target='mainIndex'>Commands</a><br/>
-      <a href='t_argtype.html' target='mainIndex'>Argument Types</a><br/>
-      <a href='t_function.html' target='mainIndex'>XPath Functions</a><br/>
+      <a href='t_argtype.html' target='mainIndex'>Argument types</a><br/>
     </font>
     <hr/>
     <small></small>
   </body>
-</html>
-EOF
-};
-new I <<"EOF";
-<html>
+</html>";
+
+new I "<html>
   <head>
     <title>XSH Reference</title>
     <link href='$html_stylesheet' rel='stylesheet'/>
@@ -123,23 +100,19 @@ new I <<"EOF";
        </body>
      </noframes>
   </frameset>
-</html>
-EOF
-
+</html>";
 save_HTML I 'doc/frames/index.html';
 close I;
 
-echo 'sections';
 new S "<section id='intro'><title>Getting Started</title></section>";
 %section=S://section;
 xcopy X:/recdescent-xml/doc/description/node() into %section;
-call transform_section %section;
+call transform_section;
 close S;
 
 # SYNTAX TOC
 new T $toc_template;
 for T:(/html/body/font/a[contains(@href,'syntax')]) {
-  echo 'sec';
   add chunk "<u><b/></u>" before .;
   move . into preceding-sibling::u/b;
 }
@@ -148,7 +121,6 @@ add chunk "<a href='s_intro.html' target='mainWindow'>Getting started</a><br/>"
 
 foreach X:/recdescent-xml/doc/section {
   $id=string(@id);
-  echo $id;
   add chunk "<a href='s_${id}.html' target='mainWindow'>${{string(title)}}</a><br/>"
     into T:/html/body/small;
   for (.) { # avoid selecting S:/
@@ -158,9 +130,12 @@ foreach X:/recdescent-xml/doc/section {
   xcopy ./node() into %section;
 
   %rules=X:(/recdescent-xml/rules/rule[documentation[id(@sections)[@id='$id']]]);
-  if %rules
+  if %rules[@type='command'] { $c='Commands' } else { $c='' }
+  if %rules[@type='argtype'] { $a='Argument Types' } else { $a='' }
+  if ('$c' != '' and '$a' != '') { $t='$a and $c' } else { $t='$a$c' }
+  if ('$a$c' != '')
     add chunk "<simplesect>
-                 <title>Related Topics</title>
+                 <title>Related $t</title>
                  <variablelist/>
                </simplesect>" into %section;
   sort (@name|@id) { $a cmp $b } %rules;
@@ -172,15 +147,14 @@ foreach X:/recdescent-xml/doc/section {
     xcopy ./documentation/shortdesc/node()
       into %section/simplesect[last()]/variablelist/varlistentry[last()]/listitem;
   }
-  call transform_section %section;
+  call transform_section;
 }
 
 save_HTML T "doc/frames/t_syntax.html";
 close T;
 
-# COMMANDS, TYPES AND FUNCTIONS
-foreach { qw(command type function list) } {
-  echo $__;
+# COMMANDS AND TYPES
+foreach { qw(command type) } {
   new T $toc_template;
 
   for T:(/html/body/font/a[contains(@href,'$__')]) {
@@ -192,7 +166,6 @@ foreach { qw(command type function list) } {
   sort (documentation/title|@name|@id) { lc($a) cmp lc($b) } %rules;
   foreach %rules {
     $ref=string(@id);
-    echo "rule: $ref";
     new S "<section id='$ref'/>";
     cd X:id('$ref');
     %section=S:section;
@@ -203,12 +176,13 @@ foreach { qw(command type function list) } {
     } else {
       add chunk "<title>${{string(@name)}}</title>" into %section;
     }
-    map { s/\s+argument\s+type//i; $_=lcfirst if lc(lcfirst($_)) eq lcfirst} %section/title/text();
+    map { s/\s+argument\s+type//i; $_=lcfirst } %section/title/text();
     for %section/title {
       add chunk "<a href='s_${ref}.html' target='mainWindow'>${{string(.)}}</a><br/>"
 	into T:/html/body/small;
     }
-    if ('${__}'='argtype') { $t = 'argument type' } else { $t='${__}' }
+    if ('$__'='argtype') { $t = 'argument type' }
+    else { $t = 'command' }
     insert text " $t" into %section/title;
     #USAGE
     if (./documentation/usage) {
@@ -261,10 +235,9 @@ foreach { qw(command type function list) } {
 	}
       }
     }
-    call transform_section %section;
+    call transform_section;
     close S;
   }
-  echo "writing doc/frames/t_${__}.html";
   save_HTML T "doc/frames/t_${__}.html";
   close T;
 };

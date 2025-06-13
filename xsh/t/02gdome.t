@@ -2,11 +2,18 @@
 use Test;
 
 BEGIN {
+    if ($ENV{AUTOMATED_TESTING}) {
+        print "1..0 # Skipped. Deprecated, use XML::XSH2 instead.\n";
+        exit
+    }
+}
+
+BEGIN {
   plan tests => 0;
   exit;
 
   @xsh_test=split /\n\n/, <<'EOF';
-list | wc
+list | wc 1>&2
 
 count /;
 
@@ -38,7 +45,7 @@ exec ls -l;
 
 clone t=scratch;
 
-list | wc;
+list | wc 1>&2;
 
 def myfunc { defs; encoding iso-8859-2; };
 
@@ -72,15 +79,15 @@ count scratch:count(/scratch/foo)=9;
 
 count t:count(/scratch/foo/foo)=1;
 
-locate //foo | cat
+locate //foo | cat 1>&2
 
 cd t:/scratch/foo/foo/text()
 
-pwd | cat
+pwd | cat 1>&2
 
 remove t://foo/foo;
 
-pwd | cat
+pwd | cat 1>&2
 
 count t:count(/scratch/foo/foo)=0;
 
@@ -113,16 +120,16 @@ xinsert element silly after //br
 
 count count(//br[./following-sibling::silly])=2
 
-ls scratch:/ | cat;
-ls t:/ | cat;
-ls new1:/ | cat;
-ls new2:/ | cat
+ls scratch:/ | cat 1>&2;
+ls t:/ | cat 1>&2;
+ls new1:/ | cat 1>&2;
+ls new2:/ | cat 1>&2
 
 select t
 
 close t
 
-ls / | cat
+ls / | cat 1>&2
 EOF
 
   if (eval { require XML::GDOME; } ) {
@@ -141,8 +148,6 @@ unless ($no_gdome) {
   $loaded=1;
   ok(1);
 
-  my $verbose=$ENV{HARNESS_VERBOSE};
-
   ($::RD_ERRORS,$::RD_WARN,$::RD_HINT)=(1,1,1);
 
   $::RD_ERRORS = 1; # Make sure the parser dies when it encounters an error
@@ -154,17 +159,17 @@ unless ($no_gdome) {
 
   xsh_init("XML::XSH::GDOMECompat");
 
-  print STDERR "\n" if $verbose;
+  print STDERR "\n";
   ok(1);
 
-  print STDERR "\n" if $verbose;
+  print STDERR "\n";
   ok ( XML::XSH::Functions::create_doc("scratch","scratch") );
 
-  print STDERR "\n" if $verbose;
+  print STDERR "\n";
   ok ( XML::XSH::Functions::set_local_xpath(['scratch','/']) );
 
   foreach (@xsh_test) {
-    print STDERR "\n\n[[ $_ ]]\n" if $verbose;
+    print STDERR "\n\n[[ $_ ]]\n";
     ok( xsh($_) );
   }
 }

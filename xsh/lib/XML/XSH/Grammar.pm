@@ -1,5 +1,5 @@
 # This file was automatically generated from src/xsh_grammar.xml on 
-# Fri Jul 16 23:29:27 2004
+# Wed Sep 10 17:53:03 2003
 
 
 package XML::XSH::Grammar;
@@ -86,17 +86,17 @@ $grammar=<<'_EO_GRAMMAR_';
 	  | /(options|flags)/ <commit>
 		{ [\&XML::XSH::Functions::list_flags] }
   	
-	  | /(copy|cp)\s/ <commit> xpath loc xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::copy,@item[3,5,4],0,@{$item[6]}] }
+	  | /(copy|cp)\s/ <commit> xpath loc xpath
+		{ [\&XML::XSH::Functions::copy,@item[3,5,4]] }
   	
-	  | /(xcopy|xcp)\s/ <commit> xpath loc xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::copy,@item[3,5,4],1,@{$item[6]}] }
+	  | /(xcopy|xcp)\s/ <commit> xpath loc xpath
+		{ [\&XML::XSH::Functions::copy,@item[3,5,4],1] }
   	
-	  | /(move|mv)\s/ <commit> xpath loc xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::move,@item[3,5,4],0,@{$item[6]}] }
+	  | /(move|mv)\s/ <commit> xpath loc xpath
+		{ [\&XML::XSH::Functions::move,@item[3,5,4]] }
   	
-	  | /(xmove|xmv)\s/ <commit> xpath loc xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::move,@item[3,5,4],1,@{$item[6]}] }
+	  | /(xmove|xmv)\s/ <commit> xpath loc xpath
+		{ [\&XML::XSH::Functions::move,@item[3,5,4],1] }
   	
 	  | /(ls|list)\s/ xpath expression
 		{ [\&XML::XSH::Functions::list,$item[2],$item[3]] }
@@ -173,20 +173,14 @@ $grammar=<<'_EO_GRAMMAR_';
 	  | /(documents|files|docs)/
 		{ [\&XML::XSH::Functions::files] }
   	
-	  | /(xslt|transform|xsl|xsltproc|process)\s/ <commit> filename expression xslt_params(?)
+	  | /(xslt|transform|xsl|xsltproc|process)\s/ <commit> expression filename expression xslt_params(?)
 		{ [\&XML::XSH::Functions::xslt,@item[3,4,5],@{$item[6]}] }
   	
-	  | /(wrap)\s/ <commit> expression namespace(?) xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::wrap,@item[5,3],$item[4][0],@{$item[6]}] }
+	  | /(insert|add)\s/ <commit> nodetype expression namespace(?) loc xpath
+		{ [\&XML::XSH::Functions::insert,@item[3,4,7,6],$item[5][0],0] }
   	
-	  | /(wrap-span|wrap_span)\s/ <commit> expression namespace(?) xpath xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::wrap_span,@item[5,6,3],$item[4][0],@{$item[7]}] }
-  	
-	  | /(insert|add)\s/ <commit> nodetype expression namespace(?) loc xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::insert,@item[3,4,7,6],$item[5][0],0,@{$item[8]}] }
-  	
-	  | /(xinsert|xadd)\s/ <commit> nodetype expression namespace(?) loc xpath store_or_append_nl(?)
-		{ [\&XML::XSH::Functions::insert,@item[3,4,7,6],$item[5][0],1,@{$item[8]}] }
+	  | /(xinsert|xadd)\s/ <commit> nodetype expression namespace(?) loc xpath
+		{ [\&XML::XSH::Functions::insert,@item[3,4,7,6],$item[5][0],1] }
   	
 	  | /(help|\?)/ <commit> optional_expression(?)
 		{ [\&XML::XSH::Functions::help,@{$item[3]}] }
@@ -342,14 +336,8 @@ $grammar=<<'_EO_GRAMMAR_';
 	  | /(doc-info|doc_info)/ <commit> optional_expression(?)
 		{ [\&XML::XSH::Functions::doc_info,@{$item[3]}] }
   	
-	  | /(xpath-extensions|xpath_extensions)/ <commit> optional_expression(?)
-		{ [\&XML::XSH::Functions::xpath_extensions,@{$item[3]}] }
-  	
-	  | /(use)\s/ <commit> /XML::XSH::Inline/
+	  | /(use)\s/ <commit> /Inline::XSH/
 		{ 1 }
-  	
-	  | /(lineno)/ <commit> xpath(?)
-		{ [\&XML::XSH::Functions::print_lineno,@{$item[3]}] }
   	
 	  | call_command
 
@@ -431,8 +419,8 @@ $grammar=<<'_EO_GRAMMAR_';
 		{ 
 	  local $_=$item[1];
 	  s/^\'|\'$//g;
-	  s{(\\)(.|\n)|(\$)}{ (defined($3) and $3 eq '$') ? "\\\$" : ((defined($2) and $2 eq "\\")
-	  ? "\\\\" : ((defined($2) and $2 eq "'") ? "'" : ( (defined($2) and $2 eq '$') ? "\\\\\\$2" :
+	  s{(\\)(.|\n)|(\$)}{ ($3 eq '$') ? "\\\$" : (($2 eq "\\")
+	  ? "\\\\" : (($2 eq "'") ? "'" : ( ($2 eq '$') ? "\\\\\\$2" :
 	  "\\\\$2"))) }eg;
 	  $_;
 	 }
@@ -464,10 +452,8 @@ $grammar=<<'_EO_GRAMMAR_';
 	    $text=$item[6].$text;
 	    local $_=$item[7]; s/\n$item[3]\s*$//;
 	    if ($item[2] eq "'") {
-	      s{(\\)(.|\n)|(\$)}{ (defined($3) and $3 eq '$') ? "\\\$"
-	    : ((defined($2) and $2 eq "\\")
-	      ? "\\\\" : ((defined($2) and $2 eq "'") ? "'" : (
-	    (defined($2) and $2 eq '$') ? "\\\\\\$2" :
+	      s{(\\)(.|\n)|(\$)}{ ($3 eq '$') ? "\\\$" : (($2 eq "\\")
+	      ? "\\\\" : (($2 eq "'") ? "'" : ( ($2 eq '$') ? "\\\\\\$2" :
 	      "\\\\$2"))) }eg;
           }
 	    $_;
@@ -778,11 +764,6 @@ $grammar=<<'_EO_GRAMMAR_';
   param:
 	    /[^=\s]+/ '=' expression
 		{ [$item[1],$item[3]] }
-  	
-
-  store_or_append_nl:
-	    /result|append-result/ nodelistvariable
-		{ [$item[1] eq 'result' ? 0 : 1,$item[2]] }
   	
 
   nodetype:

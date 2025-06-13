@@ -1,6 +1,13 @@
 # -*- cperl -*-
 use Test;
 
+BEGIN {
+    if ($ENV{AUTOMATED_TESTING}) {
+        print "1..0 # Skipped. Deprecated, use XML::XSH2 instead.\n";
+        exit
+    }
+}
+
 use IO::File;
 
 BEGIN {
@@ -8,7 +15,7 @@ BEGIN {
   autoflush STDERR 1;
 
   @xsh_test=split /\n\n/, <<'EOF';
-quiet;
+
 def p_assert $cond
   {
    perl { xsh("unless {$cond} throw \"Assertion failed \$cond\"") }
@@ -47,7 +54,7 @@ call p_assert '$b == 0';
 $a=0; $b=1; $c=0;
 foreach { 1..3 } {
   perl { $b = ($b+1) % 2 };
-  echo $a $b | cat;
+  echo $a $b | cat 1>&2;
   $a = $a+1;
   unless $b redo;
   $c = 1;
@@ -120,7 +127,7 @@ call p_assert '$b == 0';
 $i=0; $a=0; $b=1; $c=0;
 while { $i++<3 } {
   perl { $b = ($b+1) % 2 };
-  echo $a $b $i | cat;
+  echo $a $b $i | cat 1>&2;
   $a = $a+1;
   unless $b redo;
   $c = 1;
@@ -156,7 +163,7 @@ call p_assert '$b == 0';
 $i=0; $a=0; $b=1; $c=0;
 while ( $i<3 ) {
   perl { $b = ($b+1) % 2 };
-  echo $a $b $i | cat;
+  echo $a $b $i | cat 1>&2;
   $a = $a+1;
   unless $b redo;
   $i=$i+1;
@@ -177,8 +184,6 @@ use XML::XSH qw/&xsh &xsh_init &set_quiet &xsh_set_output/;
 $loaded=1;
 ok(1);
 
-my $verbose=$ENV{HARNESS_VERBOSE};
-
 ($::RD_ERRORS,$::RD_WARN,$::RD_HINT)=(1,1,1);
 
 $::RD_ERRORS = 1; # Make sure the parser dies when it encounters an error
@@ -189,16 +194,16 @@ xsh_set_output(\*STDERR);
 set_quiet(0);
 xsh_init();
 
-print STDERR "\n" if $verbose;
+print STDERR "\n";
 ok(1);
 
-print STDERR "\n" if $verbose;
+print STDERR "\n";
 ok ( XML::XSH::Functions::create_doc("scratch","scratch") );
 
-print STDERR "\n" if $verbose;
+print STDERR "\n";
 ok ( XML::XSH::Functions::set_local_xpath(['scratch','/']) );
 
 foreach (@xsh_test) {
-  print STDERR "\n\n[[ $_ ]]\n" if $verbose;
+  print STDERR "\n\n[[ $_ ]]\n";
   ok( xsh($_) );
 }

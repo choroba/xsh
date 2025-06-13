@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# $Id: gen_pod.pl,v 1.1 2003-08-11 15:08:51 pajas Exp $
+# $Id: gen_pod.pl,v 1.1 2003/08/11 15:08:51 pajas Exp $
 
 use strict;
 use vars qw(%enc);
@@ -39,7 +39,11 @@ print <<'PREAMB';
 
 =head1 NAME
 
-XSH - scripting language for XPath-based editing of XML
+XSH (DEPRECATED) scripting language for XPath-based editing of XML
+
+=head1 DEPRECATED
+
+This module is deprecated, use XML::XSH2 instead.
 
 PREAMB
 

@@ -1,4 +1,4 @@
-# $Id: GDOMECompat.pm,v 1.8 2003-01-22 15:06:12 pajas Exp $
+# $Id: GDOMECompat.pm,v 1.8 2003/01/22 15:06:12 pajas Exp $
 
 package XML::XSH::GDOMECompat;
 
